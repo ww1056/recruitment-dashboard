@@ -225,12 +225,12 @@
     <div class="card-sub">2025全年 vs 2026年初至今（YTD）</div>
     <table class="rank-table" id="table-compare">
       <thead><tr>
-        <th>年度</th><th>推送</th><th>入职</th><th>OD/在途</th><th>Fail</th><th>入职率</th><th>终转化率</th><th>Fail率</th>
+        <th>年度</th><th>推送</th><th>入职</th><th>待入职/在途</th><th style='color:#f85149'>Offer Dropped</th><th>Fail</th><th>入职率</th><th>终转化率</th><th>Fail率</th>
       </tr></thead>
       <tbody>
-        <tr><td><b>2025全年</b></td><td>462</td><td class="c-green">182</td><td>92</td><td>176</td><td>39%</td><td style="color:#3fb950">59%</td><td>38%</td></tr>
-        <tr><td><b>2026 YTD</b></td><td>139</td><td class="c-green">43</td><td>25</td><td>53</td><td>31%</td><td class="c-orange">49%</td><td>38%</td></tr>
-        <tr style="background:rgba(88,166,255,.08)"><td><b>变化</b></td><td class="c-red">-323</td><td>-139</td><td>-67</td><td>-123</td><td class="c-red">-8pp</td><td class="c-red">-10pp</td><td>0pp</td></tr>
+        <tr><td><b>2025全年</b></td><td>462</td><td class="c-green">182</td><td>20</td><td style='color:#f85149'>113</td><td>176</td><td>39%</td><td style="color:#3fb950">59%</td><td>38%</td></tr>
+        <tr><td><b>2026 YTD</b></td><td>139</td><td class="c-green">43</td><td>26</td><td style='color:#f85149'>113</td><td>53</td><td>31%</td><td class="c-orange">49%</td><td>38%</td></tr>
+        <tr style="background:rgba(88,166,255,.08)"><td><b>变化</b></td><td class="c-red">-323</td><td>-139</td><td>+6</td><td>0</td><td>-123</td><td class="c-red">-8pp</td><td class="c-red">-10pp</td><td>0pp</td></tr>
       </tbody>
     </table>
   </div>
@@ -323,23 +323,9 @@
 <script>
 // ===== 数据 =====
 const D = {
-  hrbp: [{"name":"川木","total":1,"hired":1,"offer":0,"fail":0,"hire_rate":100,"final_rate":100,"fail_rate":0},{"name":"豆豆","total":12,"hired":5,"offer":4,"fail":3,"hire_rate":42,"final_rate":75,"fail_rate":25},{"name":"一岚","total":4,"hired":2,"offer":1,"fail":1,"hire_rate":50,"final_rate":75,"fail_rate":25},{"name":"予安","total":4,"hired":2,"offer":1,"fail":1,"hire_rate":50,"final_rate":75,"fail_rate":25},{"name":"杨盈","total":45,"hired":22,"offer":11,"fail":11,"hire_rate":49,"final_rate":73,"fail_rate":24},{"name":"广白","total":15,"hired":8,"offer":3,"fail":4,"hire_rate":53,"final_rate":73,"fail_rate":27},{"name":"贵音","total":39,"hired":11,"offer":17,"fail":8,"hire_rate":28,"final_rate":72,"fail_rate":21},{"name":"芭内","total":6,"hired":3,"offer":1,"fail":2,"hire_rate":50,"final_rate":67,"fail_rate":33},{"name":"卡朵","total":6,"hired":2,"offer":2,"fail":2,"hire_rate":33,"final_rate":67,"fail_rate":33},{"name":"瑾瑜","total":57,"hired":23,"offer":14,"fail":16,"hire_rate":40,"final_rate":65,"fail_rate":28},{"name":"星夏","total":13,"hired":5,"offer":3,"fail":5,"hire_rate":38,"final_rate":62,"fail_rate":38},{"name":"幸运","total":18,"hired":7,"offer":4,"fail":7,"hire_rate":39,"final_rate":61,"fail_rate":39},{"name":"希仁","total":27,"hired":7,"offer":9,"fail":11,"hire_rate":26,"final_rate":59,"fail_rate":41},{"name":"天翼","total":43,"hired":17,"offer":8,"fail":18,"hire_rate":40,"final_rate":58,"fail_rate":42},{"name":"奎妮","total":34,"hired":9,"offer":10,"fail":13,"hire_rate":26,"final_rate":56,"fail_rate":38},{"name":"雪山","total":85,"hired":30,"offer":17,"fail":38,"hire_rate":35,"final_rate":55,"fail_rate":45},{"name":"雪糕","total":48,"hired":20,"offer":6,"fail":20,"hire_rate":42,"final_rate":54,"fail_rate":42},{"name":"塔美","total":13,"hired":7,"offer":0,"fail":6,"hire_rate":54,"final_rate":54,"fail_rate":46},{"name":"筱然","total":20,"hired":8,"offer":2,"fail":10,"hire_rate":40,"final_rate":50,"fail_rate":50},{"name":"蝶衣","total":20,"hired":2,"offer":8,"fail":7,"hire_rate":10,"final_rate":50,"fail_rate":35},{"name":"梓晴","total":16,"hired":6,"offer":2,"fail":8,"hire_rate":38,"final_rate":50,"fail_rate":50},{"name":"云阳","total":6,"hired":2,"offer":1,"fail":3,"hire_rate":33,"final_rate":50,"fail_rate":50},{"name":"金槌","total":23,"hired":9,"offer":2,"fail":12,"hire_rate":39,"final_rate":48,"fail_rate":52},{"name":"绫华","total":22,"hired":4,"offer":6,"fail":11,"hire_rate":18,"final_rate":45,"fail_rate":50},{"name":"战歌","total":27,"hired":5,"offer":7,"fail":12,"hire_rate":19,"final_rate":44,"fail_rate":44}],
-  ta: [{"name":"幸运","total":4,"hired":3,"offer":0,"fail":1,"hire_rate":75,"final_rate":75,"fail_rate":25},{"name":"瑞妮","total":35,"hired":14,"offer":10,"fail":10,"hire_rate":40,"final_rate":69,"fail_rate":29},{"name":"大娃","total":32,"hired":14,"offer":8,"fail":10,"hire_rate":44,"final_rate":69,"fail_rate":31},{"name":"真珠","total":6,"hired":3,"offer":1,"fail":2,"hire_rate":50,"final_rate":67,"fail_rate":33},{"name":"林波","total":3,"hired":1,"offer":1,"fail":1,"hire_rate":33,"final_rate":67,"fail_rate":33},{"name":"车英","total":50,"hired":15,"offer":17,"fail":16,"hire_rate":30,"final_rate":64,"fail_rate":32},{"name":"越祈","total":22,"hired":11,"offer":3,"fail":8,"hire_rate":50,"final_rate":64,"fail_rate":36},{"name":"蒂蒂","total":11,"hired":4,"offer":3,"fail":4,"hire_rate":36,"final_rate":64,"fail_rate":36},{"name":"欣然","total":39,"hired":16,"offer":8,"fail":15,"hire_rate":41,"final_rate":62,"fail_rate":38},{"name":"褚岩","total":8,"hired":3,"offer":2,"fail":2,"hire_rate":38,"final_rate":62,"fail_rate":25},{"name":"天雪","total":61,"hired":26,"offer":11,"fail":24,"hire_rate":43,"final_rate":61,"fail_rate":39},{"name":"司童","total":40,"hired":13,"offer":11,"fail":16,"hire_rate":32,"final_rate":60,"fail_rate":40},{"name":"玄鸟","total":49,"hired":18,"offer":11,"fail":18,"hire_rate":37,"final_rate":59,"fail_rate":37},{"name":"贵音","total":41,"hired":15,"offer":9,"fail":14,"hire_rate":37,"final_rate":59,"fail_rate":34},{"name":"禇岩","total":24,"hired":8,"offer":6,"fail":10,"hire_rate":33,"final_rate":58,"fail_rate":42},{"name":"优妮","total":19,"hired":7,"offer":4,"fail":6,"hire_rate":37,"final_rate":58,"fail_rate":32},{"name":"希雯","total":68,"hired":21,"offer":17,"fail":30,"hire_rate":31,"final_rate":56,"fail_rate":44},{"name":"瑞思","total":20,"hired":8,"offer":3,"fail":6,"hire_rate":40,"final_rate":55,"fail_rate":30},{"name":"散影","total":15,"hired":7,"offer":1,"fail":7,"hire_rate":47,"final_rate":53,"fail_rate":47},{"name":"予安","total":6,"hired":3,"offer":0,"fail":3,"hire_rate":50,"final_rate":50,"fail_rate":50},{"name":"夏娜","total":25,"hired":2,"offer":10,"fail":10,"hire_rate":8,"final_rate":48,"fail_rate":40},{"name":"粥粥","total":8,"hired":2,"offer":1,"fail":4,"hire_rate":25,"final_rate":38,"fail_rate":50},{"name":"奎妮","total":4,"hired":1,"offer":0,"fail":3,"hire_rate":25,"final_rate":25,"fail_rate":75},{"name":"子衿","total":10,"hired":1,"offer":1,"fail":8,"hire_rate":10,"final_rate":20,"fail_rate":80}],
-  monthly: [
-    {month:"25年3月",total:25,hired:10,offer:1,fail:14,final_rate:44,fail_rate:56},
-    {month:"25年4月",total:19,hired:8,offer:3,fail:8,final_rate:58,fail_rate:42},
-    {month:"25年5月",total:40,hired:21,offer:4,fail:15,final_rate:62,fail_rate:38},
-    {month:"25年6月",total:39,hired:16,offer:7,fail:16,final_rate:59,fail_rate:41},
-    {month:"25年7月",total:41,hired:19,offer:10,fail:12,final_rate:71,fail_rate:29},
-    {month:"25年8月",total:44,hired:11,offer:10,fail:23,final_rate:48,fail_rate:52},
-    {month:"25年9月",total:44,hired:19,offer:5,fail:20,final_rate:55,fail_rate:45},
-    {month:"25年10月",total:41,hired:12,offer:15,fail:14,final_rate:66,fail_rate:34},
-    {month:"25年11月",total:77,hired:35,offer:17,fail:25,final_rate:68,fail_rate:32},
-    {month:"25年12月",total:92,hired:41,offer:22,fail:29,final_rate:68,fail_rate:32},
-    {month:"26年1月",total:59,hired:19,offer:13,fail:27,final_rate:54,fail_rate:46},
-    {month:"26年2月",total:31,hired:6,offer:18,fail:7,final_rate:77,fail_rate:23},
-    {month:"26年3月",total:37,hired:0,offer:14,fail:19,final_rate:38,fail_rate:51},
-  ],
+  hrbp: [{"name":"川木","total":1,"hired":1,"pipeline":0,"od":0,"fail":0,"hire_rate":100,"final_rate":100,"od_rate":0,"fail_rate":0},{"name":"广白","total":15,"hired":8,"pipeline":2,"od":1,"fail":4,"hire_rate":53,"final_rate":67,"od_rate":7,"fail_rate":27},{"name":"塔美","total":13,"hired":7,"pipeline":0,"od":0,"fail":6,"hire_rate":54,"final_rate":54,"od_rate":0,"fail_rate":46},{"name":"芭内","total":6,"hired":3,"pipeline":0,"od":1,"fail":2,"hire_rate":50,"final_rate":50,"od_rate":17,"fail_rate":33},{"name":"卡朵","total":6,"hired":2,"pipeline":1,"od":1,"fail":2,"hire_rate":33,"final_rate":50,"od_rate":17,"fail_rate":33},{"name":"一岚","total":4,"hired":2,"pipeline":0,"od":1,"fail":1,"hire_rate":50,"final_rate":50,"od_rate":25,"fail_rate":25},{"name":"予安","total":4,"hired":2,"pipeline":0,"od":1,"fail":1,"hire_rate":50,"final_rate":50,"od_rate":25,"fail_rate":25},{"name":"瑾瑜","total":57,"hired":23,"pipeline":5,"od":9,"fail":16,"hire_rate":40,"final_rate":49,"od_rate":16,"fail_rate":28},{"name":"杨盈","total":45,"hired":22,"pipeline":0,"od":11,"fail":11,"hire_rate":49,"final_rate":49,"od_rate":24,"fail_rate":24},{"name":"雪糕","total":48,"hired":20,"pipeline":2,"od":4,"fail":20,"hire_rate":42,"final_rate":46,"od_rate":8,"fail_rate":42},{"name":"星夏","total":13,"hired":5,"pipeline":1,"od":2,"fail":5,"hire_rate":38,"final_rate":46,"od_rate":15,"fail_rate":38},{"name":"梓晴","total":16,"hired":6,"pipeline":1,"od":1,"fail":8,"hire_rate":38,"final_rate":44,"od_rate":6,"fail_rate":50},{"name":"豆豆","total":12,"hired":5,"pipeline":0,"od":4,"fail":3,"hire_rate":42,"final_rate":42,"od_rate":33,"fail_rate":25},{"name":"奎妮","total":34,"hired":9,"pipeline":5,"od":5,"fail":13,"hire_rate":26,"final_rate":41,"od_rate":15,"fail_rate":38},{"name":"天翼","total":43,"hired":17,"pipeline":0,"od":8,"fail":18,"hire_rate":40,"final_rate":40,"od_rate":19,"fail_rate":42},{"name":"筱然","total":20,"hired":8,"pipeline":0,"od":2,"fail":10,"hire_rate":40,"final_rate":40,"od_rate":10,"fail_rate":50},{"name":"金槌","total":23,"hired":9,"pipeline":0,"od":2,"fail":12,"hire_rate":39,"final_rate":39,"od_rate":9,"fail_rate":52},{"name":"幸运","total":18,"hired":7,"pipeline":0,"od":4,"fail":7,"hire_rate":39,"final_rate":39,"od_rate":22,"fail_rate":39},{"name":"雪山","total":85,"hired":30,"pipeline":0,"od":17,"fail":38,"hire_rate":35,"final_rate":35,"od_rate":20,"fail_rate":45},{"name":"战歌","total":27,"hired":5,"pipeline":4,"od":3,"fail":12,"hire_rate":19,"final_rate":33,"od_rate":11,"fail_rate":44},{"name":"云阳","total":6,"hired":2,"pipeline":0,"od":1,"fail":3,"hire_rate":33,"final_rate":33,"od_rate":17,"fail_rate":50},{"name":"贵音","total":39,"hired":11,"pipeline":1,"od":16,"fail":8,"hire_rate":28,"final_rate":31,"od_rate":41,"fail_rate":21},{"name":"蝶衣","total":20,"hired":2,"pipeline":4,"od":4,"fail":7,"hire_rate":10,"final_rate":30,"od_rate":20,"fail_rate":35},{"name":"希仁","total":27,"hired":7,"pipeline":0,"od":9,"fail":11,"hire_rate":26,"final_rate":26,"od_rate":33,"fail_rate":41},{"name":"绫华","total":22,"hired":4,"pipeline":0,"od":6,"fail":11,"hire_rate":18,"final_rate":18,"od_rate":27,"fail_rate":50}],
+  ta: [{"name":"幸运","total":4,"hired":3,"pipeline":0,"od":0,"fail":1,"hire_rate":75,"final_rate":75,"od_rate":0,"fail_rate":25},{"name":"越祈","total":22,"hired":11,"pipeline":1,"od":2,"fail":8,"hire_rate":50,"final_rate":55,"od_rate":9,"fail_rate":36},{"name":"褚岩","total":8,"hired":3,"pipeline":1,"od":1,"fail":2,"hire_rate":38,"final_rate":50,"od_rate":12,"fail_rate":25},{"name":"予安","total":6,"hired":3,"pipeline":0,"od":0,"fail":3,"hire_rate":50,"final_rate":50,"od_rate":0,"fail_rate":50},{"name":"真珠","total":6,"hired":3,"pipeline":0,"od":1,"fail":2,"hire_rate":50,"final_rate":50,"od_rate":17,"fail_rate":33},{"name":"瑞妮","total":35,"hired":14,"pipeline":3,"od":7,"fail":10,"hire_rate":40,"final_rate":49,"od_rate":20,"fail_rate":29},{"name":"大娃","total":32,"hired":14,"pipeline":1,"od":7,"fail":10,"hire_rate":44,"final_rate":47,"od_rate":22,"fail_rate":31},{"name":"散影","total":15,"hired":7,"pipeline":0,"od":1,"fail":7,"hire_rate":47,"final_rate":47,"od_rate":7,"fail_rate":47},{"name":"瑞思","total":20,"hired":8,"pipeline":1,"od":2,"fail":6,"hire_rate":40,"final_rate":45,"od_rate":10,"fail_rate":30},{"name":"天雪","total":61,"hired":26,"pipeline":1,"od":10,"fail":24,"hire_rate":43,"final_rate":44,"od_rate":16,"fail_rate":39},{"name":"欣然","total":39,"hired":16,"pipeline":1,"od":7,"fail":15,"hire_rate":41,"final_rate":44,"od_rate":18,"fail_rate":38},{"name":"玄鸟","total":49,"hired":18,"pipeline":3,"od":8,"fail":18,"hire_rate":37,"final_rate":43,"od_rate":16,"fail_rate":37},{"name":"车英","total":50,"hired":15,"pipeline":6,"od":11,"fail":16,"hire_rate":30,"final_rate":42,"od_rate":22,"fail_rate":32},{"name":"禇岩","total":24,"hired":8,"pipeline":2,"od":4,"fail":10,"hire_rate":33,"final_rate":42,"od_rate":17,"fail_rate":42},{"name":"优妮","total":19,"hired":7,"pipeline":1,"od":3,"fail":6,"hire_rate":37,"final_rate":42,"od_rate":16,"fail_rate":32},{"name":"贵音","total":41,"hired":15,"pipeline":0,"od":9,"fail":14,"hire_rate":37,"final_rate":37,"od_rate":22,"fail_rate":34},{"name":"蒂蒂","total":11,"hired":4,"pipeline":0,"od":3,"fail":4,"hire_rate":36,"final_rate":36,"od_rate":27,"fail_rate":36},{"name":"司童","total":40,"hired":13,"pipeline":1,"od":10,"fail":16,"hire_rate":32,"final_rate":35,"od_rate":25,"fail_rate":40},{"name":"林波","total":3,"hired":1,"pipeline":0,"od":1,"fail":1,"hire_rate":33,"final_rate":33,"od_rate":33,"fail_rate":33},{"name":"希雯","total":68,"hired":21,"pipeline":0,"od":17,"fail":30,"hire_rate":31,"final_rate":31,"od_rate":25,"fail_rate":44},{"name":"粥粥","total":8,"hired":2,"pipeline":0,"od":1,"fail":4,"hire_rate":25,"final_rate":25,"od_rate":12,"fail_rate":50},{"name":"奎妮","total":4,"hired":1,"pipeline":0,"od":0,"fail":3,"hire_rate":25,"final_rate":25,"od_rate":0,"fail_rate":75},{"name":"夏娜","total":25,"hired":2,"pipeline":3,"od":7,"fail":10,"hire_rate":8,"final_rate":20,"od_rate":28,"fail_rate":40},{"name":"子衿","total":10,"hired":1,"pipeline":0,"od":1,"fail":8,"hire_rate":10,"final_rate":10,"od_rate":10,"fail_rate":80}],
+  monthly: [{"month":"25年3月","total":25,"hired":10,"pipeline":0,"od":1,"fail":14,"final_rate":40,"fail_rate":56,"od_rate":4},{"month":"25年4月","total":19,"hired":8,"pipeline":0,"od":3,"fail":8,"final_rate":42,"fail_rate":42,"od_rate":16},{"month":"25年5月","total":40,"hired":21,"pipeline":0,"od":4,"fail":15,"final_rate":52,"fail_rate":38,"od_rate":10},{"month":"25年6月","total":39,"hired":16,"pipeline":0,"od":7,"fail":16,"final_rate":41,"fail_rate":41,"od_rate":18},{"month":"25年7月","total":41,"hired":19,"pipeline":0,"od":10,"fail":12,"final_rate":46,"fail_rate":29,"od_rate":24},{"month":"25年8月","total":44,"hired":11,"pipeline":0,"od":10,"fail":23,"final_rate":25,"fail_rate":52,"od_rate":23},{"month":"25年9月","total":44,"hired":19,"pipeline":0,"od":5,"fail":20,"final_rate":43,"fail_rate":45,"od_rate":11},{"month":"25年10月","total":41,"hired":12,"pipeline":0,"od":15,"fail":14,"final_rate":29,"fail_rate":34,"od_rate":37},{"month":"25年11月","total":77,"hired":35,"pipeline":0,"od":17,"fail":25,"final_rate":45,"fail_rate":32,"od_rate":22},{"month":"25年12月","total":92,"hired":41,"pipeline":2,"od":20,"fail":29,"final_rate":47,"fail_rate":32,"od_rate":22},{"month":"26年1月","total":59,"hired":19,"pipeline":3,"od":10,"fail":27,"final_rate":37,"fail_rate":46,"od_rate":17},{"month":"26年2月","total":31,"hired":6,"pipeline":10,"od":8,"fail":7,"final_rate":52,"fail_rate":23,"od_rate":26},{"month":"26年3月","total":37,"hired":0,"pipeline":11,"od":3,"fail":19,"final_rate":30,"fail_rate":51,"od_rate":8}],
   compare: {
     "2025": {total:462,hired:182,offer:92,fail:176,hire_rate:39,final_rate:59,fail_rate:38},
     "2026": {total:139,hired:43,offer:25,fail:53,hire_rate:31,final_rate:49,fail_rate:38}
@@ -423,14 +409,14 @@ function initOverviewBars(){
 function initMonthlyOverview(){
   const c=gc('chart-monthly-overview');if(!c)return;
   c.setOption({backgroundColor:'transparent',grid:{left:36,right:60,top:16,bottom:40},
-    legend:{data:['推送','入职','OD在途','Fail','终转化率'],right:0,top:0,textStyle:{color:'#8b949e',fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+    legend:{data:['推送','已入职','待入职/在途','Offer Dropped','Fail','终转化率'],right:0,top:0,textStyle:{color:'#8b949e',fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
     xAxis:{type:'category',data:D.monthly.map(d=>d.month),...ax,axisLabel:{...ax.axisLabel,rotate:30,fontSize:10}},
     yAxis:[{type:'value',...ax},{type:'value',max:100,position:'right',...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}}],
     tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
     series:[
       {name:'推送',type:'bar',data:D.monthly.map(d=>d.total),itemStyle:{color:'#21262d',borderRadius:[3,3,0,0]},barMaxWidth:16},
       {name:'入职',type:'bar',data:D.monthly.map(d=>d.hired),itemStyle:{color:G,borderRadius:[3,3,0,0]},barMaxWidth:10},
-      {name:'OD在途',type:'bar',data:D.monthly.map(d=>d.offer),itemStyle:{color:O,borderRadius:[3,3,0,0]},barMaxWidth:10},
+      {name:'待入职/在途',type:'bar',data:D.monthly.map(d=>d.pipeline),itemStyle:{color:'#58a6ff',borderRadius:[3,3,0,0]},barMaxWidth:10},{name:'Offer Dropped',type:'bar',data:D.monthly.map(d=>d.od),itemStyle:{color:'#6e3030',borderRadius:[3,3,0,0]},barMaxWidth:10},
       {name:'Fail',type:'bar',data:D.monthly.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.35)',borderRadius:[3,3,0,0]},barMaxWidth:10},
       {name:'终转化率',type:'line',yAxisIndex:1,data:D.monthly.map(d=>d.final_rate),lineStyle:{color:B,width:2},itemStyle:{color:B},symbol:'circle',symbolSize:5,label:{show:false}},
     ]
@@ -565,7 +551,7 @@ function initTA(){
 function initMonthly(){
   const c=gc('chart-monthly-main');if(!c)return;
   c.setOption({backgroundColor:'transparent',grid:{left:36,right:64,top:28,bottom:44},
-    legend:{data:['推送量','已入职','OD在途','Fail','终转化率'],right:0,top:0,textStyle:{color:M,fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+    legend:{data:['推送量','已入职','待入职/在途','Offer Dropped','Fail','终转化率'],right:0,top:0,textStyle:{color:M,fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
     xAxis:{type:'category',data:D.monthly.map(d=>d.month),...ax,
       axisLabel:{...ax.axisLabel,rotate:30,fontSize:11}},
     yAxis:[{type:'value',...ax},{type:'value',max:100,position:'right',...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}}],
@@ -575,7 +561,7 @@ function initMonthly(){
       {name:'推送量',type:'bar',data:D.monthly.map(d=>d.total),itemStyle:{color:'rgba(33,38,45,.9)',borderRadius:[3,3,0,0]},barMaxWidth:28,
         markPoint:{data:[{type:'max',name:'峰值',label:{formatter:'峰值\n{c}人',color:'#e6edf3',fontSize:10},itemStyle:{color:'rgba(88,166,255,.3)'}}]}},
       {name:'已入职',type:'bar',data:D.monthly.map(d=>d.hired),itemStyle:{color:G,borderRadius:[3,3,0,0]},barMaxWidth:18},
-      {name:'OD在途',type:'bar',data:D.monthly.map(d=>d.offer),itemStyle:{color:O,borderRadius:[3,3,0,0]},barMaxWidth:18},
+      {name:'待入职/在途',type:'bar',data:D.monthly.map(d=>d.pipeline),itemStyle:{color:'#58a6ff',borderRadius:[3,3,0,0]},barMaxWidth:18},{name:'Offer Dropped',type:'bar',data:D.monthly.map(d=>d.od),itemStyle:{color:'#6e3030',borderRadius:[3,3,0,0]},barMaxWidth:18},
       {name:'Fail',type:'bar',data:D.monthly.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.45)',borderRadius:[3,3,0,0]},barMaxWidth:18},
       {name:'终转化率',type:'line',yAxisIndex:1,data:D.monthly.map(d=>d.final_rate),
         lineStyle:{color:B,width:2},itemStyle:{color:B},symbol:'circle',symbolSize:6,
@@ -605,12 +591,12 @@ function initCompare(){
   const c2=gc('chart-compare-absolute');
   c2.setOption({backgroundColor:'transparent',grid:{left:44,right:12,top:30,bottom:20},
     legend:{data:['2025全年','2026 YTD'],top:0,right:0,textStyle:{color:M,fontSize:10},icon:'rect',itemWidth:10,itemHeight:10},
-    xAxis:{type:'category',data:['总推送','入职','OD/在途','Fail'],...ax},
+    xAxis:{type:'category',data:['总推送','入职','待入职/在途','Offer Dropped','Fail'],...ax},
     yAxis:{type:'value',...ax},
     tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},formatter:p=>{let r=p[0];return `<b>${r.name}</b><br/>${p.map(d=>`${d.seriesName}: ${d.value}人`).join('<br/>')}`;}},
     series:[
-      {name:'2025全年',type:'bar',data:[462,182,92,176],itemStyle:{color:P},barMaxWidth:36},
-      {name:'2026 YTD',type:'bar',data:[139,43,25,53],itemStyle:{color:B},barMaxWidth:36},
+      {name:'2025全年',type:'bar',data:[462,182,20,113,176],itemStyle:{color:P},barMaxWidth:36},
+      {name:'2026 YTD',type:'bar',data:[139,43,26,113,53],itemStyle:{color:B},barMaxWidth:36},
     ]
   });
 }
@@ -648,7 +634,7 @@ function initIndustry(){
     series:[
       {name:'已入职',type:'bar',stack:'s',data:stackSort.map(d=>d.hired),itemStyle:{color:G},barMaxWidth:14},
       {name:'闪离',type:'bar',stack:'s',data:stackSort.map(d=>d.flash_quit),itemStyle:{color:R}},
-      {name:'在途',type:'bar',stack:'s',data:stackSort.map(d=>d.offer),itemStyle:{color:'#58a6ff'}},
+      {name:'待入职/在途',type:'bar',stack:'s',data:stackSort.map(d=>d.offer),itemStyle:{color:'#58a6ff'}},
       {name:'Dropped',type:'bar',stack:'s',data:stackSort.map(d=>d.dropped),itemStyle:{color:'#30363d'}},
       {name:'Fail',type:'bar',stack:'s',data:stackSort.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.4)',borderRadius:[0,3,3,0]}},
     ]
@@ -657,11 +643,11 @@ function initIndustry(){
   // 详表
   const el=document.getElementById('table-industry');if(!el)return;
   const tbl=[...D.industry].sort((a,b)=>b.total-a.total);
-  let h='<thead><tr><th>#</th><th>行业</th><th>推送</th><th>在职入职</th><th>⚡闪离</th><th>实际入职</th><th>入职率</th><th>闪离率</th><th>在途</th><th>Fail</th><th>Fail率</th></tr></thead><tbody>';
+  let h='<thead><tr><th>#</th><th>行业</th><th>推送</th><th>在职入职</th><th>⚡闪离</th><th>实际入职</th><th>入职率</th><th>闪离率</th><th>在途</th><th style='color:#f85149'>OD</th><th>Fail</th><th>Fail率</th></tr></thead><tbody>';
   tbl.forEach((d,i)=>{
     const fq=d.flash_quit>0?`<span class="pill pill-r">⚡${d.flash_quit}</span>`:'0';
     const fr=d.flash_rate>0?`<span style="color:var(--red)">${d.flash_rate}%</span>`:'0%';
-    h+=`<tr><td>${i+1}</td><td><b>${d.name}</b></td><td>${d.total}</td><td class="c-green">${d.hired}</td><td>${fq}</td><td>${d.total_hired}</td><td>${d.hire_rate}%</td><td>${fr}</td><td>${d.offer}</td><td>${d.fail}</td><td class="${d.fail_rate>=50?'c-red':d.fail_rate>=40?'c-orange':''}">${d.fail_rate}%</td></tr>`;
+    h+=`<tr><td>${i+1}</td><td><b>${d.name}</b></td><td>${d.total}</td><td class="c-green">${d.hired}</td><td>${fq}</td><td>${d.total_hired}</td><td>${d.hire_rate}%</td><td>${fr}</td><td style='color:#58a6ff'>${d.pipeline}</td><td style='color:#6e7681'>${d.od}</td><td>${d.fail}</td><td class="${d.fail_rate>=50?'c-red':d.fail_rate>=40?'c-orange':''}">${d.fail_rate}%</td></tr>`;
   });
   el.innerHTML=h+'</tbody>';
 }
@@ -670,7 +656,7 @@ function round1(v){return Math.round(v*10)/10;}
 function makeTable(id,items){
   const el=document.getElementById(id);if(!el)return;
   const sorted=[...items].sort((a,b)=>b.final_rate-a.final_rate);
-  let h='<thead><tr><th style="width:28px">#</th><th>姓名</th><th>推送</th><th>入职</th><th>入职率</th><th>OD/在途</th><th style="min-width:130px">终转化率</th><th style="min-width:130px">Fail率</th><th>评级</th></tr></thead><tbody>';
+  let h='<thead><tr><th style="width:28px">#</th><th>姓名</th><th>推送</th><th>入职</th><th>入职率</th><th>在途</th><th style="color:#f85149">OD率</th><th style="min-width:130px">终转化率</th><th style="min-width:130px">Fail率</th><th>评级</th></tr></thead><tbody>';
   sorted.forEach((d,i)=>{
     const rc=i===0?'r1':i===1?'r2':i===2?'r3':'rn';
     const fc2=d.final_rate>=60?'c-green':d.final_rate>=35?'c-blue':d.final_rate>=20?'c-orange':'c-red';
@@ -681,7 +667,7 @@ function makeTable(id,items){
     else if(d.final_rate>=50)pill='<span class="pill pill-b">✅ 良好</span>';
     else if(d.final_rate>=25)pill='<span class="pill pill-o">⚠️ 待改善</span>';
     else pill='<span class="pill pill-r">🚨 关注</span>';
-    h+=`<tr><td><span class="rnum ${rc}">${i+1}</span></td><td><b>${d.name}</b></td><td>${d.total}</td><td class="c-green">${d.hired}</td><td style="color:var(--muted)">${d.hire_rate}%</td><td class="c-orange">${d.offer}</td><td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill bar-g" style="width:${d.final_rate}%"></div></div><span class="rate-lbl ${fc2}">${d.final_rate}%</span></div></td><td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill bar-r" style="width:${d.fail_rate}%"></div></div><span class="rate-lbl ${frc}">${d.fail_rate}%</span></div></td><td>${pill}</td></tr>`;
+    h+=`<tr><td><span class="rnum ${rc}">${i+1}</span></td><td><b>${d.name}</b></td><td>${d.total}</td><td class="c-green">${d.hired}</td><td style="color:var(--muted)">${d.hire_rate}%</td><td style="color:#58a6ff">${d.pipeline}</td><td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill bar-g" style="width:${d.final_rate}%"></div></div><span class="rate-lbl ${fc2}">${d.final_rate}%</span></div></td><td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill bar-r" style="width:${d.fail_rate}%"></div></div><span class="rate-lbl ${frc}">${d.fail_rate}%</span></div></td><td style="color:#f85149;font-size:11px">${d.od_rate}%</td><td>${pill}</td></tr>`;
   });
   el.innerHTML=h+'</tbody>';
 }
