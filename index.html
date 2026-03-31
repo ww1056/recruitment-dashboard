@@ -131,7 +131,7 @@
   </div>
 
   <div class="sec">月度趋势</div>
-  <div class="card full"><div class="card-title">月度推送 / 入职 / Fail / 终转化率</div><div class="card-sub">3月入职尚在 Offer 流程中</div><div id="chart-monthly-overview" style="height:240px"></div></div>
+  <div class="card full"><div class="card-title">月度推送 / 入职 / Fail / 终转化率</div><div class="card-sub">全量数据（2025年3月—2026年3月）</div><div id="chart-monthly-overview" style="height:240px"></div></div>
 </div>
 
 <!-- ===== HRBP ===== -->
@@ -170,8 +170,42 @@
 
 <!-- ===== 月度趋势 ===== -->
 <div class="tab-panel" id="panel-monthly">
-  <div class="sec">月度漏斗趋势</div>
-  <div class="card full"><div class="card-title">月度推送 / 入职 / OD在途 / Fail / 终转化率</div><div class="card-sub">2026年1月 — 3月</div><div id="chart-monthly-main" style="height:300px"></div></div>
+  <div class="sec">月度漏斗趋势 · 全量数据（2025年3月 — 2026年3月）</div>
+  <div class="card full"><div class="card-title">月度推送 / 已入职 / OD在途 / Fail / 终转化率</div><div class="card-sub">全量13个月 · 3月数据为阶段性，入职尚在流程中</div><div id="chart-monthly-main" style="height:320px"></div></div>
+
+  <div class="card full" style="margin-top:16px">
+    <div class="card-title" style="font-size:14px;margin-bottom:12px">🔍 月度趋势复盘结论</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+
+      <div style="background:rgba(248,81,73,.06);border:1px solid rgba(248,81,73,.2);border-radius:8px;padding:14px">
+        <div style="color:#f85149;font-weight:700;font-size:12px;margin-bottom:8px">🚨 核心问题：Q4冲量后Q1断崖</div>
+        <div style="color:#c9d1d9;font-size:12px;line-height:1.7">
+          25年11-12月推送量飙升至77/92人，是全年峰值，但<b>2026年Q1推送量骤降至127人（月均42人）</b>，降幅超50%。
+          更危险的是：<b>26年3月终转化率跌至38%，创历史最低</b>，0人入职，19人Fail，14人OD在途悬而未决。
+          Q4集中冲量的副作用是耗尽了 HRBP/TA 的候选人储备，Q1接续乏力。
+        </div>
+      </div>
+
+      <div style="background:rgba(210,153,34,.06);border:1px solid rgba(210,153,34,.2);border-radius:8px;padding:14px">
+        <div style="color:#d29922;font-weight:700;font-size:12px;margin-bottom:8px">⚠️ 规律洞察：暑期 & 年底是双低谷</div>
+        <div style="color:#c9d1d9;font-size:12px;line-height:1.7">
+          <b>25年8月终转化率48%</b>，Fail率52%，是2025年最差月份——暑期候选人质量下沉，竞争减少但意愿度低。
+          <b>25年7月是全年最佳（71%终转化）</b>，说明6-7月是黄金招聘窗口，候选人市场活跃、稳定性高。
+          <b>26年2月终转化率77%</b>看似亮眼，实为假象：推送量仅31人，OD积压18人，大量候选人尚未结案，终转化率会回调。
+        </div>
+      </div>
+
+      <div style="background:rgba(63,185,80,.06);border:1px solid rgba(63,185,80,.2);border-radius:8px;padding:14px">
+        <div style="color:#3fb950;font-weight:700;font-size:12px;margin-bottom:8px">✅ 改善措施（按优先级）</div>
+        <div style="color:#c9d1d9;font-size:12px;line-height:1.7">
+          <b>① 立即清仓3月OD：</b>26年3月14人OD在途，需本周内逐一回访确认意向，争取4月转化入职，挽救Q1收尾数据。<br/>
+          <b>② 提前布局Q2招聘：</b>4-5月是年度第二招聘黄金期，应在3月底前完成简历储备，避免重蹈Q1断供覆辙。<br/>
+          <b>③ 平滑推送节奏：</b>禁止季末堆量，目标每月推送量稳定在40-60人，终转化率目标≥60%，避免批量低质推送拉低整体表现。
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
 <!-- ===== 年度对比 ===== -->
@@ -297,9 +331,19 @@ const D = {
   hrbp: [{"name":"川木","total":1,"hired":1,"offer":0,"fail":0,"hire_rate":100,"final_rate":100,"fail_rate":0},{"name":"豆豆","total":12,"hired":5,"offer":4,"fail":3,"hire_rate":42,"final_rate":75,"fail_rate":25},{"name":"一岚","total":4,"hired":2,"offer":1,"fail":1,"hire_rate":50,"final_rate":75,"fail_rate":25},{"name":"予安","total":4,"hired":2,"offer":1,"fail":1,"hire_rate":50,"final_rate":75,"fail_rate":25},{"name":"杨盈","total":45,"hired":22,"offer":11,"fail":11,"hire_rate":49,"final_rate":73,"fail_rate":24},{"name":"广白","total":15,"hired":8,"offer":3,"fail":4,"hire_rate":53,"final_rate":73,"fail_rate":27},{"name":"贵音","total":39,"hired":11,"offer":17,"fail":8,"hire_rate":28,"final_rate":72,"fail_rate":21},{"name":"芭内","total":6,"hired":3,"offer":1,"fail":2,"hire_rate":50,"final_rate":67,"fail_rate":33},{"name":"卡朵","total":6,"hired":2,"offer":2,"fail":2,"hire_rate":33,"final_rate":67,"fail_rate":33},{"name":"瑾瑜","total":57,"hired":23,"offer":14,"fail":16,"hire_rate":40,"final_rate":65,"fail_rate":28},{"name":"星夏","total":13,"hired":5,"offer":3,"fail":5,"hire_rate":38,"final_rate":62,"fail_rate":38},{"name":"幸运","total":18,"hired":7,"offer":4,"fail":7,"hire_rate":39,"final_rate":61,"fail_rate":39},{"name":"希仁","total":27,"hired":7,"offer":9,"fail":11,"hire_rate":26,"final_rate":59,"fail_rate":41},{"name":"天翼","total":43,"hired":17,"offer":8,"fail":18,"hire_rate":40,"final_rate":58,"fail_rate":42},{"name":"奎妮","total":34,"hired":9,"offer":10,"fail":13,"hire_rate":26,"final_rate":56,"fail_rate":38},{"name":"雪山","total":85,"hired":30,"offer":17,"fail":38,"hire_rate":35,"final_rate":55,"fail_rate":45},{"name":"雪糕","total":48,"hired":20,"offer":6,"fail":20,"hire_rate":42,"final_rate":54,"fail_rate":42},{"name":"塔美","total":13,"hired":7,"offer":0,"fail":6,"hire_rate":54,"final_rate":54,"fail_rate":46},{"name":"筱然","total":20,"hired":8,"offer":2,"fail":10,"hire_rate":40,"final_rate":50,"fail_rate":50},{"name":"蝶衣","total":20,"hired":2,"offer":8,"fail":7,"hire_rate":10,"final_rate":50,"fail_rate":35},{"name":"梓晴","total":16,"hired":6,"offer":2,"fail":8,"hire_rate":38,"final_rate":50,"fail_rate":50},{"name":"云阳","total":6,"hired":2,"offer":1,"fail":3,"hire_rate":33,"final_rate":50,"fail_rate":50},{"name":"金槌","total":23,"hired":9,"offer":2,"fail":12,"hire_rate":39,"final_rate":48,"fail_rate":52},{"name":"绫华","total":22,"hired":4,"offer":6,"fail":11,"hire_rate":18,"final_rate":45,"fail_rate":50},{"name":"战歌","total":27,"hired":5,"offer":7,"fail":12,"hire_rate":19,"final_rate":44,"fail_rate":44}],
   ta: [{"name":"幸运","total":4,"hired":3,"offer":0,"fail":1,"hire_rate":75,"final_rate":75,"fail_rate":25},{"name":"瑞妮","total":35,"hired":14,"offer":10,"fail":10,"hire_rate":40,"final_rate":69,"fail_rate":29},{"name":"大娃","total":32,"hired":14,"offer":8,"fail":10,"hire_rate":44,"final_rate":69,"fail_rate":31},{"name":"真珠","total":6,"hired":3,"offer":1,"fail":2,"hire_rate":50,"final_rate":67,"fail_rate":33},{"name":"林波","total":3,"hired":1,"offer":1,"fail":1,"hire_rate":33,"final_rate":67,"fail_rate":33},{"name":"车英","total":50,"hired":15,"offer":17,"fail":16,"hire_rate":30,"final_rate":64,"fail_rate":32},{"name":"越祈","total":22,"hired":11,"offer":3,"fail":8,"hire_rate":50,"final_rate":64,"fail_rate":36},{"name":"蒂蒂","total":11,"hired":4,"offer":3,"fail":4,"hire_rate":36,"final_rate":64,"fail_rate":36},{"name":"欣然","total":39,"hired":16,"offer":8,"fail":15,"hire_rate":41,"final_rate":62,"fail_rate":38},{"name":"褚岩","total":8,"hired":3,"offer":2,"fail":2,"hire_rate":38,"final_rate":62,"fail_rate":25},{"name":"天雪","total":61,"hired":26,"offer":11,"fail":24,"hire_rate":43,"final_rate":61,"fail_rate":39},{"name":"司童","total":40,"hired":13,"offer":11,"fail":16,"hire_rate":32,"final_rate":60,"fail_rate":40},{"name":"玄鸟","total":49,"hired":18,"offer":11,"fail":18,"hire_rate":37,"final_rate":59,"fail_rate":37},{"name":"贵音","total":41,"hired":15,"offer":9,"fail":14,"hire_rate":37,"final_rate":59,"fail_rate":34},{"name":"禇岩","total":24,"hired":8,"offer":6,"fail":10,"hire_rate":33,"final_rate":58,"fail_rate":42},{"name":"优妮","total":19,"hired":7,"offer":4,"fail":6,"hire_rate":37,"final_rate":58,"fail_rate":32},{"name":"希雯","total":68,"hired":21,"offer":17,"fail":30,"hire_rate":31,"final_rate":56,"fail_rate":44},{"name":"瑞思","total":20,"hired":8,"offer":3,"fail":6,"hire_rate":40,"final_rate":55,"fail_rate":30},{"name":"散影","total":15,"hired":7,"offer":1,"fail":7,"hire_rate":47,"final_rate":53,"fail_rate":47},{"name":"予安","total":6,"hired":3,"offer":0,"fail":3,"hire_rate":50,"final_rate":50,"fail_rate":50},{"name":"夏娜","total":25,"hired":2,"offer":10,"fail":10,"hire_rate":8,"final_rate":48,"fail_rate":40},{"name":"粥粥","total":8,"hired":2,"offer":1,"fail":4,"hire_rate":25,"final_rate":38,"fail_rate":50},{"name":"奎妮","total":4,"hired":1,"offer":0,"fail":3,"hire_rate":25,"final_rate":25,"fail_rate":75},{"name":"子衿","total":10,"hired":1,"offer":1,"fail":8,"hire_rate":10,"final_rate":20,"fail_rate":80}],
   monthly: [
-    {month:"1月",total:59,hired:19,offer:13,fail:27,final_rate:54,fail_rate:46},
-    {month:"2月",total:31,hired:6,offer:17,fail:7,final_rate:74,fail_rate:23},
-    {month:"3月",total:37,hired:0,offer:17,fail:19,final_rate:46,fail_rate:51},
+    {month:"25年3月",total:25,hired:10,offer:1,fail:14,final_rate:44,fail_rate:56},
+    {month:"25年4月",total:19,hired:8,offer:3,fail:8,final_rate:58,fail_rate:42},
+    {month:"25年5月",total:40,hired:21,offer:4,fail:15,final_rate:62,fail_rate:38},
+    {month:"25年6月",total:39,hired:16,offer:7,fail:16,final_rate:59,fail_rate:41},
+    {month:"25年7月",total:41,hired:19,offer:10,fail:12,final_rate:71,fail_rate:29},
+    {month:"25年8月",total:44,hired:11,offer:10,fail:23,final_rate:48,fail_rate:52},
+    {month:"25年9月",total:44,hired:19,offer:5,fail:20,final_rate:55,fail_rate:45},
+    {month:"25年10月",total:41,hired:12,offer:15,fail:14,final_rate:66,fail_rate:34},
+    {month:"25年11月",total:77,hired:35,offer:17,fail:25,final_rate:68,fail_rate:32},
+    {month:"25年12月",total:92,hired:41,offer:22,fail:29,final_rate:68,fail_rate:32},
+    {month:"26年1月",total:59,hired:19,offer:13,fail:27,final_rate:54,fail_rate:46},
+    {month:"26年2月",total:31,hired:6,offer:18,fail:7,final_rate:77,fail_rate:23},
+    {month:"26年3月",total:37,hired:0,offer:14,fail:19,final_rate:38,fail_rate:51},
   ],
   compare: {
     "2025": {total:462,hired:182,offer:92,fail:176,hire_rate:39,final_rate:59,fail_rate:38},
@@ -383,17 +427,17 @@ function initOverviewBars(){
 
 function initMonthlyOverview(){
   const c=gc('chart-monthly-overview');if(!c)return;
-  c.setOption({backgroundColor:'transparent',grid:{left:36,right:60,top:16,bottom:20},
+  c.setOption({backgroundColor:'transparent',grid:{left:36,right:60,top:16,bottom:40},
     legend:{data:['推送','入职','OD在途','Fail','终转化率'],right:0,top:0,textStyle:{color:'#8b949e',fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
-    xAxis:{type:'category',data:D.monthly.map(d=>d.month),...ax},
+    xAxis:{type:'category',data:D.monthly.map(d=>d.month),...ax,axisLabel:{...ax.axisLabel,rotate:30,fontSize:10}},
     yAxis:[{type:'value',...ax},{type:'value',max:100,position:'right',...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}}],
     tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
     series:[
-      {name:'推送',type:'bar',stack:'s',data:D.monthly.map(d=>d.total),itemStyle:{color:'#21262d',borderRadius:[3,3,0,0]},barMaxWidth:32},
-      {name:'入职',type:'bar',stack:'s2',data:D.monthly.map(d=>d.hired),itemStyle:{color:G,borderRadius:[3,3,0,0]},barMaxWidth:20},
-      {name:'OD在途',type:'bar',stack:'s2',data:D.monthly.map(d=>d.offer),itemStyle:{color:O},barMaxWidth:20},
-      {name:'Fail',type:'bar',stack:'s2',data:D.monthly.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.35)',borderRadius:[3,3,0,0]},barMaxWidth:20},
-      {name:'终转化率',type:'line',yAxisIndex:1,data:D.monthly.map(d=>d.final_rate),lineStyle:{color:B,width:2},itemStyle:{color:B},symbol:'circle',symbolSize:7,label:{show:true,formatter:'{c}%',color:B,fontSize:11,position:'top'}},
+      {name:'推送',type:'bar',data:D.monthly.map(d=>d.total),itemStyle:{color:'#21262d',borderRadius:[3,3,0,0]},barMaxWidth:16},
+      {name:'入职',type:'bar',data:D.monthly.map(d=>d.hired),itemStyle:{color:G,borderRadius:[3,3,0,0]},barMaxWidth:10},
+      {name:'OD在途',type:'bar',data:D.monthly.map(d=>d.offer),itemStyle:{color:O,borderRadius:[3,3,0,0]},barMaxWidth:10},
+      {name:'Fail',type:'bar',data:D.monthly.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.35)',borderRadius:[3,3,0,0]},barMaxWidth:10},
+      {name:'终转化率',type:'line',yAxisIndex:1,data:D.monthly.map(d=>d.final_rate),lineStyle:{color:B,width:2},itemStyle:{color:B},symbol:'circle',symbolSize:5,label:{show:false}},
     ]
   });
 }
@@ -512,17 +556,22 @@ function initTA(){
 
 function initMonthly(){
   const c=gc('chart-monthly-main');if(!c)return;
-  c.setOption({backgroundColor:'transparent',grid:{left:36,right:60,top:24,bottom:24},
+  c.setOption({backgroundColor:'transparent',grid:{left:36,right:64,top:28,bottom:44},
     legend:{data:['推送量','已入职','OD在途','Fail','终转化率'],right:0,top:0,textStyle:{color:M,fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
-    xAxis:{type:'category',data:D.monthly.map(d=>d.month),...ax},
+    xAxis:{type:'category',data:D.monthly.map(d=>d.month),...ax,
+      axisLabel:{...ax.axisLabel,rotate:30,fontSize:11}},
     yAxis:[{type:'value',...ax},{type:'value',max:100,position:'right',...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}}],
     tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
+    // 25年底高峰标注
     series:[
-      {name:'推送量',type:'bar',data:D.monthly.map(d=>d.total),itemStyle:{color:'#21262d',borderRadius:[3,3,0,0]},barMaxWidth:36},
-      {name:'已入职',type:'bar',data:D.monthly.map(d=>d.hired),itemStyle:{color:G,borderRadius:[3,3,0,0]},barMaxWidth:24},
-      {name:'OD在途',type:'bar',data:D.monthly.map(d=>d.offer),itemStyle:{color:O,borderRadius:[3,3,0,0]},barMaxWidth:24},
-      {name:'Fail',type:'bar',data:D.monthly.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.4)',borderRadius:[3,3,0,0]},barMaxWidth:24},
-      {name:'终转化率',type:'line',yAxisIndex:1,data:D.monthly.map(d=>d.final_rate),lineStyle:{color:B,width:2},itemStyle:{color:B},symbol:'circle',symbolSize:7,label:{show:true,formatter:'{c}%',color:B,fontSize:11,position:'top'}},
+      {name:'推送量',type:'bar',data:D.monthly.map(d=>d.total),itemStyle:{color:'rgba(33,38,45,.9)',borderRadius:[3,3,0,0]},barMaxWidth:28,
+        markPoint:{data:[{type:'max',name:'峰值',label:{formatter:'峰值\n{c}人',color:'#e6edf3',fontSize:10},itemStyle:{color:'rgba(88,166,255,.3)'}}]}},
+      {name:'已入职',type:'bar',data:D.monthly.map(d=>d.hired),itemStyle:{color:G,borderRadius:[3,3,0,0]},barMaxWidth:18},
+      {name:'OD在途',type:'bar',data:D.monthly.map(d=>d.offer),itemStyle:{color:O,borderRadius:[3,3,0,0]},barMaxWidth:18},
+      {name:'Fail',type:'bar',data:D.monthly.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.45)',borderRadius:[3,3,0,0]},barMaxWidth:18},
+      {name:'终转化率',type:'line',yAxisIndex:1,data:D.monthly.map(d=>d.final_rate),
+        lineStyle:{color:B,width:2},itemStyle:{color:B},symbol:'circle',symbolSize:6,
+        label:{show:true,formatter:d=>d.value>0?d.value+'%':'',color:B,fontSize:10,position:'top'}},
     ]
   });
 }
