@@ -582,8 +582,8 @@ function initCompare(){
     yAxis:{type:'value',...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}},
     tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
     series:[
-      {name:'2025全年',type:'bar',data:[39,59,38],itemStyle:{color:P},barMaxWidth:30},
-      {name:'2026 YTD',type:'bar',data:[31,49,38],itemStyle:{color:B},barMaxWidth:30},
+      {name:'2025全年',type:'bar',data:[39,59,38],itemStyle:{color:'#4e9d8f'},barMaxWidth:30},
+      {name:'2026 YTD',type:'bar',data:[31,49,38],itemStyle:{color:'#5b8db8'},barMaxWidth:30},
     ]
   });
 
@@ -595,8 +595,8 @@ function initCompare(){
     yAxis:{type:'value',...ax},
     tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},formatter:p=>{let r=p[0];return `<b>${r.name}</b><br/>${p.map(d=>`${d.seriesName}: ${d.value}人`).join('<br/>')}`;}},
     series:[
-      {name:'2025全年',type:'bar',data:[462,182,20,113,176],itemStyle:{color:P},barMaxWidth:36},
-      {name:'2026 YTD',type:'bar',data:[139,43,26,113,53],itemStyle:{color:B},barMaxWidth:36},
+      {name:'2025全年',type:'bar',data:[462,182,20,113,176],itemStyle:{color:'#4e9d8f'},barMaxWidth:36},
+      {name:'2026 YTD',type:'bar',data:[139,43,26,113,53],itemStyle:{color:'#5b8db8'},barMaxWidth:36},
     ]
   });
 }
