@@ -391,13 +391,10 @@ function initHRBP(){
       data:D.hrbp.map(d=>[d.fail_rate,d.final_rate,d.total*3,d.name,d.total,d.hired]),
       symbolSize:d=>Math.max(16,Math.sqrt(d[2])*2.4),
       itemStyle:{color:d=>fc(d.data[1]),opacity:.9,borderColor:'rgba(255,255,255,.2)',borderWidth:1},
-      label:{show:true,formatter:d=>{
-        // 只给极端位置（终转化≥80 或 ≤10，或Fail≥70）常驻标签
-        const fr=d.data[1],fail=d.data[0];
-        if(fr>=80||fr<=10||fail>=70) return d.data[3];
-        return '';
-      },position:'top',color:'#e6edf3',fontSize:11,fontWeight:'bold',
-        textBorderColor:'#161b22',textBorderWidth:3}
+      label:{show:true,formatter:d=>d.data[3],
+        position:'top',distance:6,
+        color:'#e6edf3',fontSize:11,fontWeight:'bold',
+        textBorderColor:'#0d1117',textBorderWidth:4}
     }]
   });
   const ck=gc('chart-hrbp-stack');
@@ -428,12 +425,10 @@ function initTA(){
       data:D.ta.map(d=>[d.fail_rate,d.final_rate,d.total*3,d.name,d.total,d.hired]),
       symbolSize:d=>Math.max(16,Math.sqrt(d[2])*2.4),
       itemStyle:{color:d=>fc(d.data[1]),opacity:.9,borderColor:'rgba(255,255,255,.2)',borderWidth:1},
-      label:{show:true,formatter:d=>{
-        const fr=d.data[1],fail=d.data[0];
-        if(fr>=75||fr<=20||fail>=65) return d.data[3];
-        return '';
-      },position:'top',color:'#e6edf3',fontSize:11,fontWeight:'bold',
-        textBorderColor:'#161b22',textBorderWidth:3}
+      label:{show:true,formatter:d=>d.data[3],
+        position:'top',distance:6,
+        color:'#e6edf3',fontSize:11,fontWeight:'bold',
+        textBorderColor:'#0d1117',textBorderWidth:4}
     }]
   });
   const ck=gc('chart-ta-stack');
