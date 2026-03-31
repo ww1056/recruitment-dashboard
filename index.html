@@ -155,8 +155,9 @@
 <!-- ===== TA ===== -->
 <div class="tab-panel" id="panel-ta">
   <div class="sec">TA 推荐质量榜 · 全量数据（2025+2026）· CBD 专场 · 推送量 ≥ 3 · 共 24 人</div>
+  <div class="card full" style="margin-bottom:16px"><div class="card-title">TA 推荐质量详表</div><div class="card-sub">按终转化率排序 · 推送量 ≥ 3</div><table class="rank-table" id="table-ta"></table></div>
   <div style="display:grid;grid-template-columns:200px 1fr;gap:16px;margin-bottom:16px">
-    <div class="card" style="overflow-y:auto;max-height:460px">
+    <div class="card" style="overflow-y:auto">
       <div class="card-title" style="margin-bottom:8px">📋 终转化率排名</div>
       <div id="legend-ta" style="font-size:11px;line-height:1.8"></div>
     </div>
@@ -166,8 +167,6 @@
       <div id="chart-ta-scatter" style="height:420px"></div>
     </div>
   </div>
-  <div class="card full"><div class="card-title">结果构成堆叠图</div><div class="card-sub">按推送量排序</div><div id="chart-ta-stack" style="height:320px"></div></div>
-  <div class="card full" style="margin-top:16px"><div class="card-title">TA 推荐质量详表</div><div class="card-sub">按终转化率排序 · 推送量 ≥ 3</div><table class="rank-table" id="table-ta"></table></div>
 </div>
 
 <!-- ===== 月度趋势 ===== -->
@@ -488,18 +487,7 @@ function initTA(){
       }
     ]
   });
-  const ck=gc('chart-ta-stack');
-  const sorted=[...D.ta].sort((a,b)=>b.total-a.total);
-  ck.setOption({backgroundColor:'transparent',grid:{left:44,right:12,top:28,bottom:4,containLabel:false},
-    legend:{data:['已入职','OD/在途','Fail'],top:0,right:0,textStyle:{color:M,fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
-    xAxis:{type:'value',...ax},yAxis:{type:'category',data:sorted.map(d=>d.name),...ax},
-    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
-    series:[
-      {name:'已入职',type:'bar',stack:'s',data:sorted.map(d=>d.hired),itemStyle:{color:G},barMaxWidth:14},
-      {name:'OD/在途',type:'bar',stack:'s',data:sorted.map(d=>d.offer),itemStyle:{color:O}},
-      {name:'Fail',type:'bar',stack:'s',data:sorted.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.35)',borderRadius:[0,3,3,0]}},
-    ]
-  });
+  // chart-ta-stack 已移除
   makeTable('table-ta', D.ta);
 }
 
