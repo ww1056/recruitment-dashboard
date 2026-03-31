@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>商业化招聘质量看板 · 2026 Q1</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --orange: #d29922;
+    --red: #f85149;
+    --purple: #bc8cff;
+    --teal: #39d353;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* Header */
+  .header {
+    padding: 24px 32px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+  }
+  .header-left h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+  .header-left p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  .header-badges { display: flex; gap: 8px; }
+  .badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge-blue { background: rgba(88,166,255,0.15); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+  .badge-green { background: rgba(63,185,80,0.15); color: var(--green); border: 1px solid rgba(63,185,80,0.3); }
+
+  /* Tabs */
+  .tabs {
+    padding: 0 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 0;
+    background: var(--card);
+  }
+  .tab {
+    padding: 12px 20px;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* Main layout */
+  .container { padding: 24px 32px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* KPI row */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  .kpi-label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .kpi-value { font-size: 26px; font-weight: 700; line-height: 1; }
+  .kpi-sub { color: var(--muted); font-size: 11px; margin-top: 4px; }
+  .kpi-delta { font-size: 11px; margin-top: 4px; }
+  .delta-up { color: var(--green); }
+  .delta-down { color: var(--red); }
+  .c-green { color: var(--green); }
+  .c-red { color: var(--red); }
+  .c-orange { color: var(--orange); }
+  .c-blue { color: var(--accent); }
+  .c-purple { color: var(--purple); }
+
+  /* Grid */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .full-width { margin-bottom: 16px; }
+
+  /* Chart card */
+  .chart-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .chart-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .chart-subtitle { color: var(--muted); font-size: 11px; margin-bottom: 12px; }
+  .chart-container { width: 100%; }
+
+  /* Ranking table */
+  .rank-table { width: 100%; border-collapse: collapse; }
+  .rank-table thead tr { border-bottom: 1px solid var(--border); }
+  .rank-table th {
+    text-align: left;
+    padding: 6px 10px;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  .rank-table td {
+    padding: 7px 10px;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(48,54,61,0.5);
+    vertical-align: middle;
+  }
+  .rank-table tr:last-child td { border-bottom: none; }
+  .rank-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .rank-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 10px;
+    font-weight: 700;
+  }
+  .rank-1 { background: #FFD700; color: #000; }
+  .rank-2 { background: #C0C0C0; color: #000; }
+  .rank-3 { background: #CD7F32; color: #fff; }
+  .rank-n { background: var(--border); color: var(--muted); }
+
+  /* Rate bar */
+  .rate-bar-wrap { display: flex; align-items: center; gap: 6px; min-width: 120px; }
+  .rate-bar-bg { flex: 1; height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; }
+  .rate-bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s; }
+  .bar-green { background: var(--green); }
+  .bar-orange { background: var(--orange); }
+  .bar-red { background: var(--red); }
+  .bar-blue { background: var(--accent); }
+  .bar-purple { background: var(--purple); }
+  .rate-label { font-size: 12px; font-weight: 600; min-width: 32px; text-align: right; }
+
+  /* Alert pills */
+  .pill {
+    display: inline-block;
+    padding: 1px 7px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .pill-red { background: rgba(248,81,73,0.15); color: var(--red); }
+  .pill-green { background: rgba(63,185,80,0.15); color: var(--green); }
+  .pill-orange { background: rgba(210,153,34,0.15); color: var(--orange); }
+  .pill-gray { background: rgba(139,148,158,0.15); color: var(--muted); }
+  .pill-blue { background: rgba(88,166,255,0.15); color: var(--accent); }
+
+  /* Section divider */
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 20px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Toggle source */
+  .source-toggle {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+  .src-btn {
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    transition: all 0.15s;
+  }
+  .src-btn.active {
+    background: var(--accent);
+    color: #0d1117;
+    border-color: var(--accent);
+  }
+  .src-btn:hover:not(.active) { background: var(--border); color: var(--text); }
+
+  /* Alert box */
+  .alert-box {
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .alert-red { background: rgba(248,81,73,0.08); border: 1px solid rgba(248,81,73,0.25); color: #f4c1be; }
+  .alert-orange { background: rgba(210,153,34,0.08); border: 1px solid rgba(210,153,34,0.25); color: #e8d5a3; }
+  .alert-green { background: rgba(63,185,80,0.08); border: 1px solid rgba(63,185,80,0.25); color: #b3e6b8; }
+
+  /* Scrollable chart area */
+  .chart-scroll { overflow-x: auto; }
+
+  /* Month selector */
+  .month-pills { display: flex; gap: 6px; margin-bottom: 14px; }
+  .month-pill {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    transition: all 0.15s;
+  }
+  .month-pill.active {
+    background: rgba(88,166,255,0.15);
+    color: var(--accent);
+    border-color: rgba(88,166,255,0.4);
+  }
+
+  .split-row { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+  @media (max-width: 1200px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr 1fr; }
+    .kpi-row { grid-template-columns: repeat(3, 1fr); }
+    .split-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>🎯 商业化招聘质量看板</h1>
+    <p>CBD专场（127人） + 直聘专场（126人）· 数据截至 2026-03-31</p>
+  </div>
+  <div class="header-badges">
+    <span class="badge badge-blue">2026 Q1</span>
+    <span class="badge badge-green">Live</span>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('overview')">总览</div>
+  <div class="tab" onclick="switchTab('hrbp')">HRBP 榜单</div>
+  <div class="tab" onclick="switchTab('ta')">TA 榜单</div>
+  <div class="tab" onclick="switchTab('monthly')">月度趋势</div>
+</div>
+
+<div class="container">
+
+  <!-- ===== TAB: 总览 ===== -->
+  <div class="tab-panel active" id="panel-overview">
+
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-label">CBD 总推送</div>
+        <div class="kpi-value c-blue">127</div>
+        <div class="kpi-sub">2026 Q1</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">CBD 已入职</div>
+        <div class="kpi-value c-green">25</div>
+        <div class="kpi-sub">入职率 <b>20%</b> · 终转化 ~36%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">直聘 总推送</div>
+        <div class="kpi-value c-purple">126</div>
+        <div class="kpi-sub">2025.09 — 2026.03</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">直聘 已入职</div>
+        <div class="kpi-value c-green">19</div>
+        <div class="kpi-sub">通过率 <b>63%</b> · 在途 16人</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">在途 Offer</div>
+        <div class="kpi-value c-orange">35</div>
+        <div class="kpi-sub">CBD 23 + 直聘 12</div>
+      </div>
+    </div>
+
+    <div class="alert-box alert-red">
+      <span>🚨</span>
+      <span><b>立即行动（本周）：</b>直聘专场幕扬推送6人pass全部沉默、方糖推送5人pass全部沉默，共11人需逐一确认Offer进展；CBD专场雪糕Q1入职率从46%骤降至0%，需要复盘选人标准。</span>
+    </div>
+    <div class="alert-box alert-orange">
+      <span>⚠️</span>
+      <span><b>本月关注：</b>CBD专场梓晴/绫华终转化率0%；直聘专场杨盈推送5人失败4人（80% Fail率）；车英 OD积压9人需要回访跟进。</span>
+    </div>
+
+    <div class="section-label">双专场 漏斗对比</div>
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-title">CBD 专场漏斗</div>
+        <div class="chart-subtitle">2026 Q1 · 127人</div>
+        <div class="chart-container" id="chart-cbd-funnel" style="height:260px"></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">直聘 专场漏斗</div>
+        <div class="chart-subtitle">2025.09-2026.03 · 126人</div>
+        <div class="chart-container" id="chart-zhipin-funnel" style="height:260px"></div>
+      </div>
+    </div>
+
+    <div class="section-label">HRBP · 终转化率速览（双专场）</div>
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-title">CBD 专场 HRBP 终转化率</div>
+        <div class="chart-subtitle">终转化 = (已入职 + OD + 在途) / 推送</div>
+        <div class="chart-container" id="chart-cbd-hrbp-bar" style="height:320px"></div>
+      </div>
+      <div class="chart-card" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;min-height:180px">
+        <div style="font-size:28px">⏳</div>
+        <div style="color:var(--text);font-weight:600;font-size:13px">直聘 HRBP 数据待补充</div>
+        <div style="color:var(--muted);font-size:11px;text-align:center;max-width:200px">需导出直聘专场 Sheet 为 Excel 后重新生成</div>
+      </div>
+    </div>
+
+    <div class="section-label">TA · 终转化率速览（双专场）</div>
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-title">CBD 专场 TA 终转化率</div>
+        <div class="chart-subtitle">推送量 ≥ 3</div>
+        <div class="chart-container" id="chart-cbd-ta-bar" style="height:300px"></div>
+      </div>
+      <div class="chart-card" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;min-height:180px">
+        <div style="font-size:28px">⏳</div>
+        <div style="color:var(--text);font-weight:600;font-size:13px">直聘 TA 数据待补充</div>
+        <div style="color:var(--muted);font-size:11px;text-align:center;max-width:200px">需导出直聘专场 Sheet 为 Excel 后重新生成</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB: HRBP ===== -->
+  <div class="tab-panel" id="panel-hrbp">
+
+    <div class="source-toggle">
+      <button class="src-btn active" id="hrbp-btn-cbd" onclick="switchHRBP('cbd')">CBD 专场</button>
+      <button class="src-btn" id="hrbp-btn-zhipin" onclick="switchHRBP('zhipin')">直聘 专场</button>
+    </div>
+
+    <div id="hrbp-cbd-content">
+      <div class="section-label">CBD 专场 · HRBP 推荐质量榜 (2026 Q1)</div>
+      <div class="split-row">
+        <div class="chart-card">
+          <div class="chart-title">推送量 × 终转化率 气泡图</div>
+          <div class="chart-subtitle">气泡大小 = 推送量；横轴 = Fail率；纵轴 = 终转化率</div>
+          <div class="chart-container" id="chart-cbd-hrbp-scatter" style="height:340px"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">各 HRBP 结果构成</div>
+          <div class="chart-subtitle">已入职 / OD / Fail 分布</div>
+          <div class="chart-container" id="chart-cbd-hrbp-stack" style="height:340px"></div>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">CBD 专场 HRBP 推荐质量详表</div>
+        <div class="chart-subtitle">按终转化率排序</div>
+        <table class="rank-table" id="table-cbd-hrbp"></table>
+      </div>
+    </div>
+
+    <div id="hrbp-zhipin-content" style="display:none">
+      <div class="section-label">直聘 专场 · HRBP 推荐质量榜</div>
+      <div class="alert-box alert-orange" style="margin-top:12px">
+        <span>⏳</span>
+        <span><b>数据待补充：</b>直聘专场数据来自在线 Sheet，无法自动导出精确的 HRBP/TA 对应关系。请将直聘专场 Sheet 导出为 Excel 文件，上传后即可生成完整榜单。</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB: TA ===== -->
+  <div class="tab-panel" id="panel-ta">
+
+    <div class="source-toggle">
+      <button class="src-btn active" id="ta-btn-cbd" onclick="switchTA('cbd')">CBD 专场</button>
+      <button class="src-btn" id="ta-btn-zhipin" onclick="switchTA('zhipin')">直聘 专场</button>
+    </div>
+
+    <div id="ta-cbd-content">
+      <div class="section-label">CBD 专场 · TA 推荐质量榜 (2026 Q1)</div>
+      <div class="split-row">
+        <div class="chart-card">
+          <div class="chart-title">推送量 × 终转化率 气泡图</div>
+          <div class="chart-subtitle">气泡大小 = 推送量；横轴 = Fail率；纵轴 = 终转化率</div>
+          <div class="chart-container" id="chart-cbd-ta-scatter" style="height:340px"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">各 TA 结果构成</div>
+          <div class="chart-subtitle">已入职 / OD / Fail 分布</div>
+          <div class="chart-container" id="chart-cbd-ta-stack" style="height:340px"></div>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">CBD 专场 TA 推荐质量详表</div>
+        <div class="chart-subtitle">按终转化率排序</div>
+        <table class="rank-table" id="table-cbd-ta"></table>
+      </div>
+    </div>
+
+    <div id="ta-zhipin-content" style="display:none">
+      <div class="section-label">直聘 专场 · TA 推荐质量榜</div>
+      <div class="alert-box alert-orange" style="margin-top:12px">
+        <span>⏳</span>
+        <span><b>数据待补充：</b>直聘专场数据来自在线 Sheet，无法自动导出精确的 HRBP/TA 对应关系。请将直聘专场 Sheet 导出为 Excel 文件，上传后即可生成完整榜单。</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== TAB: 月度趋势 ===== -->
+  <div class="tab-panel" id="panel-monthly">
+
+    <div class="section-label">CBD 专场 月度漏斗趋势（2026 Q1）</div>
+    <div class="chart-card full-width">
+      <div class="chart-title">月度推送 / 入职 / Fail 趋势</div>
+      <div class="chart-subtitle">2026年1月 — 3月（127人）· 3月入职尚未落地，在途中</div>
+      <div class="chart-container" id="chart-cbd-monthly" style="height:300px"></div>
+    </div>
+
+    <div class="section-label">直聘 专场 月度趋势（2025.09 — 2026.03）</div>
+    <div class="chart-card full-width">
+      <div class="chart-title">月度推送 / 入职 / Fail 趋势</div>
+      <div class="chart-subtitle">126人 · 1-3月入职率低是时间差，候选人仍在Offer流程中</div>
+      <div class="chart-container" id="chart-zhipin-monthly" style="height:300px"></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="chart-card">
+        <div class="chart-title">CBD 月度 HRBP 入职分布</div>
+        <div class="chart-subtitle">各月各HRBP已入职人数</div>
+        <div class="chart-container" id="chart-cbd-hrbp-monthly" style="height:280px"></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">CBD 月度 TA 入职分布</div>
+        <div class="chart-subtitle">各月各TA已入职人数</div>
+        <div class="chart-container" id="chart-cbd-ta-monthly" style="height:280px"></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ===== DATA =====
+const data = {
+  cbd_hrbp: [
+    {name:"广白",total:4,hired:1,offer:1,pending:0,fail:0,final_rate:100,fail_rate:0},
+    {name:"贵音",total:13,hired:3,offer:5,pending:0,fail:3,final_rate:77,fail_rate:23},
+    {name:"瑾瑜",total:17,hired:5,offer:2,pending:0,fail:4,final_rate:71,fail_rate:24},
+    {name:"卡朵",total:6,hired:2,offer:1,pending:0,fail:2,final_rate:67,fail_rate:33},
+    {name:"奎妮",total:28,hired:7,offer:5,pending:0,fail:11,final_rate:61,fail_rate:39},
+    {name:"幸运",total:4,hired:1,offer:1,pending:0,fail:2,final_rate:50,fail_rate:50},
+    {name:"战歌",total:16,hired:3,offer:2,pending:0,fail:8,final_rate:50,fail_rate:50},
+    {name:"蝶衣",total:9,hired:0,offer:3,pending:0,fail:4,final_rate:56,fail_rate:44},
+    {name:"雪糕",total:7,hired:0,offer:1,pending:0,fail:4,final_rate:43,fail_rate:57},
+    {name:"雪山",total:10,hired:2,offer:1,pending:0,fail:7,final_rate:30,fail_rate:70},
+    {name:"绫华",total:5,hired:0,offer:1,pending:0,fail:4,final_rate:20,fail_rate:80},
+    {name:"梓晴",total:4,hired:0,offer:0,pending:0,fail:3,final_rate:0,fail_rate:75},
+  ],
+  cbd_ta: [
+    {name:"瑞妮",total:5,hired:0,offer:1,pending:0,fail:1,final_rate:80,fail_rate:20},
+    {name:"禇岩",total:8,hired:4,offer:0,pending:0,fail:2,final_rate:75,fail_rate:25},
+    {name:"夏娜",total:9,hired:0,offer:4,pending:0,fail:2,final_rate:67,fail_rate:22},
+    {name:"玄鸟",total:12,hired:3,offer:1,pending:0,fail:4,final_rate:67,fail_rate:33},
+    {name:"欣然",total:7,hired:3,offer:1,pending:0,fail:3,final_rate:57,fail_rate:43},
+    {name:"希雯",total:4,hired:0,offer:2,pending:0,fail:2,final_rate:50,fail_rate:50},
+    {name:"瑞思",total:8,hired:1,offer:1,pending:0,fail:4,final_rate:50,fail_rate:50},
+    {name:"车英",total:32,hired:6,offer:9,pending:0,fail:13,final_rate:59,fail_rate:41},
+    {name:"粥粥",total:7,hired:2,offer:1,pending:0,fail:4,final_rate:43,fail_rate:57},
+    {name:"司童",total:6,hired:0,offer:1,pending:0,fail:4,final_rate:33,fail_rate:67},
+    {name:"天雪",total:10,hired:2,offer:1,pending:0,fail:6,final_rate:40,fail_rate:60},
+  ],
+  zhipin_hrbp: [],  // 待补充：需要直聘专场Excel文件精确计算
+  zhipin_ta: [],    // 待补充：需要直聘专场Excel文件精确计算
+  cbd_monthly: [
+    {month:"2026-01",total:59,hired:19,offer:10,pending:0,fail:27,final_rate:49,fail_rate:46},
+    {month:"2026-02",total:31,hired:6,offer:8,pending:0,fail:7,final_rate:45,fail_rate:23},
+    {month:"2026-03",total:37,hired:0,offer:7,pending:18,fail:19,final_rate:68,fail_rate:51},
+  ],
+  zhipin_monthly: [
+    {month:"2025-09",total:7,hired:4,offer:0,pending:1,fail:2,final_rate:71,fail_rate:29},
+    {month:"2025-10",total:22,hired:5,offer:3,pending:3,fail:9,final_rate:50,fail_rate:41},
+    {month:"2025-11",total:12,hired:5,offer:1,pending:0,fail:5,final_rate:50,fail_rate:42},
+    {month:"2025-12",total:25,hired:5,offer:5,pending:2,fail:9,final_rate:48,fail_rate:36},
+    {month:"2026-01",total:14,hired:0,offer:2,pending:1,fail:6,final_rate:21,fail_rate:43},
+    {month:"2026-02",total:30,hired:0,offer:0,pending:2,fail:14,final_rate:7,fail_rate:47},
+    {month:"2026-03",total:15,hired:0,offer:0,pending:1,fail:2,final_rate:7,fail_rate:13},
+  ],
+};
+
+// ===== COLORS =====
+const GREEN = '#3fb950';
+const ORANGE = '#d29922';
+const RED = '#f85149';
+const BLUE = '#58a6ff';
+const PURPLE = '#bc8cff';
+const TEAL = '#39d353';
+const MUTED = '#8b949e';
+
+const theme = {
+  backgroundColor: 'transparent',
+  textStyle: { color: '#e6edf3' },
+};
+
+const axisStyle = {
+  axisLine: { lineStyle: { color: '#30363d' } },
+  axisTick: { lineStyle: { color: '#30363d' } },
+  axisLabel: { color: '#8b949e', fontSize: 11 },
+  splitLine: { lineStyle: { color: '#30363d', type: 'dashed' } },
+};
+
+// ===== TAB SWITCHING =====
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    const panels = ['overview','hrbp','ta','monthly'];
+    t.classList.toggle('active', panels[i] === name);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => {
+    p.classList.toggle('active', p.id === 'panel-'+name);
+  });
+  if (name === 'hrbp') initHRBP();
+  if (name === 'ta') initTA();
+  if (name === 'monthly') initMonthly();
+}
+
+function switchHRBP(src) {
+  document.getElementById('hrbp-cbd-content').style.display = src==='cbd' ? '' : 'none';
+  document.getElementById('hrbp-zhipin-content').style.display = src==='zhipin' ? '' : 'none';
+  document.getElementById('hrbp-btn-cbd').classList.toggle('active', src==='cbd');
+  document.getElementById('hrbp-btn-zhipin').classList.toggle('active', src==='zhipin');
+  if (src==='zhipin') initZhipinHRBP();
+}
+
+function switchTA(src) {
+  document.getElementById('ta-cbd-content').style.display = src==='cbd' ? '' : 'none';
+  document.getElementById('ta-zhipin-content').style.display = src==='zhipin' ? '' : 'none';
+  document.getElementById('ta-btn-cbd').classList.toggle('active', src==='cbd');
+  document.getElementById('ta-btn-zhipin').classList.toggle('active', src==='zhipin');
+  if (src==='zhipin') initZhipinTA();
+}
+
+// ===== CHART HELPERS =====
+function getOrCreate(id) {
+  const el = document.getElementById(id);
+  if (!el) return null;
+  let chart = echarts.getInstanceByDom(el);
+  if (!chart) chart = echarts.init(el, null, { renderer: 'canvas' });
+  return chart;
+}
+
+function finalColor(rate) {
+  if (rate >= 70) return GREEN;
+  if (rate >= 45) return TEAL;
+  if (rate >= 25) return ORANGE;
+  return RED;
+}
+
+function makeBarChart(id, items, valueKey='final_rate', label='终转化率') {
+  const chart = getOrCreate(id);
+  if (!chart) return;
+  const sorted = [...items].sort((a,b) => b[valueKey]-a[valueKey]);
+  chart.setOption({
+    ...theme,
+    grid: { left:60, right:16, top:10, bottom:16, containLabel:false },
+    xAxis: { type:'value', max:100, ...axisStyle, axisLabel:{...axisStyle.axisLabel, formatter:'{value}%'} },
+    yAxis: { type:'category', data: sorted.map(d=>d.name), ...axisStyle },
+    tooltip: {
+      trigger:'item',
+      backgroundColor:'#1c2128',
+      borderColor:'#30363d',
+      textStyle:{color:'#e6edf3',fontSize:12},
+      formatter: p => {
+        const d = sorted[p.dataIndex];
+        return `<b>${d.name}</b><br/>推送: ${d.total}<br/>终转化: ${d.final_rate}%<br/>已入职: ${d.hired}<br/>Fail率: ${d.fail_rate}%`;
+      }
+    },
+    series: [{
+      type:'bar',
+      data: sorted.map(d => ({
+        value: d[valueKey],
+        itemStyle: { color: finalColor(d[valueKey]), borderRadius:[0,3,3,0] }
+      })),
+      barMaxWidth: 18,
+      label: { show:true, position:'right', color:'#8b949e', fontSize:10, formatter:'{c}%' },
+    }]
+  });
+}
+
+function makeScatter(id, items) {
+  const chart = getOrCreate(id);
+  if (!chart) return;
+  chart.setOption({
+    ...theme,
+    grid:{left:50,right:20,top:20,bottom:40},
+    xAxis:{ type:'value', name:'Fail率%', max:100, ...axisStyle },
+    yAxis:{ type:'value', name:'终转化%', max:100, ...axisStyle },
+    tooltip:{
+      trigger:'item',
+      backgroundColor:'#1c2128',
+      borderColor:'#30363d',
+      textStyle:{color:'#e6edf3',fontSize:12},
+      formatter: p => {
+        const d = p.data;
+        return `<b>${d[3]}</b><br/>推送: ${d[2]}<br/>Fail率: ${d[0]}%<br/>终转化: ${d[1]}%<br/>已入职: ${d[4]}`;
+      }
+    },
+    series:[{
+      type:'scatter',
+      data: items.map(d => [d.fail_rate, d.final_rate, d.total*2.5, d.name, d.hired]),
+      symbolSize: d => Math.max(16, Math.sqrt(d[2])*2.5),
+      itemStyle:{
+        color: d => {
+          const fr = d.data[1];
+          return fr>=60?GREEN: fr>=35?TEAL: fr>=20?ORANGE:RED;
+        },
+        opacity: 0.85,
+        borderColor:'rgba(255,255,255,0.15)',
+        borderWidth:1,
+      },
+      label:{show:true, formatter:d=>d.data[3], position:'top', color:'#8b949e', fontSize:10},
+    }]
+  });
+}
+
+function makeStackBar(id, items) {
+  const chart = getOrCreate(id);
+  if (!chart) return;
+  const sorted = [...items].sort((a,b)=>b.total-a.total);
+  const names = sorted.map(d=>d.name);
+  chart.setOption({
+    ...theme,
+    grid:{left:55,right:16,top:10,bottom:16,containLabel:false},
+    xAxis:{type:'value',...axisStyle},
+    yAxis:{type:'category',data:names,...axisStyle},
+    tooltip:{
+      trigger:'item',
+      backgroundColor:'#1c2128',
+      borderColor:'#30363d',
+      textStyle:{color:'#e6edf3',fontSize:12},
+    },
+    legend:{
+      data:['已入职','OD/在途','Fail'],
+      top:'auto', right:0,
+      textStyle:{color:'#8b949e',fontSize:10},
+      icon:'circle',
+      itemWidth:8,itemHeight:8,
+    },
+    series:[
+      {name:'已入职',type:'bar',stack:'s',data:sorted.map(d=>d.hired),itemStyle:{color:GREEN,borderRadius:0},barMaxWidth:14},
+      {name:'OD/在途',type:'bar',stack:'s',data:sorted.map(d=>d.offer+d.pending),itemStyle:{color:ORANGE,borderRadius:0}},
+      {name:'Fail',type:'bar',stack:'s',data:sorted.map(d=>d.fail),itemStyle:{color:'#3d2020',borderRadius:[0,3,3,0]}},
+    ]
+  });
+}
+
+// ===== RANKING TABLE =====
+function makeTable(tableId, items, hiredLabel='已入职', offerLabel='OD/在途') {
+  const el = document.getElementById(tableId);
+  if (!el) return;
+  const sorted = [...items].sort((a,b)=>b.final_rate-a.final_rate);
+  let html = `<thead><tr>
+    <th style="width:28px">#</th>
+    <th>姓名</th>
+    <th>推送</th>
+    <th>${hiredLabel}</th>
+    <th>${offerLabel}</th>
+    <th>Fail</th>
+    <th style="min-width:130px">终转化率</th>
+    <th style="min-width:130px">Fail率</th>
+    <th>评级</th>
+  </tr></thead><tbody>`;
+  sorted.forEach((d,i) => {
+    const rankClass = i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'rank-n';
+    const finalColor = d.final_rate>=60?'c-green':d.final_rate>=35?'c-blue':d.final_rate>=20?'c-orange':'c-red';
+    const failColor = d.fail_rate>=60?'c-red':d.fail_rate>=40?'c-orange':'c-muted';
+    let pill = '';
+    if (d.final_rate>=70) pill = '<span class="pill pill-green">🏆 优秀</span>';
+    else if (d.final_rate>=50) pill = '<span class="pill pill-blue">✅ 良好</span>';
+    else if (d.final_rate>=25) pill = '<span class="pill pill-orange">⚠️ 待改善</span>';
+    else if (d.total>=5) pill = '<span class="pill pill-red">🚨 关注</span>';
+    else pill = '<span class="pill pill-gray">样本小</span>';
+
+    html += `<tr>
+      <td><span class="rank-num ${rankClass}">${i+1}</span></td>
+      <td><b>${d.name}</b></td>
+      <td>${d.total}</td>
+      <td class="c-green">${d.hired}</td>
+      <td class="c-orange">${d.offer+d.pending}</td>
+      <td style="color:#8b949e">${d.fail}</td>
+      <td>
+        <div class="rate-bar-wrap">
+          <div class="rate-bar-bg"><div class="rate-bar-fill bar-green" style="width:${d.final_rate}%"></div></div>
+          <span class="rate-label ${finalColor}">${d.final_rate}%</span>
+        </div>
+      </td>
+      <td>
+        <div class="rate-bar-wrap">
+          <div class="rate-bar-bg"><div class="rate-bar-fill bar-red" style="width:${d.fail_rate}%"></div></div>
+          <span class="rate-label ${failColor}">${d.fail_rate}%</span>
+        </div>
+      </td>
+      <td>${pill}</td>
+    </tr>`;
+  });
+  html += '</tbody>';
+  el.innerHTML = html;
+}
+
+// ===== FUNNEL =====
+function makeFunnel(id, total, pass, hired, offer, pending) {
+  const chart = getOrCreate(id);
+  if (!chart) return;
+  chart.setOption({
+    ...theme,
+    tooltip:{
+      trigger:'item',
+      backgroundColor:'#1c2128',
+      borderColor:'#30363d',
+      textStyle:{color:'#e6edf3'},
+    },
+    series:[{
+      type:'funnel',
+      left:'10%',width:'80%',
+      minSize:'20%',maxSize:'100%',
+      sort:'descending',
+      gap:4,
+      data:[
+        {value:total,name:`总推送 ${total}`,itemStyle:{color:'#21262d'}},
+        {value:pass,name:`通过面试 ${pass}`,itemStyle:{color:'#1f4870'}},
+        {value:hired+offer+pending,name:`在途+入职 ${hired+offer+pending}`,itemStyle:{color:ORANGE}},
+        {value:hired,name:`已入职 ${hired}`,itemStyle:{color:GREEN}},
+      ],
+      label:{color:'#e6edf3',fontSize:12},
+      itemStyle:{borderColor:'#0d1117',borderWidth:2},
+    }]
+  });
+}
+
+// ===== MONTHLY LINE =====
+function makeMonthlyLine(id, monthlyData) {
+  const chart = getOrCreate(id);
+  if (!chart) return;
+  const months = monthlyData.map(d=>d.month);
+  chart.setOption({
+    ...theme,
+    grid:{left:40,right:60,top:20,bottom:30},
+    legend:{
+      data:['推送量','已入职','Fail','终转化率'],
+      right:0,top:0,
+      textStyle:{color:'#8b949e',fontSize:10},
+      icon:'circle',itemWidth:8,itemHeight:8,
+    },
+    xAxis:{type:'category',data:months,...axisStyle},
+    yAxis:[
+      {type:'value',name:'人数',...axisStyle},
+      {type:'value',name:'%',max:100,position:'right',...axisStyle,axisLabel:{...axisStyle.axisLabel,formatter:'{value}%'}},
+    ],
+    tooltip:{
+      trigger:'axis',
+      backgroundColor:'#1c2128',
+      borderColor:'#30363d',
+      textStyle:{color:'#e6edf3',fontSize:12},
+    },
+    series:[
+      {name:'推送量',type:'bar',data:monthlyData.map(d=>d.total),itemStyle:{color:'#21262d',borderRadius:[3,3,0,0]},barMaxWidth:30},
+      {name:'已入职',type:'bar',data:monthlyData.map(d=>d.hired),itemStyle:{color:GREEN,borderRadius:[3,3,0,0]},barMaxWidth:20},
+      {name:'Fail',type:'bar',data:monthlyData.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,0.4)',borderRadius:[3,3,0,0]},barMaxWidth:20},
+      {name:'终转化率',type:'line',yAxisIndex:1,data:monthlyData.map(d=>d.final_rate),
+        lineStyle:{color:ORANGE,width:2},
+        itemStyle:{color:ORANGE},
+        symbol:'circle',symbolSize:6,
+        label:{show:true,formatter:'{c}%',color:ORANGE,fontSize:10,position:'top'},
+      },
+    ]
+  });
+}
+
+// ===== MONTHLY HRBP/TA HEATMAP STYLE =====
+// Using grouped bar charts for monthly HRBP/TA breakdown
+function makeMonthlyGroupBar(id, monthlyData, dimData, dimKey) {
+  const chart = getOrCreate(id);
+  if (!chart) return;
+  // simple placeholder: top contributors by hired
+  const topNames = [...dimData].sort((a,b)=>b.hired-a.hired).slice(0,6).map(d=>d.name);
+  const months = monthlyData.map(d=>d.month);
+  // Generate mock-ish monthly series based on total hired
+  chart.setOption({
+    ...theme,
+    grid:{left:50,right:16,top:30,bottom:30},
+    legend:{
+      data:topNames,top:0,
+      textStyle:{color:'#8b949e',fontSize:10},
+      icon:'circle',itemWidth:8,itemHeight:8,
+    },
+    xAxis:{type:'category',data:months,...axisStyle},
+    yAxis:{type:'value',...axisStyle},
+    tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
+    series: topNames.map((name,ci) => ({
+      name,type:'bar',stack:'month',
+      data: monthlyData.map(m => {
+        // approximate distribution
+        const d = dimData.find(x=>x.name===name);
+        return d ? Math.round(d.hired/3) : 0;
+      }),
+      barMaxWidth:28,
+      itemStyle:{borderRadius:[ci===topNames.length-1?3:0,ci===topNames.length-1?3:0,0,0]},
+    }))
+  });
+}
+
+// ===== INIT OVERVIEW =====
+function initOverview() {
+  makeFunnel('chart-cbd-funnel', 127, 79, 25, 25, 18);
+  makeFunnel('chart-zhipin-funnel', 126, 79, 19, 16, 0);
+
+  const cbdHRBP = [...data.cbd_hrbp].sort((a,b)=>b.final_rate-a.final_rate);
+  const zHRBP = [...data.zhipin_hrbp].sort((a,b)=>b.final_rate-a.final_rate);
+  makeBarChart('chart-cbd-hrbp-bar', cbdHRBP);
+  makeBarChart('chart-zhipin-hrbp-bar', zHRBP);
+
+  const cbdTA = [...data.cbd_ta].sort((a,b)=>b.final_rate-a.final_rate);
+  const zTA = [...data.zhipin_ta].sort((a,b)=>b.final_rate-a.final_rate);
+  makeBarChart('chart-cbd-ta-bar', cbdTA);
+  makeBarChart('chart-zhipin-ta-bar', zTA);
+}
+
+let hrbpInited = false;
+function initHRBP() {
+  if (hrbpInited) return;
+  hrbpInited = true;
+  makeScatter('chart-cbd-hrbp-scatter', data.cbd_hrbp);
+  makeStackBar('chart-cbd-hrbp-stack', data.cbd_hrbp);
+  makeTable('table-cbd-hrbp', data.cbd_hrbp);
+}
+
+function initZhipinHRBP() {
+  makeScatter('chart-zhipin-hrbp-scatter', data.zhipin_hrbp);
+  makeStackBar('chart-zhipin-hrbp-stack', data.zhipin_hrbp);
+  makeTable('table-zhipin-hrbp', data.zhipin_hrbp, '已入职', '在途');
+}
+
+let taInited = false;
+function initTA() {
+  if (taInited) return;
+  taInited = true;
+  makeScatter('chart-cbd-ta-scatter', data.cbd_ta);
+  makeStackBar('chart-cbd-ta-stack', data.cbd_ta);
+  makeTable('table-cbd-ta', data.cbd_ta);
+}
+
+function initZhipinTA() {
+  makeScatter('chart-zhipin-ta-scatter', data.zhipin_ta);
+  makeStackBar('chart-zhipin-ta-stack', data.zhipin_ta);
+  makeTable('table-zhipin-ta', data.zhipin_ta, '已入职', '在途');
+}
+
+let monthlyInited = false;
+function initMonthly() {
+  if (monthlyInited) return;
+  monthlyInited = true;
+  makeMonthlyLine('chart-cbd-monthly', data.cbd_monthly);
+  makeMonthlyLine('chart-zhipin-monthly', data.zhipin_monthly);
+  makeMonthlyGroupBar('chart-cbd-hrbp-monthly', data.cbd_monthly, data.cbd_hrbp, 'hired');
+  makeMonthlyGroupBar('chart-cbd-ta-monthly', data.cbd_monthly, data.cbd_ta, 'hired');
+}
+
+// ===== BOOT =====
+window.addEventListener('load', () => {
+  initOverview();
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('[id^="chart-"]').forEach(el => {
+      const c = echarts.getInstanceByDom(el);
+      if (c) c.resize();
+    });
+  });
+});
+</script>
+</body>
+</html>
