@@ -99,6 +99,7 @@
   <div class="tab" onclick="switchTab('ta')">TA 榜单</div>
   <div class="tab" onclick="switchTab('monthly')">月度趋势</div>
   <div class="tab" onclick="switchTab('compare')">📊 年度对比</div>
+  <div class="tab" onclick="switchTab('industry')">🏭 行业分析</div>
 </div>
 
 <div class="container">
@@ -197,6 +198,52 @@
   </div>
 </div>
 
+<!-- ===== 行业分析 ===== -->
+<div class="tab-panel" id="panel-industry">
+  <div class="sec">行业招聘质量复盘 · CBD 专场全量数据</div>
+
+  <div class="grid-2">
+    <div class="card"><div class="card-title">各行业入职率排行</div><div class="card-sub">按入职率降序 · 含闪离</div><div id="chart-industry-hire" style="height:380px"></div></div>
+    <div class="card"><div class="card-title">各行业推送量 & 结果构成</div><div class="card-sub">已入职 / 在途 / Fail / Offer Dropped</div><div id="chart-industry-stack" style="height:380px"></div></div>
+  </div>
+
+  <div class="sec">⚡ 已闪离候选人（入职不满一年离职）</div>
+  <div class="alert alert-r">
+    <span>🚨</span>
+    <span><b>共 12 人已闪离</b>：市场营销4人、行业七部（生服）2人、行业一部（美业）2人、行业五部（互联网）2人、行业二部（服饰）1人、商业化服务与体验1人。重点关注：希雯推荐3人均已闪离；欣然推荐3人中2人闪离；雪糕/芭内/雪山各有2人闪离。</span>
+  </div>
+  <div class="card full">
+    <div class="card-title">闪离候选人明细</div>
+    <div class="card-sub">状态：已闪离（入职不满一年离职）· 全部来自 CBD 专场</div>
+    <table class="rank-table">
+      <thead><tr>
+        <th>#</th><th>候选人</th><th>行业</th><th>HRBP</th><th>TA</th><th>年份</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>1</td><td><b>葛禹彤</b></td><td>行业七部（生服）</td><td>瑾瑜</td><td>司童</td><td>2025</td></tr>
+        <tr><td>2</td><td><b>王鸿博</b></td><td>行业一部（美业）</td><td>雪糕</td><td>欣然</td><td>2025</td></tr>
+        <tr><td>3</td><td><b>孙瑶</b></td><td>行业一部（美业）</td><td>雪糕</td><td>欣然</td><td>2025</td></tr>
+        <tr><td>4</td><td><b>杨露萌</b></td><td>行业五部（互联网）</td><td>芭内</td><td>欣然</td><td>2025</td></tr>
+        <tr><td>5</td><td><b>江颖</b></td><td>市场营销</td><td>金槌</td><td>希雯</td><td>2025</td></tr>
+        <tr><td>6</td><td><b>莎日娜</b></td><td>行业七部（生服）</td><td>星夏</td><td>玄鸟</td><td>2025</td></tr>
+        <tr><td>7</td><td><b>夏卓然</b></td><td>行业二部（服饰）</td><td>筱然</td><td>天雪</td><td>2025</td></tr>
+        <tr><td>8</td><td><b>周源</b></td><td>行业五部（互联网）</td><td>芭内</td><td>司童</td><td>2025</td></tr>
+        <tr><td>9</td><td><b>于佳宁</b></td><td>市场营销</td><td>金槌</td><td>希雯</td><td>2025</td></tr>
+        <tr><td>10</td><td><b>李菁晗</b></td><td>市场营销</td><td>雪山</td><td>希雯</td><td>2025</td></tr>
+        <tr><td>11</td><td><b>陈钰</b></td><td>商业化服务与体验</td><td>豆豆</td><td>玄鸟</td><td>2025</td></tr>
+        <tr><td>12</td><td><b>高婧璇</b></td><td>市场营销</td><td>雪山</td><td>车英</td><td>2025</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec">行业详表</div>
+  <div class="card full">
+    <div class="card-title">各行业招聘质量详表</div>
+    <div class="card-sub">按推送量降序 · 闪离率 = 闪离 / 实际入职</div>
+    <table class="rank-table" id="table-industry"></table>
+  </div>
+</div>
+
 </div><!-- /container -->
 
 <script>
@@ -239,7 +286,23 @@ const D = {
   compare: {
     "2025": {total:462,hired:182,offer:92,fail:176,hire_rate:39,final_rate:59,fail_rate:38},
     "2026": {total:139,hired:43,offer:25,fail:53,hire_rate:31,final_rate:49,fail_rate:38}
-  }
+  },
+  industry: [
+    {name:"市场营销",total:124,hired:37,flash_quit:4,total_hired:41,offer:5,dropped:23,fail:53,hire_rate:33,final_rate:37,fail_rate:43,flash_rate:10},
+    {name:"行业一部（美业）",total:84,hired:35,flash_quit:2,total_hired:37,offer:5,dropped:10,fail:28,hire_rate:44,final_rate:50,fail_rate:33,flash_rate:5},
+    {name:"行业四部（快消）",total:68,hired:24,flash_quit:0,total_hired:24,offer:1,dropped:19,fail:21,hire_rate:35,final_rate:37,fail_rate:31,flash_rate:0},
+    {name:"行业七部（生服）",total:49,hired:16,flash_quit:2,total_hired:18,offer:0,dropped:7,fail:23,hire_rate:37,final_rate:37,fail_rate:47,flash_rate:11},
+    {name:"行业三部（耐消）",total:46,hired:25,flash_quit:0,total_hired:25,offer:1,dropped:8,fail:11,hire_rate:54,final_rate:57,fail_rate:24,flash_rate:0},
+    {name:"渠道业务",total:40,hired:15,flash_quit:0,total_hired:15,offer:3,dropped:8,fail:12,hire_rate:38,final_rate:45,fail_rate:30,flash_rate:0},
+    {name:"行业二部（服饰）",total:32,hired:10,flash_quit:1,total_hired:11,offer:0,dropped:6,fail:14,hire_rate:34,final_rate:34,fail_rate:44,flash_rate:9},
+    {name:"行业八部（教育到综）",total:28,hired:9,flash_quit:0,total_hired:9,offer:1,dropped:3,fail:15,hire_rate:32,final_rate:36,fail_rate:54,flash_rate:0},
+    {name:"行业六部（交通）",total:26,hired:5,flash_quit:0,total_hired:5,offer:4,dropped:6,fail:9,hire_rate:19,final_rate:35,fail_rate:35,flash_rate:0},
+    {name:"行业五部（互联网）",total:26,hired:6,flash_quit:2,total_hired:8,offer:2,dropped:5,fail:9,hire_rate:31,final_rate:38,fail_rate:35,flash_rate:25},
+    {name:"创作者营销与商业服务",total:20,hired:9,flash_quit:0,total_hired:9,offer:0,dropped:3,fail:8,hire_rate:45,final_rate:45,fail_rate:40,flash_rate:0},
+    {name:"商业化服务与体验",total:20,hired:3,flash_quit:1,total_hired:4,offer:0,dropped:4,fail:11,hire_rate:20,final_rate:20,fail_rate:55,flash_rate:25},
+    {name:"电商行业运营",total:18,hired:3,flash_quit:0,total_hired:3,offer:0,dropped:9,fail:6,hire_rate:17,final_rate:17,fail_rate:33,flash_rate:0},
+    {name:"行业九部（跨境）",total:7,hired:5,flash_quit:0,total_hired:5,offer:1,dropped:0,fail:1,hire_rate:71,final_rate:86,fail_rate:14,flash_rate:0},
+  ]
 };
 
 const G='#3fb950',O='#d29922',R='#f85149',B='#58a6ff',M='#8b949e',P='#bc8cff';
@@ -257,6 +320,7 @@ function switchTab(name){
   if(name==='ta') initTA();
   if(name==='monthly') initMonthly();
   if(name==='compare') initCompare();
+  if(name==='industry') initIndustry();
 }
 
 function initPie(){
@@ -411,6 +475,58 @@ function initCompare(){
     ]
   });
 }
+
+let industryDone=false;
+function initIndustry(){
+  if(industryDone)return;industryDone=true;
+  const sorted=[...D.industry].sort((a,b)=>b.hire_rate-a.hire_rate);
+  const names=sorted.map(d=>d.name);
+
+  // 入职率条形图
+  const c1=gc('chart-industry-hire');
+  c1.setOption({backgroundColor:'transparent',grid:{left:160,right:60,top:8,bottom:8,containLabel:false},
+    xAxis:{type:'value',max:100,...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}},
+    yAxis:{type:'category',data:names,...ax,axisLabel:{...ax.axisLabel,width:150,overflow:'truncate'}},
+    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},
+      formatter:p=>{const d=sorted[p.dataIndex];return `<b>${d.name}</b><br/>推送:${d.total} 入职:${d.total_hired} 闪离:${d.flash_quit}<br/>入职率:${d.hire_rate}% 闪离率:${d.flash_rate}%`;}},
+    series:[
+      {name:'在职入职',type:'bar',stack:'s',barMaxWidth:14,
+        data:sorted.map(d=>({value:round1(d.hired/d.total*100),itemStyle:{color:G,borderRadius:d.flash_quit===0?[0,3,3,0]:0}}))},
+      {name:'已闪离',type:'bar',stack:'s',barMaxWidth:14,
+        data:sorted.map(d=>({value:round1(d.flash_quit/d.total*100),itemStyle:{color:R,borderRadius:[0,3,3,0]}})),
+        label:{show:true,position:'right',color:R,fontSize:10,formatter:p=>{const d=sorted[p.dataIndex];return d.flash_quit>0?`⚡${d.flash_rate}%`:'';}}}
+    ]
+  });
+
+  // 堆叠图
+  const stackSort=[...D.industry].sort((a,b)=>b.total-a.total);
+  const c2=gc('chart-industry-stack');
+  c2.setOption({backgroundColor:'transparent',grid:{left:160,right:12,top:28,bottom:4,containLabel:false},
+    legend:{data:['已入职','闪离','在途','Fail','Dropped'],top:0,right:0,textStyle:{color:M,fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+    xAxis:{type:'value',...ax},
+    yAxis:{type:'category',data:stackSort.map(d=>d.name),...ax,axisLabel:{...ax.axisLabel,width:150,overflow:'truncate'}},
+    tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
+    series:[
+      {name:'已入职',type:'bar',stack:'s',data:stackSort.map(d=>d.hired),itemStyle:{color:G},barMaxWidth:14},
+      {name:'闪离',type:'bar',stack:'s',data:stackSort.map(d=>d.flash_quit),itemStyle:{color:R}},
+      {name:'在途',type:'bar',stack:'s',data:stackSort.map(d=>d.offer),itemStyle:{color:'#58a6ff'}},
+      {name:'Dropped',type:'bar',stack:'s',data:stackSort.map(d=>d.dropped),itemStyle:{color:'#30363d'}},
+      {name:'Fail',type:'bar',stack:'s',data:stackSort.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.4)',borderRadius:[0,3,3,0]}},
+    ]
+  });
+
+  // 详表
+  const el=document.getElementById('table-industry');if(!el)return;
+  const tbl=[...D.industry].sort((a,b)=>b.total-a.total);
+  let h='<thead><tr><th>#</th><th>行业</th><th>推送</th><th>在职入职</th><th>⚡闪离</th><th>实际入职</th><th>入职率</th><th>闪离率</th><th>在途</th><th>Fail</th><th>Fail率</th></tr></thead><tbody>';
+  tbl.forEach((d,i)=>{
+    const fq=d.flash_quit>0?`<span class="pill pill-r">⚡${d.flash_quit}</span>`:'0';
+    const fr=d.flash_rate>0?`<span style="color:var(--red)">${d.flash_rate}%</span>`:'0%';
+    h+=`<tr><td>${i+1}</td><td><b>${d.name}</b></td><td>${d.total}</td><td class="c-green">${d.hired}</td><td>${fq}</td><td>${d.total_hired}</td><td>${d.hire_rate}%</td><td>${fr}</td><td>${d.offer}</td><td>${d.fail}</td><td class="${d.fail_rate>=50?'c-red':d.fail_rate>=40?'c-orange':''}">${d.fail_rate}%</td></tr>`;
+  });
+  el.innerHTML=h+'</tbody>';
+}
+function round1(v){return Math.round(v*10)/10;}
 
 function makeTable(id,items){
   const el=document.getElementById(id);if(!el)return;
