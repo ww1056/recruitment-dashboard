@@ -168,12 +168,7 @@
   </div>
 
   <div class="sec">TA × 行业 推送分布</div>
-  <div class="card full">
-    <div class="card-title">TA 推送行业热力图</div>
-    <div class="card-sub">颜色深浅 = 推送人数 · 仅展示主要 TA（推送量 ≥ 8）· Hover 查看详情</div>
-    <div id="chart-ta-heatmap" style="height:420px"></div>
-  </div>
-  <div class="card full" style="margin-top:16px">
+  <div class="card full" style="margin-top:0">
     <div class="card-title">每位 TA 推荐量 Top 3 行业</div>
     <div class="card-sub">按 TA 推送总量降序 · 数字为推送人数</div>
     <div id="ta-top3-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px"></div>
@@ -564,53 +559,7 @@ function initTA(){
   });
   // chart-ta-stack 已移除
 
-  // ===== TA × 行业 热力图 =====
-  const taNames=["希雯","天雪","车英","玄鸟","贵音","司童","欣然","瑞妮","大娃","夏娜","禇岩","越祈","瑞思","优妮","散影","蒂蒂"];
-  const indNames=["市场营销","行业一部\n（美业）","行业四部\n（快消）","行业七部\n（生服）","行业三部\n（耐消）","渠道业务","行业二部\n（服饰）","商业化\n服务与体验","创作者营销\n与商业服务","行业八部\n（教育到综）","行业六部\n（交通）","行业五部\n（互联网）"];
-  const indNamesShort=["市场营销","美业","快消","生服","耐消","渠道","服饰","商业化服务","创作者营销","教育到综","交通","互联网"];
-
-  // TA × 行业 完整推送矩阵（只含主要TA前16人）
-  const taIndRaw = {
-    "希雯":  [49,1,3,1,1,2,1,0,0,2,1,0],
-    "天雪":  [3,10,7,2,5,16,6,0,4,3,3,0],
-    "车英":  [37,0,2,1,1,0,1,1,4,1,1,0],
-    "玄鸟":  [5,11,1,5,4,3,1,9,0,4,1,1],
-    "贵音":  [2,11,12,1,0,3,1,0,2,0,4,1],
-    "司童":  [3,4,12,5,0,1,6,3,0,1,0,4],
-    "欣然":  [1,13,8,1,2,1,0,2,1,2,0,3],
-    "瑞妮":  [3,5,0,0,17,2,0,1,0,0,4,3],
-    "大娃":  [2,2,3,15,0,1,5,0,0,2,0,1],
-    "夏娜":  [2,4,4,0,1,6,2,0,0,1,2,2],
-    "禇岩":  [5,6,1,1,3,0,0,0,2,1,3,0],
-    "越祈":  [1,2,2,6,0,1,1,0,0,0,0,2],
-    "瑞思":  [0,4,3,0,5,0,3,0,0,0,2,1],
-    "优妮":  [0,2,3,5,2,0,1,1,0,0,2,3],
-    "散影":  [0,0,0,1,1,3,0,0,0,10,0,0],
-    "蒂蒂":  [3,2,0,1,0,0,0,0,3,1,0,1],
-  };
-
-  const hmData=[];
-  taNames.forEach((ta,ti)=>{
-    (taIndRaw[ta]||[]).forEach((v,ii)=>{
-      if(v>0) hmData.push([ii, ti, v]);
-    });
-  });
-
-  const ch=gc('chart-ta-heatmap');
-  ch.setOption({backgroundColor:'transparent',
-    grid:{left:90,right:24,top:16,bottom:100},
-    xAxis:{type:'category',data:indNamesShort,...ax,axisLabel:{...ax.axisLabel,rotate:30,fontSize:10}},
-    yAxis:{type:'category',data:taNames,...ax,axisLabel:{...ax.axisLabel,fontSize:11}},
-    visualMap:{min:0,max:49,calculable:true,orient:'horizontal',left:'center',bottom:4,
-      inRange:{color:['#161b22','#1a4c1a','#2d7a2d','#3fb950']},
-      textStyle:{color:M,fontSize:10}},
-    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},
-      formatter:p=>{const v=p.data[2];if(!v)return '';
-        return `<b>${taNames[p.data[1]]}</b> → <b>${indNamesShort[p.data[0]]}</b><br/>推送人数：<b style="color:#3fb950">${v} 人</b>`;}},
-    series:[{type:'heatmap',data:hmData,
-      label:{show:true,formatter:p=>p.data[2]>0?p.data[2]:'',color:'#e6edf3',fontSize:10},
-      emphasis:{itemStyle:{shadowBlur:6,shadowColor:'rgba(0,0,0,.5)'}}}]
-  });
+  // 热力图已移除
 
   // Top3 卡片
   const taTop3Data = [
