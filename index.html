@@ -385,8 +385,9 @@ function initHRBP(){
   cs.setOption({backgroundColor:'transparent',grid:{left:44,right:20,top:20,bottom:36},
     xAxis:{type:'value',name:'Fail率 %',max:100,...ax,nameTextStyle:{color:M,fontSize:11}},
     yAxis:{type:'value',name:'终转化 %',max:100,...ax,nameTextStyle:{color:M,fontSize:11}},
-    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},formatter:p=>{const d=p.data;return `<b>${d[3]}</b><br/>推送:${d[4]} 入职:${d[5]}<br/>终转化:${d[1]}% Fail:${d[0]}%`;}},
-    series:[{type:'scatter',data:D.hrbp.map(d=>[d.fail_rate,d.final_rate,d.total*3,d.name,d.total,d.hired]),symbolSize:d=>Math.max(14,Math.sqrt(d[2])*2.2),itemStyle:{color:d=>fc(d.data[1]),opacity:.85,borderColor:'rgba(255,255,255,.15)',borderWidth:1},label:{show:true,formatter:d=>d.data[3],position:'top',color:M,fontSize:10}}]
+    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},enterable:false,
+      formatter:p=>{const d=p.data;const color=p.color;return `<div style="font-size:13px;font-weight:700;margin-bottom:4px;color:${color}">${d[3]}</div><div style="color:#8b949e;font-size:11px">推送量：${d[4]} 人</div><div style="color:#3fb950;font-size:11px">已入职：${d[5]} 人</div><div style="color:#58a6ff;font-size:11px">终转化率：${d[1]}%</div><div style="color:#f85149;font-size:11px">Fail率：${d[0]}%</div>`;}},
+    series:[{type:'scatter',data:D.hrbp.map(d=>[d.fail_rate,d.final_rate,d.total*3,d.name,d.total,d.hired]),symbolSize:d=>Math.max(16,Math.sqrt(d[2])*2.4),itemStyle:{color:d=>fc(d.data[1]),opacity:.9,borderColor:'rgba(255,255,255,.2)',borderWidth:1},label:{show:false}}]
   });
   const ck=gc('chart-hrbp-stack');
   const sorted=[...D.hrbp].sort((a,b)=>b.total-a.total);
@@ -410,8 +411,9 @@ function initTA(){
   cs.setOption({backgroundColor:'transparent',grid:{left:44,right:20,top:20,bottom:36},
     xAxis:{type:'value',name:'Fail率 %',max:100,...ax,nameTextStyle:{color:M,fontSize:11}},
     yAxis:{type:'value',name:'终转化 %',max:100,...ax,nameTextStyle:{color:M,fontSize:11}},
-    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},formatter:p=>{const d=p.data;return `<b>${d[3]}</b><br/>推送:${d[4]} 入职:${d[5]}<br/>终转化:${d[1]}% Fail:${d[0]}%`;}},
-    series:[{type:'scatter',data:D.ta.map(d=>[d.fail_rate,d.final_rate,d.total*3,d.name,d.total,d.hired]),symbolSize:d=>Math.max(14,Math.sqrt(d[2])*2.2),itemStyle:{color:d=>fc(d.data[1]),opacity:.85,borderColor:'rgba(255,255,255,.15)',borderWidth:1},label:{show:true,formatter:d=>d.data[3],position:'top',color:M,fontSize:10}}]
+    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},enterable:false,
+      formatter:p=>{const d=p.data;const color=p.color;return `<div style="font-size:13px;font-weight:700;margin-bottom:4px;color:${color}">${d[3]}</div><div style="color:#8b949e;font-size:11px">推送量：${d[4]} 人</div><div style="color:#3fb950;font-size:11px">已入职：${d[5]} 人</div><div style="color:#58a6ff;font-size:11px">终转化率：${d[1]}%</div><div style="color:#f85149;font-size:11px">Fail率：${d[0]}%</div>`;}},
+    series:[{type:'scatter',data:D.ta.map(d=>[d.fail_rate,d.final_rate,d.total*3,d.name,d.total,d.hired]),symbolSize:d=>Math.max(16,Math.sqrt(d[2])*2.4),itemStyle:{color:d=>fc(d.data[1]),opacity:.9,borderColor:'rgba(255,255,255,.2)',borderWidth:1},label:{show:false}}]
   });
   const ck=gc('chart-ta-stack');
   const sorted=[...D.ta].sort((a,b)=>b.total-a.total);
