@@ -125,9 +125,9 @@
 
   <div class="sec">漏斗总览</div>
   <div class="grid-3">
-    <div class="card"><div class="card-title">推送结果构成</div><div class="card-sub">127人分布</div><div id="chart-pie" style="height:220px"></div></div>
-    <div class="card"><div class="card-title">HRBP 终转化率排行</div><div class="card-sub">按终转化率降序</div><div id="chart-hrbp-overview" style="height:220px"></div></div>
-    <div class="card"><div class="card-title">TA 终转化率排行</div><div class="card-sub">推送量 ≥ 3</div><div id="chart-ta-overview" style="height:220px"></div></div>
+    <div class="card"><div class="card-title">推送结果构成</div><div class="card-sub">127人分布</div><div id="chart-pie" style="height:320px"></div></div>
+    <div class="card"><div class="card-title">HRBP 终转化率排行</div><div class="card-sub">按终转化率降序 · 全量数据</div><div id="chart-hrbp-overview" style="height:320px"></div></div>
+    <div class="card"><div class="card-title">TA 终转化率排行</div><div class="card-sub">推送量 ≥ 3 · 全量数据</div><div id="chart-ta-overview" style="height:320px"></div></div>
   </div>
 
   <div class="sec">月度趋势</div>
@@ -332,20 +332,22 @@ function initPie(){
 function initOverviewBars(){
   const ch=gc('chart-hrbp-overview');if(ch){
     const hs=[...D.hrbp].sort((a,b)=>b.final_rate-a.final_rate);
-    ch.setOption({backgroundColor:'transparent',grid:{left:48,right:40,top:4,bottom:4,containLabel:false},
-      xAxis:{type:'value',max:100,...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}},
-      yAxis:{type:'category',data:hs.map(d=>d.name),...ax},
+    ch.setOption({backgroundColor:'transparent',grid:{left:52,right:48,top:8,bottom:8,containLabel:false},
+      xAxis:{type:'value',max:100,...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'},show:false},
+      yAxis:{type:'category',data:hs.map(d=>d.name),...ax,axisLabel:{...ax.axisLabel,fontSize:12,margin:8}},
       tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},formatter:p=>{const d=hs[p.dataIndex];return `<b>${d.name}</b><br/>推送:${d.total} 入职:${d.hired} 终转化:${d.final_rate}%`;}},
-      series:[{type:'bar',barMaxWidth:12,data:hs.map(d=>({value:d.final_rate,itemStyle:{color:fc(d.final_rate),borderRadius:[0,3,3,0]}})),label:{show:true,position:'right',color:'#8b949e',fontSize:10,formatter:'{c}%'}}]
+      series:[{type:'bar',barCategoryGap:'40%',data:hs.map(d=>({value:d.final_rate,itemStyle:{color:fc(d.final_rate),borderRadius:[0,4,4,0]}})),
+        label:{show:true,position:'right',color:'#c9d1d9',fontSize:11,fontWeight:'bold',formatter:'{c}%'}}]
     });
   }
   const ct=gc('chart-ta-overview');if(ct){
     const ts=[...D.ta].sort((a,b)=>b.final_rate-a.final_rate);
-    ct.setOption({backgroundColor:'transparent',grid:{left:42,right:40,top:4,bottom:4,containLabel:false},
-      xAxis:{type:'value',max:100,...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}},
-      yAxis:{type:'category',data:ts.map(d=>d.name),...ax},
+    ct.setOption({backgroundColor:'transparent',grid:{left:46,right:48,top:8,bottom:8,containLabel:false},
+      xAxis:{type:'value',max:100,...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'},show:false},
+      yAxis:{type:'category',data:ts.map(d=>d.name),...ax,axisLabel:{...ax.axisLabel,fontSize:12,margin:8}},
       tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},formatter:p=>{const d=ts[p.dataIndex];return `<b>${d.name}</b><br/>推送:${d.total} 入职:${d.hired} 终转化:${d.final_rate}%`;}},
-      series:[{type:'bar',barMaxWidth:12,data:ts.map(d=>({value:d.final_rate,itemStyle:{color:fc(d.final_rate),borderRadius:[0,3,3,0]}})),label:{show:true,position:'right',color:'#8b949e',fontSize:10,formatter:'{c}%'}}]
+      series:[{type:'bar',barCategoryGap:'40%',data:ts.map(d=>({value:d.final_rate,itemStyle:{color:fc(d.final_rate),borderRadius:[0,4,4,0]}})),
+        label:{show:true,position:'right',color:'#c9d1d9',fontSize:11,fontWeight:'bold',formatter:'{c}%'}}]
     });
   }
 }
