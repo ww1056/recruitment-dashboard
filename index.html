@@ -137,15 +137,15 @@
 <!-- ===== HRBP ===== -->
 <div class="tab-panel" id="panel-hrbp">
   <div class="sec">HRBP 推荐质量榜 · 全量数据（2025+2026）· CBD 专场 · 共 25 人</div>
-  <div style="display:grid;grid-template-columns:1fr 220px;gap:16px;margin-bottom:16px">
-    <div class="card">
-      <div class="card-title">终转化率 × Fail率 散点图</div>
-      <div class="card-sub">气泡大小 = 推送量 · Hover 查看详情 · 颜色：🟢 ≥60% 🟡 35-59% 🔴 &lt;35%</div>
-      <div id="chart-hrbp-scatter" style="height:380px"></div>
-    </div>
-    <div class="card" style="overflow-y:auto">
+  <div style="display:grid;grid-template-columns:200px 1fr;gap:16px;margin-bottom:16px">
+    <div class="card" style="overflow-y:auto;max-height:460px">
       <div class="card-title" style="margin-bottom:8px">📋 终转化率排名</div>
       <div id="legend-hrbp" style="font-size:11px;line-height:1.8"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">终转化率 × Fail率 · 四象限图</div>
+      <div class="card-sub">气泡编号对应左侧排名 · 大小 = 推送量 · Hover 查看详情</div>
+      <div id="chart-hrbp-scatter" style="height:420px"></div>
     </div>
   </div>
   <div class="card full"><div class="card-title">结果构成堆叠图</div><div class="card-sub">按推送量排序</div><div id="chart-hrbp-stack" style="height:300px"></div></div>
@@ -155,15 +155,15 @@
 <!-- ===== TA ===== -->
 <div class="tab-panel" id="panel-ta">
   <div class="sec">TA 推荐质量榜 · 全量数据（2025+2026）· CBD 专场 · 推送量 ≥ 3 · 共 24 人</div>
-  <div style="display:grid;grid-template-columns:1fr 220px;gap:16px;margin-bottom:16px">
-    <div class="card">
-      <div class="card-title">终转化率 × Fail率 散点图</div>
-      <div class="card-sub">气泡大小 = 推送量 · Hover 查看详情 · 颜色：🟢 ≥60% 🟡 35-59% 🔴 &lt;35%</div>
-      <div id="chart-ta-scatter" style="height:380px"></div>
-    </div>
-    <div class="card" style="overflow-y:auto">
+  <div style="display:grid;grid-template-columns:200px 1fr;gap:16px;margin-bottom:16px">
+    <div class="card" style="overflow-y:auto;max-height:460px">
       <div class="card-title" style="margin-bottom:8px">📋 终转化率排名</div>
       <div id="legend-ta" style="font-size:11px;line-height:1.8"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">终转化率 × Fail率 · 四象限图</div>
+      <div class="card-sub">气泡编号对应左侧排名 · 大小 = 推送量 · Hover 查看详情</div>
+      <div id="chart-ta-scatter" style="height:420px"></div>
     </div>
   </div>
   <div class="card full"><div class="card-title">结果构成堆叠图</div><div class="card-sub">按推送量排序</div><div id="chart-ta-stack" style="height:320px"></div></div>
@@ -372,32 +372,59 @@ function initMonthlyOverview(){
 let hrbpDone=false;
 function initHRBP(){
   if(hrbpDone)return;hrbpDone=true;
-  const cs=gc('chart-hrbp-scatter');
-  cs.setOption({backgroundColor:'transparent',grid:{left:56,right:24,top:30,bottom:44},
-    xAxis:{type:'value',name:'Fail率 %',min:-5,max:105,...ax,nameLocation:'end',nameTextStyle:{color:M,fontSize:11}},
-    yAxis:{type:'value',name:'终转化 %',min:-5,max:110,...ax,nameLocation:'end',nameTextStyle:{color:M,fontSize:11}},
-    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},enterable:false,
-      formatter:p=>{const d=p.data,c=p.color;return `<div style="font-size:14px;font-weight:700;margin-bottom:5px;color:${c}">${d[3]}</div><div style="color:#8b949e;font-size:11px">推送量：<b style="color:#e6edf3">${d[4]} 人</b></div><div style="color:#8b949e;font-size:11px">已入职：<b style="color:#3fb950">${d[5]} 人</b></div><div style="color:#8b949e;font-size:11px">终转化率：<b style="color:#58a6ff">${d[1]}%</b></div><div style="color:#8b949e;font-size:11px">Fail率：<b style="color:#f85149">${d[0]}%</b></div>`;}},
-    series:[{type:'scatter',
-      data:D.hrbp.map(d=>[d.fail_rate,d.final_rate,d.total*3,d.name,d.total,d.hired]),
-      symbolSize:d=>Math.max(14,Math.sqrt(d[2])*2.6),
-      itemStyle:{color:d=>fc(d.data[1]),opacity:.85,borderColor:'rgba(255,255,255,.25)',borderWidth:1.5},
-      emphasis:{itemStyle:{opacity:1,borderWidth:3,borderColor:'#fff'},scale:1.15},
-      label:{show:false}
-    }]
-  });
-  // 右侧排名列表
   const hrbpSorted=[...D.hrbp].sort((a,b)=>b.final_rate-a.final_rate);
+  // 左侧排名列表
   document.getElementById('legend-hrbp').innerHTML=hrbpSorted.map((d,i)=>{
     const c=fc(d.final_rate);
-    return `<div style="display:flex;align-items:center;gap:6px;padding:2px 0;border-bottom:1px solid rgba(48,54,61,.4)">
-      <span style="color:${M};min-width:16px;font-size:10px">${i+1}</span>
-      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${c};flex-shrink:0"></span>
+    return `<div style="display:flex;align-items:center;gap:5px;padding:3px 0;border-bottom:1px solid rgba(48,54,61,.4)">
+      <span style="background:${c};color:#000;border-radius:3px;font-size:9px;font-weight:700;min-width:18px;text-align:center;padding:1px 2px">${i+1}</span>
       <span style="flex:1;color:#e6edf3;font-weight:500">${d.name}</span>
       <span style="color:${c};font-weight:700;font-size:11px">${d.final_rate}%</span>
-      <span style="color:${M};font-size:10px">(${d.total}人)</span>
     </div>`;
   }).join('');
+  // 散点图：编号气泡
+  const cs=gc('chart-hrbp-scatter');
+  cs.setOption({backgroundColor:'transparent',
+    grid:{left:52,right:16,top:36,bottom:44},
+    xAxis:{type:'value',name:'← Fail率低    Fail率高 →',min:0,max:100,...ax,
+      nameLocation:'middle',nameGap:28,nameTextStyle:{color:M,fontSize:10},
+      splitLine:{lineStyle:{color:'#21262d',type:'dashed'}},
+      axisLabel:{...ax.axisLabel,formatter:v=>v+'%'}},
+    yAxis:{type:'value',name:'终转化率',min:0,max:100,...ax,
+      nameLocation:'middle',nameGap:36,nameTextStyle:{color:M,fontSize:10},
+      splitLine:{lineStyle:{color:'#21262d',type:'dashed'}},
+      axisLabel:{...ax.axisLabel,formatter:v=>v+'%'}},
+    // 四象限参考线
+    markLine:{silent:true},
+    graphic:[
+      {type:'line',shape:{x1:0,y1:0,x2:0,y2:0},style:{stroke:'transparent'}},
+      // 象限标注文字（通过额外series实现）
+    ],
+    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},enterable:false,
+      formatter:p=>{const d=p.data,c=p.color;
+        return `<div style="font-size:13px;font-weight:700;margin-bottom:4px;color:${c}">#${d[6]+1} ${d[3]}</div>`+
+               `<div style="color:#8b949e;font-size:11px">推送量：<b style="color:#e6edf3">${d[4]}人</b> &nbsp; 已入职：<b style="color:#3fb950">${d[5]}人</b></div>`+
+               `<div style="color:#8b949e;font-size:11px">终转化率：<b style="color:#58a6ff">${d[1]}%</b> &nbsp; Fail率：<b style="color:#f85149">${d[0]}%</b></div>`;}},
+    series:[
+      // 四象限背景
+      {type:'scatter',data:[[25,75]],symbol:'rect',symbolSize:[0,0],
+        markArea:{silent:true,data:[
+          [{coord:[0,55],itemStyle:{color:'rgba(63,185,80,.04)'},label:{show:true,position:'insideTopLeft',formatter:'⭐ 优质区',color:'rgba(63,185,80,.4)',fontSize:10}},{coord:[45,100]}],
+          [{coord:[45,55],itemStyle:{color:'rgba(210,153,34,.04)'},label:{show:true,position:'insideTopRight',formatter:'⚠️ 高转高Fail',color:'rgba(210,153,34,.4)',fontSize:10}},{coord:[100,100]}],
+          [{coord:[0,0],itemStyle:{color:'rgba(88,166,255,.03)'},label:{show:true,position:'insideBottomLeft',formatter:'📉 低转低Fail',color:'rgba(88,166,255,.3)',fontSize:10}},{coord:[45,55]}],
+          [{coord:[45,0],itemStyle:{color:'rgba(248,81,73,.04)'},label:{show:true,position:'insideBottomRight',formatter:'🚨 危险区',color:'rgba(248,81,73,.4)',fontSize:10}},{coord:[100,55]}],
+        ]}},
+      // 实际数据气泡
+      {type:'scatter',
+        data:hrbpSorted.map((d,i)=>[d.fail_rate,d.final_rate,d.total,d.name,d.total,d.hired,i]),
+        symbolSize:d=>Math.max(22,Math.sqrt(d[2])*3.2),
+        itemStyle:{color:d=>fc(d.data[1]),opacity:.88,borderColor:'rgba(0,0,0,.3)',borderWidth:1},
+        emphasis:{itemStyle:{opacity:1,borderWidth:2,borderColor:'#fff'},scale:1.1},
+        label:{show:true,formatter:d=>`${d.data[6]+1}`,
+          color:'#000',fontSize:9,fontWeight:'bold'}
+      }
+    ]
+  });
   const ck=gc('chart-hrbp-stack');
   const sorted=[...D.hrbp].sort((a,b)=>b.total-a.total);
   ck.setOption({backgroundColor:'transparent',grid:{left:44,right:12,top:28,bottom:4,containLabel:false},
@@ -416,32 +443,51 @@ function initHRBP(){
 let taDone=false;
 function initTA(){
   if(taDone)return;taDone=true;
-  const cs=gc('chart-ta-scatter');
-  cs.setOption({backgroundColor:'transparent',grid:{left:56,right:24,top:30,bottom:44},
-    xAxis:{type:'value',name:'Fail率 %',min:-5,max:105,...ax,nameLocation:'end',nameTextStyle:{color:M,fontSize:11}},
-    yAxis:{type:'value',name:'终转化 %',min:-5,max:110,...ax,nameLocation:'end',nameTextStyle:{color:M,fontSize:11}},
-    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},enterable:false,
-      formatter:p=>{const d=p.data,c=p.color;return `<div style="font-size:14px;font-weight:700;margin-bottom:5px;color:${c}">${d[3]}</div><div style="color:#8b949e;font-size:11px">推送量：<b style="color:#e6edf3">${d[4]} 人</b></div><div style="color:#8b949e;font-size:11px">已入职：<b style="color:#3fb950">${d[5]} 人</b></div><div style="color:#8b949e;font-size:11px">终转化率：<b style="color:#58a6ff">${d[1]}%</b></div><div style="color:#8b949e;font-size:11px">Fail率：<b style="color:#f85149">${d[0]}%</b></div>`;}},
-    series:[{type:'scatter',
-      data:D.ta.map(d=>[d.fail_rate,d.final_rate,d.total*3,d.name,d.total,d.hired]),
-      symbolSize:d=>Math.max(14,Math.sqrt(d[2])*2.6),
-      itemStyle:{color:d=>fc(d.data[1]),opacity:.85,borderColor:'rgba(255,255,255,.25)',borderWidth:1.5},
-      emphasis:{itemStyle:{opacity:1,borderWidth:3,borderColor:'#fff'},scale:1.15},
-      label:{show:false}
-    }]
-  });
-  // 右侧排名列表
   const taSorted=[...D.ta].sort((a,b)=>b.final_rate-a.final_rate);
+  // 左侧排名列表
   document.getElementById('legend-ta').innerHTML=taSorted.map((d,i)=>{
     const c=fc(d.final_rate);
-    return `<div style="display:flex;align-items:center;gap:6px;padding:2px 0;border-bottom:1px solid rgba(48,54,61,.4)">
-      <span style="color:${M};min-width:16px;font-size:10px">${i+1}</span>
-      <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${c};flex-shrink:0"></span>
+    return `<div style="display:flex;align-items:center;gap:5px;padding:3px 0;border-bottom:1px solid rgba(48,54,61,.4)">
+      <span style="background:${c};color:#000;border-radius:3px;font-size:9px;font-weight:700;min-width:18px;text-align:center;padding:1px 2px">${i+1}</span>
       <span style="flex:1;color:#e6edf3;font-weight:500">${d.name}</span>
       <span style="color:${c};font-weight:700;font-size:11px">${d.final_rate}%</span>
-      <span style="color:${M};font-size:10px">(${d.total}人)</span>
     </div>`;
   }).join('');
+  // 散点图：编号气泡 + 四象限
+  const cs=gc('chart-ta-scatter');
+  cs.setOption({backgroundColor:'transparent',
+    grid:{left:52,right:16,top:36,bottom:44},
+    xAxis:{type:'value',name:'← Fail率低    Fail率高 →',min:0,max:100,...ax,
+      nameLocation:'middle',nameGap:28,nameTextStyle:{color:M,fontSize:10},
+      splitLine:{lineStyle:{color:'#21262d',type:'dashed'}},
+      axisLabel:{...ax.axisLabel,formatter:v=>v+'%'}},
+    yAxis:{type:'value',name:'终转化率',min:0,max:100,...ax,
+      nameLocation:'middle',nameGap:36,nameTextStyle:{color:M,fontSize:10},
+      splitLine:{lineStyle:{color:'#21262d',type:'dashed'}},
+      axisLabel:{...ax.axisLabel,formatter:v=>v+'%'}},
+    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},enterable:false,
+      formatter:p=>{const d=p.data,c=p.color;
+        return `<div style="font-size:13px;font-weight:700;margin-bottom:4px;color:${c}">#${d[6]+1} ${d[3]}</div>`+
+               `<div style="color:#8b949e;font-size:11px">推送量：<b style="color:#e6edf3">${d[4]}人</b> &nbsp; 已入职：<b style="color:#3fb950">${d[5]}人</b></div>`+
+               `<div style="color:#8b949e;font-size:11px">终转化率：<b style="color:#58a6ff">${d[1]}%</b> &nbsp; Fail率：<b style="color:#f85149">${d[0]}%</b></div>`;}},
+    series:[
+      {type:'scatter',data:[[25,75]],symbol:'rect',symbolSize:[0,0],
+        markArea:{silent:true,data:[
+          [{coord:[0,55],itemStyle:{color:'rgba(63,185,80,.04)'},label:{show:true,position:'insideTopLeft',formatter:'⭐ 优质区',color:'rgba(63,185,80,.4)',fontSize:10}},{coord:[45,100]}],
+          [{coord:[45,55],itemStyle:{color:'rgba(210,153,34,.04)'},label:{show:true,position:'insideTopRight',formatter:'⚠️ 高转高Fail',color:'rgba(210,153,34,.4)',fontSize:10}},{coord:[100,100]}],
+          [{coord:[0,0],itemStyle:{color:'rgba(88,166,255,.03)'},label:{show:true,position:'insideBottomLeft',formatter:'📉 低转低Fail',color:'rgba(88,166,255,.3)',fontSize:10}},{coord:[45,55]}],
+          [{coord:[45,0],itemStyle:{color:'rgba(248,81,73,.04)'},label:{show:true,position:'insideBottomRight',formatter:'🚨 危险区',color:'rgba(248,81,73,.4)',fontSize:10}},{coord:[100,55]}],
+        ]}},
+      {type:'scatter',
+        data:taSorted.map((d,i)=>[d.fail_rate,d.final_rate,d.total,d.name,d.total,d.hired,i]),
+        symbolSize:d=>Math.max(22,Math.sqrt(d[2])*3.2),
+        itemStyle:{color:d=>fc(d.data[1]),opacity:.88,borderColor:'rgba(0,0,0,.3)',borderWidth:1},
+        emphasis:{itemStyle:{opacity:1,borderWidth:2,borderColor:'#fff'},scale:1.1},
+        label:{show:true,formatter:d=>`${d.data[6]+1}`,
+          color:'#000',fontSize:9,fontWeight:'bold'}
+      }
+    ]
+  });
   const ck=gc('chart-ta-stack');
   const sorted=[...D.ta].sort((a,b)=>b.total-a.total);
   ck.setOption({backgroundColor:'transparent',grid:{left:44,right:12,top:28,bottom:4,containLabel:false},
