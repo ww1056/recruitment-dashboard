@@ -85,7 +85,7 @@
 <div class="header">
   <div>
     <h1>🎯 商业化 CBD 专场招聘质量看板</h1>
-    <p>数据来源：2026 商业100CBD专场面试 · 截至 2026-03-31</p>
+    <p>数据来源：商业100CBD专场面试全量数据（2025-2026）· HRBP/TA 榜单为全量 · 总览/月度为 2026 Q1</p>
   </div>
   <div class="badges">
     <span class="badge badge-blue">2026 Q1</span>
@@ -136,7 +136,7 @@
 
 <!-- ===== HRBP ===== -->
 <div class="tab-panel" id="panel-hrbp">
-  <div class="sec">HRBP 推荐质量榜 · 2026 Q1 · CBD 专场</div>
+  <div class="sec">HRBP 推荐质量榜 · 全量数据（2025+2026）· CBD 专场 · 共 25 人</div>
   <div class="split-row">
     <div class="card"><div class="card-title">终转化率 × Fail率 散点图</div><div class="card-sub">气泡大小 = 推送量；右上角 = 高质量；左下角 = 需关注</div><div id="chart-hrbp-scatter" style="height:360px"></div></div>
     <div class="card"><div class="card-title">结果构成堆叠图</div><div class="card-sub">已入职 / OD在途 / Fail</div><div id="chart-hrbp-stack" style="height:360px"></div></div>
@@ -146,7 +146,7 @@
 
 <!-- ===== TA ===== -->
 <div class="tab-panel" id="panel-ta">
-  <div class="sec">TA 推荐质量榜 · 2026 Q1 · CBD 专场</div>
+  <div class="sec">TA 推荐质量榜 · 全量数据（2025+2026）· CBD 专场 · 推送量 ≥ 3 · 共 24 人</div>
   <div class="split-row">
     <div class="card"><div class="card-title">终转化率 × Fail率 散点图</div><div class="card-sub">气泡大小 = 推送量；推送量 ≥ 3</div><div id="chart-ta-scatter" style="height:360px"></div></div>
     <div class="card"><div class="card-title">结果构成堆叠图</div><div class="card-sub">已入职 / OD在途 / Fail · 推送量 ≥ 3</div><div id="chart-ta-stack" style="height:360px"></div></div>
@@ -249,35 +249,8 @@
 <script>
 // ===== 数据 =====
 const D = {
-  hrbp: [
-    {name:"广白",total:4,hired:1,offer:3,fail:0,hire_rate:25,final_rate:100,fail_rate:0},
-    {name:"贵音",total:13,hired:3,offer:7,fail:3,hire_rate:23,final_rate:77,fail_rate:23},
-    {name:"瑾瑜",total:17,hired:5,offer:7,fail:4,hire_rate:29,final_rate:71,fail_rate:24},
-    {name:"卡朵",total:6,hired:2,offer:2,fail:2,hire_rate:33,final_rate:67,fail_rate:33},
-    {name:"奎妮",total:28,hired:7,offer:10,fail:11,hire_rate:25,final_rate:61,fail_rate:39},
-    {name:"蝶衣",total:9,hired:0,offer:5,fail:4,hire_rate:0,final_rate:56,fail_rate:44},
-    {name:"幸运",total:4,hired:1,offer:1,fail:2,hire_rate:25,final_rate:50,fail_rate:50},
-    {name:"战歌",total:16,hired:3,offer:5,fail:8,hire_rate:19,final_rate:50,fail_rate:50},
-    {name:"雪糕",total:7,hired:0,offer:3,fail:4,hire_rate:0,final_rate:43,fail_rate:57},
-    {name:"雪山",total:10,hired:2,offer:1,fail:7,hire_rate:20,final_rate:30,fail_rate:70},
-    {name:"绫华",total:5,hired:0,offer:1,fail:4,hire_rate:0,final_rate:20,fail_rate:80},
-    {name:"梓晴",total:4,hired:0,offer:0,fail:3,hire_rate:0,final_rate:0,fail_rate:75},
-  ],
-  ta: [
-    {name:"禇岩",total:8,hired:4,offer:2,fail:2,hire_rate:50,final_rate:75,fail_rate:25},
-    {name:"瑞妮",total:5,hired:0,offer:4,fail:1,hire_rate:0,final_rate:80,fail_rate:20},
-    {name:"夏娜",total:9,hired:0,offer:6,fail:2,hire_rate:0,final_rate:67,fail_rate:22},
-    {name:"玄鸟",total:12,hired:3,offer:5,fail:4,hire_rate:25,final_rate:67,fail_rate:33},
-    {name:"贵音",total:3,hired:0,offer:2,fail:1,hire_rate:0,final_rate:67,fail_rate:33},
-    {name:"车英",total:32,hired:6,offer:13,fail:13,hire_rate:19,final_rate:59,fail_rate:41},
-    {name:"欣然",total:7,hired:3,offer:1,fail:3,hire_rate:43,final_rate:57,fail_rate:43},
-    {name:"希雯",total:4,hired:0,offer:2,fail:2,hire_rate:0,final_rate:50,fail_rate:50},
-    {name:"瑞思",total:8,hired:1,offer:3,fail:4,hire_rate:12,final_rate:50,fail_rate:50},
-    {name:"粥粥",total:7,hired:2,offer:1,fail:4,hire_rate:29,final_rate:43,fail_rate:57},
-    {name:"天雪",total:10,hired:2,offer:2,fail:6,hire_rate:20,final_rate:40,fail_rate:60},
-    {name:"司童",total:6,hired:0,offer:2,fail:4,hire_rate:0,final_rate:33,fail_rate:67},
-    {name:"蒂蒂",total:3,hired:1,offer:0,fail:2,hire_rate:33,final_rate:33,fail_rate:67},
-  ],
+  hrbp: [{"name":"川木","total":1,"hired":1,"offer":0,"fail":0,"hire_rate":100,"final_rate":100,"fail_rate":0},{"name":"豆豆","total":12,"hired":5,"offer":4,"fail":3,"hire_rate":42,"final_rate":75,"fail_rate":25},{"name":"一岚","total":4,"hired":2,"offer":1,"fail":1,"hire_rate":50,"final_rate":75,"fail_rate":25},{"name":"予安","total":4,"hired":2,"offer":1,"fail":1,"hire_rate":50,"final_rate":75,"fail_rate":25},{"name":"杨盈","total":45,"hired":22,"offer":11,"fail":11,"hire_rate":49,"final_rate":73,"fail_rate":24},{"name":"广白","total":15,"hired":8,"offer":3,"fail":4,"hire_rate":53,"final_rate":73,"fail_rate":27},{"name":"贵音","total":39,"hired":11,"offer":17,"fail":8,"hire_rate":28,"final_rate":72,"fail_rate":21},{"name":"芭内","total":6,"hired":3,"offer":1,"fail":2,"hire_rate":50,"final_rate":67,"fail_rate":33},{"name":"卡朵","total":6,"hired":2,"offer":2,"fail":2,"hire_rate":33,"final_rate":67,"fail_rate":33},{"name":"瑾瑜","total":57,"hired":23,"offer":14,"fail":16,"hire_rate":40,"final_rate":65,"fail_rate":28},{"name":"星夏","total":13,"hired":5,"offer":3,"fail":5,"hire_rate":38,"final_rate":62,"fail_rate":38},{"name":"幸运","total":18,"hired":7,"offer":4,"fail":7,"hire_rate":39,"final_rate":61,"fail_rate":39},{"name":"希仁","total":27,"hired":7,"offer":9,"fail":11,"hire_rate":26,"final_rate":59,"fail_rate":41},{"name":"天翼","total":43,"hired":17,"offer":8,"fail":18,"hire_rate":40,"final_rate":58,"fail_rate":42},{"name":"奎妮","total":34,"hired":9,"offer":10,"fail":13,"hire_rate":26,"final_rate":56,"fail_rate":38},{"name":"雪山","total":85,"hired":30,"offer":17,"fail":38,"hire_rate":35,"final_rate":55,"fail_rate":45},{"name":"雪糕","total":48,"hired":20,"offer":6,"fail":20,"hire_rate":42,"final_rate":54,"fail_rate":42},{"name":"塔美","total":13,"hired":7,"offer":0,"fail":6,"hire_rate":54,"final_rate":54,"fail_rate":46},{"name":"筱然","total":20,"hired":8,"offer":2,"fail":10,"hire_rate":40,"final_rate":50,"fail_rate":50},{"name":"蝶衣","total":20,"hired":2,"offer":8,"fail":7,"hire_rate":10,"final_rate":50,"fail_rate":35},{"name":"梓晴","total":16,"hired":6,"offer":2,"fail":8,"hire_rate":38,"final_rate":50,"fail_rate":50},{"name":"云阳","total":6,"hired":2,"offer":1,"fail":3,"hire_rate":33,"final_rate":50,"fail_rate":50},{"name":"金槌","total":23,"hired":9,"offer":2,"fail":12,"hire_rate":39,"final_rate":48,"fail_rate":52},{"name":"绫华","total":22,"hired":4,"offer":6,"fail":11,"hire_rate":18,"final_rate":45,"fail_rate":50},{"name":"战歌","total":27,"hired":5,"offer":7,"fail":12,"hire_rate":19,"final_rate":44,"fail_rate":44}],
+  ta: [{"name":"幸运","total":4,"hired":3,"offer":0,"fail":1,"hire_rate":75,"final_rate":75,"fail_rate":25},{"name":"瑞妮","total":35,"hired":14,"offer":10,"fail":10,"hire_rate":40,"final_rate":69,"fail_rate":29},{"name":"大娃","total":32,"hired":14,"offer":8,"fail":10,"hire_rate":44,"final_rate":69,"fail_rate":31},{"name":"真珠","total":6,"hired":3,"offer":1,"fail":2,"hire_rate":50,"final_rate":67,"fail_rate":33},{"name":"林波","total":3,"hired":1,"offer":1,"fail":1,"hire_rate":33,"final_rate":67,"fail_rate":33},{"name":"车英","total":50,"hired":15,"offer":17,"fail":16,"hire_rate":30,"final_rate":64,"fail_rate":32},{"name":"越祈","total":22,"hired":11,"offer":3,"fail":8,"hire_rate":50,"final_rate":64,"fail_rate":36},{"name":"蒂蒂","total":11,"hired":4,"offer":3,"fail":4,"hire_rate":36,"final_rate":64,"fail_rate":36},{"name":"欣然","total":39,"hired":16,"offer":8,"fail":15,"hire_rate":41,"final_rate":62,"fail_rate":38},{"name":"褚岩","total":8,"hired":3,"offer":2,"fail":2,"hire_rate":38,"final_rate":62,"fail_rate":25},{"name":"天雪","total":61,"hired":26,"offer":11,"fail":24,"hire_rate":43,"final_rate":61,"fail_rate":39},{"name":"司童","total":40,"hired":13,"offer":11,"fail":16,"hire_rate":32,"final_rate":60,"fail_rate":40},{"name":"玄鸟","total":49,"hired":18,"offer":11,"fail":18,"hire_rate":37,"final_rate":59,"fail_rate":37},{"name":"贵音","total":41,"hired":15,"offer":9,"fail":14,"hire_rate":37,"final_rate":59,"fail_rate":34},{"name":"禇岩","total":24,"hired":8,"offer":6,"fail":10,"hire_rate":33,"final_rate":58,"fail_rate":42},{"name":"优妮","total":19,"hired":7,"offer":4,"fail":6,"hire_rate":37,"final_rate":58,"fail_rate":32},{"name":"希雯","total":68,"hired":21,"offer":17,"fail":30,"hire_rate":31,"final_rate":56,"fail_rate":44},{"name":"瑞思","total":20,"hired":8,"offer":3,"fail":6,"hire_rate":40,"final_rate":55,"fail_rate":30},{"name":"散影","total":15,"hired":7,"offer":1,"fail":7,"hire_rate":47,"final_rate":53,"fail_rate":47},{"name":"予安","total":6,"hired":3,"offer":0,"fail":3,"hire_rate":50,"final_rate":50,"fail_rate":50},{"name":"夏娜","total":25,"hired":2,"offer":10,"fail":10,"hire_rate":8,"final_rate":48,"fail_rate":40},{"name":"粥粥","total":8,"hired":2,"offer":1,"fail":4,"hire_rate":25,"final_rate":38,"fail_rate":50},{"name":"奎妮","total":4,"hired":1,"offer":0,"fail":3,"hire_rate":25,"final_rate":25,"fail_rate":75},{"name":"子衿","total":10,"hired":1,"offer":1,"fail":8,"hire_rate":10,"final_rate":20,"fail_rate":80}],
   monthly: [
     {month:"1月",total:59,hired:19,offer:13,fail:27,final_rate:54,fail_rate:46},
     {month:"2月",total:31,hired:6,offer:17,fail:7,final_rate:74,fail_rate:23},
