@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>商业化CBD专场招聘质量看板 · 2026 Q1</title>
+<title>商业化CBD专场招聘质量看板 · 2026-04-01</title>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 <style>
   :root {
@@ -85,10 +85,10 @@
 <div class="header">
   <div>
     <h1>🎯 商业化 CBD 专场招聘质量看板</h1>
-    <p>数据来源：商业100CBD专场面试全量数据（2025-2026）· HRBP/TA 榜单为全量 · 总览/月度为 2026 Q1</p>
+    <p>数据来源：2026 商业100CBD专场面试 · 最后更新 2026-04-01</p>
   </div>
   <div class="badges">
-    <span class="badge badge-blue">2026 Q1</span>
+    <span class="badge badge-blue">2026-04-01</span>
     <span class="badge badge-green">127人</span>
   </div>
 </div>
@@ -98,19 +98,18 @@
   <div class="tab" onclick="switchTab('hrbp')">HRBP 榜单</div>
   <div class="tab" onclick="switchTab('ta')">TA 榜单</div>
   <div class="tab" onclick="switchTab('monthly')">月度趋势</div>
-  <div class="tab" onclick="switchTab('compare')">📊 年度对比</div>
-  <div class="tab" onclick="switchTab('industry')">🏭 行业分析</div>
 </div>
 
 <div class="container">
 
 <!-- ===== 总览 ===== -->
 <div class="tab-panel active" id="panel-overview">
+
   <div class="kpi-row">
-    <div class="kpi-card"><div class="kpi-label">总推送</div><div class="kpi-value c-blue">127</div><div class="kpi-sub">2026 Q1</div></div>
-    <div class="kpi-card"><div class="kpi-label">已入职</div><div class="kpi-value c-green">25</div><div class="kpi-sub">入职率 20%</div></div>
-    <div class="kpi-card"><div class="kpi-label">OD / 在途</div><div class="kpi-value c-orange">47</div><div class="kpi-sub">终转化预估 57%</div></div>
-    <div class="kpi-card"><div class="kpi-label">面试 Fail</div><div class="kpi-value c-red">53</div><div class="kpi-sub">Fail 率 42%</div></div>
+    <div class="kpi-card"><div class="kpi-label">总推送</div><div class="kpi-value c-blue">__TOTAL__</div><div class="kpi-sub">2026-04-01</div></div>
+    <div class="kpi-card"><div class="kpi-label">已入职</div><div class="kpi-value c-green">__HIRED__</div><div class="kpi-sub">入职率 20%</div></div>
+    <div class="kpi-card"><div class="kpi-label">OD / 在途</div><div class="kpi-value c-orange">__OFFER__</div><div class="kpi-sub">终转化预估 57%</div></div>
+    <div class="kpi-card"><div class="kpi-label">面试 Fail</div><div class="kpi-value c-red">__FAIL__</div><div class="kpi-sub">Fail 率 42%</div></div>
     <div class="kpi-card"><div class="kpi-label">活跃 HRBP</div><div class="kpi-value">13</div><div class="kpi-sub">TA 18人</div></div>
   </div>
 
@@ -125,556 +124,349 @@
 
   <div class="sec">漏斗总览</div>
   <div class="grid-3">
-    <div class="card"><div class="card-title">推送结果构成</div><div class="card-sub">127人分布</div><div id="chart-pie" style="height:320px"></div></div>
-    <div class="card"><div class="card-title">HRBP 终转化率排行</div><div class="card-sub">按终转化率降序 · 全量数据</div><div id="chart-hrbp-overview" style="height:320px"></div></div>
-    <div class="card"><div class="card-title">TA 终转化率排行</div><div class="card-sub">推送量 ≥ 3 · 全量数据</div><div id="chart-ta-overview" style="height:320px"></div></div>
+    <div class="card"><div class="card-title">推送结果构成</div><div class="card-sub">127人分布</div><div id="chart-pie" style="height:220px"></div></div>
+    <div class="card"><div class="card-title">HRBP 终转化率排行</div><div class="card-sub">按终转化率降序</div><div id="chart-hrbp-overview" style="height:220px"></div></div>
+    <div class="card"><div class="card-title">TA 终转化率排行</div><div class="card-sub">推送量 ≥ 3</div><div id="chart-ta-overview" style="height:220px"></div></div>
   </div>
 
   <div class="sec">月度趋势</div>
-  <div class="card full"><div class="card-title">月度推送 / 入职 / Fail / 终转化率</div><div class="card-sub">全量数据（2025年3月—2026年3月）</div><div id="chart-monthly-overview" style="height:240px"></div></div>
+  <div class="card full"><div class="card-title">月度推送 / 入职 / Fail / 终转化率</div><div class="card-sub">3月入职尚在 Offer 流程中</div><div id="chart-monthly-overview" style="height:240px"></div></div>
+
 </div>
 
 <!-- ===== HRBP ===== -->
 <div class="tab-panel" id="panel-hrbp">
-  <div class="sec">HRBP 推荐质量榜 · 全量数据（2025+2026）· CBD 专场 · 共 25 人</div>
-  <div class="card full" style="margin-bottom:16px"><div class="card-title">HRBP 推荐质量详表</div><div class="card-sub">按终转化率排序 · 终转化 = (已入职 + OD + 在途) / 推送</div><table class="rank-table" id="table-hrbp"></table></div>
-  <div class="card full" style="margin-bottom:16px">
-    <div class="card-title" style="margin-bottom:2px">📋 终转化率排名</div>
-    <div class="card-sub" style="margin-bottom:14px">绿色 = 终转化率 · 红色 = Fail率 · 按终转化率降序</div>
-    <div id="legend-hrbp"></div>
+
+  <div class="sec">HRBP 推荐质量榜 · 2026-04-01 · CBD 专场</div>
+  <div class="split-row">
+    <div class="card">
+      <div class="card-title">终转化率 × Fail率 散点图</div>
+      <div class="card-sub">气泡大小 = 推送量；右上角 = 高质量；左下角 = 需关注</div>
+      <div id="chart-hrbp-scatter" style="height:360px"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">结果构成堆叠图</div>
+      <div class="card-sub">已入职 / OD在途 / Fail</div>
+      <div id="chart-hrbp-stack" style="height:360px"></div>
+    </div>
   </div>
+  <div class="card full">
+    <div class="card-title">HRBP 推荐质量详表</div>
+    <div class="card-sub">按终转化率排序 · 终转化 = (已入职 + OD + 在途) / 推送</div>
+    <table class="rank-table" id="table-hrbp"></table>
+  </div>
+
 </div>
 
 <!-- ===== TA ===== -->
 <div class="tab-panel" id="panel-ta">
-  <div class="sec">TA 推荐质量榜 · 全量数据（2025+2026）· CBD 专场 · 推送量 ≥ 3 · 共 24 人</div>
-  <div class="card full" style="margin-bottom:16px"><div class="card-title">TA 推荐质量详表</div><div class="card-sub">按终转化率排序 · 推送量 ≥ 3</div><table class="rank-table" id="table-ta"></table></div>
-  <div class="card full" style="margin-bottom:16px">
-    <div class="card-title" style="margin-bottom:2px">📋 终转化率排名</div>
-    <div class="card-sub" style="margin-bottom:14px">绿色 = 终转化率 · 红色 = Fail率 · 按终转化率降序</div>
-    <div id="legend-ta"></div>
+
+  <div class="sec">TA 推荐质量榜 · 2026-04-01 · CBD 专场</div>
+  <div class="split-row">
+    <div class="card">
+      <div class="card-title">终转化率 × Fail率 散点图</div>
+      <div class="card-sub">气泡大小 = 推送量；推送量 ≥ 3</div>
+      <div id="chart-ta-scatter" style="height:360px"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">结果构成堆叠图</div>
+      <div class="card-sub">已入职 / OD在途 / Fail · 推送量 ≥ 3</div>
+      <div id="chart-ta-stack" style="height:360px"></div>
+    </div>
+  </div>
+  <div class="card full">
+    <div class="card-title">TA 推荐质量详表</div>
+    <div class="card-sub">按终转化率排序 · 推送量 ≥ 3</div>
+    <table class="rank-table" id="table-ta"></table>
   </div>
 
-  <div class="sec">TA × 行业 推送分布</div>
-  <div class="card full" style="margin-top:0">
-    <div class="card-title">每位 TA 推荐量 Top 3 行业</div>
-    <div class="card-sub">按 TA 推送总量降序 · 数字为推送人数</div>
-    <div id="ta-top3-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px"></div>
-  </div>
 </div>
 
 <!-- ===== 月度趋势 ===== -->
 <div class="tab-panel" id="panel-monthly">
-  <div class="sec">月度漏斗趋势 · 全量数据（2025年3月 — 2026年3月）</div>
-  <div class="card full"><div class="card-title">月度推送 / 已入职 / OD在途 / Fail / 终转化率</div><div class="card-sub">全量13个月 · 3月数据为阶段性，入职尚在流程中</div><div id="chart-monthly-main" style="height:320px"></div></div>
 
-  <div class="card full" style="margin-top:16px">
-    <div class="card-title" style="font-size:14px;margin-bottom:12px">🔍 月度趋势复盘结论</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
-
-      <div style="background:rgba(248,81,73,.06);border:1px solid rgba(248,81,73,.2);border-radius:8px;padding:14px">
-        <div style="color:#f85149;font-weight:700;font-size:12px;margin-bottom:8px">🚨 核心问题：Q4冲量后Q1断崖</div>
-        <div style="color:#c9d1d9;font-size:12px;line-height:1.7">
-          25年11-12月推送量飙升至77/92人，是全年峰值，但<b>2026年Q1推送量骤降至127人（月均42人）</b>，降幅超50%。
-          更危险的是：<b>26年3月终转化率跌至38%，创历史最低</b>，0人入职，19人Fail，14人OD在途悬而未决。
-          Q4集中冲量的副作用是耗尽了 HRBP/TA 的候选人储备，Q1接续乏力。
-        </div>
-      </div>
-
-      <div style="background:rgba(210,153,34,.06);border:1px solid rgba(210,153,34,.2);border-radius:8px;padding:14px">
-        <div style="color:#d29922;font-weight:700;font-size:12px;margin-bottom:8px">⚠️ 规律洞察：暑期 & 年底是双低谷</div>
-        <div style="color:#c9d1d9;font-size:12px;line-height:1.7">
-          <b>25年8月终转化率48%</b>，Fail率52%，是2025年最差月份——暑期候选人质量下沉，竞争减少但意愿度低。
-          <b>25年7月是全年最佳（71%终转化）</b>，说明6-7月是黄金招聘窗口，候选人市场活跃、稳定性高。
-          <b>26年2月终转化率77%</b>看似亮眼，实为假象：推送量仅31人，OD积压18人，大量候选人尚未结案，终转化率会回调。
-        </div>
-      </div>
-
-      <div style="background:rgba(63,185,80,.06);border:1px solid rgba(63,185,80,.2);border-radius:8px;padding:14px">
-        <div style="color:#3fb950;font-weight:700;font-size:12px;margin-bottom:8px">✅ 改善措施（按优先级）</div>
-        <div style="color:#c9d1d9;font-size:12px;line-height:1.7">
-          <b>① 立即清仓3月OD：</b>26年3月14人OD在途，需本周内逐一回访确认意向，争取4月转化入职，挽救Q1收尾数据。<br/>
-          <b>② 提前布局Q2招聘：</b>4-5月是年度第二招聘黄金期，应在3月底前完成简历储备，避免重蹈Q1断供覆辙。<br/>
-          <b>③ 平滑推送节奏：</b>禁止季末堆量，目标每月推送量稳定在40-60人，终转化率目标≥60%，避免批量低质推送拉低整体表现。
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- ===== 年度对比 ===== -->
-<div class="tab-panel" id="panel-compare">
-  <div class="sec">📊 2025全年 vs 2026 YTD 数据对比</div>
-  
-  <div class="kpi-row">
-    <div class="kpi-card"><div class="kpi-label">2025全年推送</div><div class="kpi-value">462</div><div class="kpi-sub c-green">+70% vs 历史</div></div>
-    <div class="kpi-card"><div class="kpi-label">2026 YTD推送</div><div class="kpi-value c-blue">139</div><div class="kpi-sub">截至3月</div></div>
-    <div class="kpi-card"><div class="kpi-label">2025入职率</div><div class="kpi-value" style="color:#3fb950">39%</div><div class="kpi-sub">最终转化率 59%</div></div>
-    <div class="kpi-card"><div class="kpi-label">2026入职率</div><div class="kpi-value c-orange">31%</div><div class="kpi-sub">最终转化率 49% ↓</div></div>
-    <div class="kpi-card"><div class="kpi-label">2025 vs 2026 Fail率</div><div class="kpi-value">持平</div><div class="kpi-sub">均为 38%</div></div>
-  </div>
+  <div class="sec">月度漏斗趋势</div>
+  <div class="card full"><div class="card-title">月度推送 / 入职 / OD在途 / Fail / 终转化率</div><div class="card-sub">2026年1月 — 3月</div><div id="chart-monthly-main" style="height:300px"></div></div>
 
   <div class="grid-2">
-    <div class="card"><div class="card-title">2025 vs 2026 关键指标对比</div><div class="card-sub">入职率 / 终转化率 / Fail率</div><div id="chart-compare-bar" style="height:300px"></div></div>
-    <div class="card"><div class="card-title">推送量 & 入职人数对比</div><div class="card-sub">绝对数值对比</div><div id="chart-compare-absolute" style="height:300px"></div></div>
+    <div class="card"><div class="card-title">月度 HRBP 入职贡献</div><div class="card-sub">各月已入职人数按 HRBP 分布</div><div id="chart-hrbp-monthly" style="height:280px"></div></div>
+    <div class="card"><div class="card-title">月度 TA 入职贡献</div><div class="card-sub">各月已入职人数按 TA 分布</div><div id="chart-ta-monthly" style="height:280px"></div></div>
   </div>
 
-  <div class="card full">
-    <div class="card-title">年度数据详表</div>
-    <div class="card-sub">2025全年 vs 2026年初至今（YTD）</div>
-    <table class="rank-table" id="table-compare">
-      <thead><tr>
-        <th>年度</th><th>推送</th><th>入职</th><th>待入职/在途</th><th style='color:#f85149'>Offer Dropped</th><th>Fail</th><th>入职率</th><th>终转化率</th><th>Fail率</th>
-      </tr></thead>
-      <tbody>
-        <tr><td><b>2025全年</b></td><td>462</td><td class="c-green">182</td><td>20</td><td style='color:#f85149'>113</td><td>176</td><td>39%</td><td style="color:#3fb950">59%</td><td>38%</td></tr>
-        <tr><td><b>2026 YTD</b></td><td>139</td><td class="c-green">43</td><td>26</td><td style='color:#f85149'>113</td><td>53</td><td>31%</td><td class="c-orange">49%</td><td>38%</td></tr>
-        <tr style="background:rgba(88,166,255,.08)"><td><b>变化</b></td><td class="c-red">-323</td><td>-139</td><td>+6</td><td>0</td><td>-123</td><td class="c-red">-8pp</td><td class="c-red">-10pp</td><td>0pp</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="card full" style="margin-top:4px">
-    <div class="card-title" style="font-size:14px;margin-bottom:12px">🔍 复盘结论</div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
-
-      <div style="background:rgba(248,81,73,.06);border:1px solid rgba(248,81,73,.2);border-radius:8px;padding:14px">
-        <div style="color:#f85149;font-weight:700;font-size:12px;margin-bottom:8px">🚨 核心问题：Offer 接受率大幅下滑</div>
-        <div style="color:#c9d1d9;font-size:12px;line-height:1.7">
-          Fail率 2025/2026 均为 38%，说明<b>面试标准没有松动</b>。但终转化率从 59% 跌至 49%，<b>-10pp 的缺口全部来自 Offer 阶段流失</b>。
-          2026 OD/在途积压 25 人（占推送量 18%），远超 2025 同期比例。
-          根因：<b>小红书 Offer 竞争力在市场营销、快消、渠道等销售类岗位相对弱化</b>（这三个行业合计推送占全量 46%），候选人有更多外部选择；部分 HRBP 推进节奏慢，Offer 期间候选人被竞争对手截胡。
-        </div>
-      </div>
-
-      <div style="background:rgba(210,153,34,.06);border:1px solid rgba(210,153,34,.2);border-radius:8px;padding:14px">
-        <div style="color:#d29922;font-weight:700;font-size:12px;margin-bottom:8px">⚠️ 结构性风险：TA 头部集中 + 闪离率上升</div>
-        <div style="color:#c9d1d9;font-size:12px;line-height:1.7">
-          TA 侧，希雯（68人）、天雪（61人）、车英（50人）三人承接了全量推送的 <b>29%</b>，过度依赖少数 TA，单点风险高。
-          与此同时，2025 全年 12 人闪离，<b>希雯负责的候选人 3 人全部闪离</b>，欣然 3 人中 2 人闪离，说明部分 TA 在候选人稳定性评估上存在系统性偏差，<b>推量大但留存质量不达标</b>。
-          HRBP 侧，雪山（85人，主负责<b>市场营销</b>行业，占其推送量的95%）承接量最大但终转化率仅 35%，Fail 率 45%，市场营销岗位竞争激烈、候选人流失率高，需重点审视推送质量与 Offer 竞争力。贵音（39人，主负责<b>行业四部·快消</b>）OD率高达 41%，Offer 流失严重。
-        </div>
-      </div>
-
-      <div style="background:rgba(63,185,80,.06);border:1px solid rgba(63,185,80,.2);border-radius:8px;padding:14px">
-        <div style="color:#3fb950;font-weight:700;font-size:12px;margin-bottom:8px">✅ 改善措施（优先级排序）</div>
-        <div style="color:#c9d1d9;font-size:12px;line-height:1.7">
-          <b>① Offer 阶段提速：</b>缩短从面试 Pass 到发 Offer 的间隔，目标 ≤3 个工作日，减少候选人窗口期被截胡。<br/>
-          <b>② OD 存量清理：</b>每周回访 OD 在途候选人，重点跟进蝶衣（8人）、车英（17人）积压名单。<br/>
-          <b>③ 闪离归因复盘：</b>对 12 名闪离候选人逐一离职访谈，判断是岗位匹配问题还是入职体验问题，输出 TA 推荐质量改进 SOP。<br/>
-          <b>④ 分散推送风险：</b>单 TA 推送占比不超过 20%，扶持大娃、越祈、瑞妮等高质量 TA 提升推送量。
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- ===== 行业分析 ===== -->
-<div class="tab-panel" id="panel-industry">
-  <div class="sec">行业招聘质量复盘 · CBD 专场全量数据</div>
-
-  <div class="grid-2">
-    <div class="card"><div class="card-title">各行业入职率排行</div><div class="card-sub">按入职率降序 · 含闪离</div><div id="chart-industry-hire" style="height:380px"></div></div>
-    <div class="card"><div class="card-title">各行业推送量 & 结果构成</div><div class="card-sub">已入职 / 在途 / Fail / Offer Dropped</div><div id="chart-industry-stack" style="height:380px"></div></div>
-  </div>
-
-  <div class="sec">⚡ 已闪离候选人（入职不满一年离职）</div>
-  <div class="alert alert-r">
-    <span>🚨</span>
-    <span><b>共 12 人已闪离</b>：市场营销4人、行业七部（生服）2人、行业一部（美业）2人、行业五部（互联网）2人、行业二部（服饰）1人、商业化服务与体验1人。重点关注：希雯推荐3人均已闪离；欣然推荐3人中2人闪离；雪糕/芭内/雪山各有2人闪离。</span>
-  </div>
-  <div class="card full">
-    <div class="card-title">闪离候选人明细</div>
-    <div class="card-sub">状态：已闪离（入职不满一年离职）· 全部来自 CBD 专场</div>
-    <table class="rank-table">
-      <thead><tr>
-        <th>#</th><th>候选人</th><th>行业</th><th>HRBP</th><th>TA</th><th>年份</th>
-      </tr></thead>
-      <tbody>
-        <tr><td>1</td><td><b>葛禹彤</b></td><td>行业七部（生服）</td><td>瑾瑜</td><td>司童</td><td>2025</td></tr>
-        <tr><td>2</td><td><b>王鸿博</b></td><td>行业一部（美业）</td><td>雪糕</td><td>欣然</td><td>2025</td></tr>
-        <tr><td>3</td><td><b>孙瑶</b></td><td>行业一部（美业）</td><td>雪糕</td><td>欣然</td><td>2025</td></tr>
-        <tr><td>4</td><td><b>杨露萌</b></td><td>行业五部（互联网）</td><td>芭内</td><td>欣然</td><td>2025</td></tr>
-        <tr><td>5</td><td><b>江颖</b></td><td>市场营销</td><td>金槌</td><td>希雯</td><td>2025</td></tr>
-        <tr><td>6</td><td><b>莎日娜</b></td><td>行业七部（生服）</td><td>星夏</td><td>玄鸟</td><td>2025</td></tr>
-        <tr><td>7</td><td><b>夏卓然</b></td><td>行业二部（服饰）</td><td>筱然</td><td>天雪</td><td>2025</td></tr>
-        <tr><td>8</td><td><b>周源</b></td><td>行业五部（互联网）</td><td>芭内</td><td>司童</td><td>2025</td></tr>
-        <tr><td>9</td><td><b>于佳宁</b></td><td>市场营销</td><td>金槌</td><td>希雯</td><td>2025</td></tr>
-        <tr><td>10</td><td><b>李菁晗</b></td><td>市场营销</td><td>雪山</td><td>希雯</td><td>2025</td></tr>
-        <tr><td>11</td><td><b>陈钰</b></td><td>商业化服务与体验</td><td>豆豆</td><td>玄鸟</td><td>2025</td></tr>
-        <tr><td>12</td><td><b>高婧璇</b></td><td>市场营销</td><td>雪山</td><td>车英</td><td>2025</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="sec">行业详表</div>
-  <div class="card full">
-    <div class="card-title">各行业招聘质量详表</div>
-    <div class="card-sub">按推送量降序 · 闪离率 = 闪离 / 实际入职</div>
-    <table class="rank-table" id="table-industry"></table>
-  </div>
 </div>
 
 </div><!-- /container -->
 
 <script>
-// ===== 数据 =====
-const D = {
-  hrbp: [{"name":"川木","total":1,"hired":1,"pipeline":0,"od":0,"fail":0,"hire_rate":100,"final_rate":100,"od_rate":0,"fail_rate":0},{"name":"广白","total":15,"hired":8,"pipeline":2,"od":1,"fail":4,"hire_rate":53,"final_rate":67,"od_rate":7,"fail_rate":27},{"name":"塔美","total":13,"hired":7,"pipeline":0,"od":0,"fail":6,"hire_rate":54,"final_rate":54,"od_rate":0,"fail_rate":46},{"name":"芭内","total":6,"hired":3,"pipeline":0,"od":1,"fail":2,"hire_rate":50,"final_rate":50,"od_rate":17,"fail_rate":33},{"name":"卡朵","total":6,"hired":2,"pipeline":1,"od":1,"fail":2,"hire_rate":33,"final_rate":50,"od_rate":17,"fail_rate":33},{"name":"一岚","total":4,"hired":2,"pipeline":0,"od":1,"fail":1,"hire_rate":50,"final_rate":50,"od_rate":25,"fail_rate":25},{"name":"予安","total":4,"hired":2,"pipeline":0,"od":1,"fail":1,"hire_rate":50,"final_rate":50,"od_rate":25,"fail_rate":25},{"name":"瑾瑜","total":57,"hired":23,"pipeline":5,"od":9,"fail":16,"hire_rate":40,"final_rate":49,"od_rate":16,"fail_rate":28},{"name":"杨盈","total":45,"hired":22,"pipeline":0,"od":11,"fail":11,"hire_rate":49,"final_rate":49,"od_rate":24,"fail_rate":24},{"name":"雪糕","total":48,"hired":20,"pipeline":2,"od":4,"fail":20,"hire_rate":42,"final_rate":46,"od_rate":8,"fail_rate":42},{"name":"星夏","total":13,"hired":5,"pipeline":1,"od":2,"fail":5,"hire_rate":38,"final_rate":46,"od_rate":15,"fail_rate":38},{"name":"梓晴","total":16,"hired":6,"pipeline":1,"od":1,"fail":8,"hire_rate":38,"final_rate":44,"od_rate":6,"fail_rate":50},{"name":"豆豆","total":12,"hired":5,"pipeline":0,"od":4,"fail":3,"hire_rate":42,"final_rate":42,"od_rate":33,"fail_rate":25},{"name":"奎妮","total":34,"hired":9,"pipeline":5,"od":5,"fail":13,"hire_rate":26,"final_rate":41,"od_rate":15,"fail_rate":38},{"name":"天翼","total":43,"hired":17,"pipeline":0,"od":8,"fail":18,"hire_rate":40,"final_rate":40,"od_rate":19,"fail_rate":42},{"name":"筱然","total":20,"hired":8,"pipeline":0,"od":2,"fail":10,"hire_rate":40,"final_rate":40,"od_rate":10,"fail_rate":50},{"name":"金槌","total":23,"hired":9,"pipeline":0,"od":2,"fail":12,"hire_rate":39,"final_rate":39,"od_rate":9,"fail_rate":52},{"name":"幸运","total":18,"hired":7,"pipeline":0,"od":4,"fail":7,"hire_rate":39,"final_rate":39,"od_rate":22,"fail_rate":39},{"name":"雪山","total":85,"hired":30,"pipeline":0,"od":17,"fail":38,"hire_rate":35,"final_rate":35,"od_rate":20,"fail_rate":45},{"name":"战歌","total":27,"hired":5,"pipeline":4,"od":3,"fail":12,"hire_rate":19,"final_rate":33,"od_rate":11,"fail_rate":44},{"name":"云阳","total":6,"hired":2,"pipeline":0,"od":1,"fail":3,"hire_rate":33,"final_rate":33,"od_rate":17,"fail_rate":50},{"name":"贵音","total":39,"hired":11,"pipeline":1,"od":16,"fail":8,"hire_rate":28,"final_rate":31,"od_rate":41,"fail_rate":21},{"name":"蝶衣","total":20,"hired":2,"pipeline":4,"od":4,"fail":7,"hire_rate":10,"final_rate":30,"od_rate":20,"fail_rate":35},{"name":"希仁","total":27,"hired":7,"pipeline":0,"od":9,"fail":11,"hire_rate":26,"final_rate":26,"od_rate":33,"fail_rate":41},{"name":"绫华","total":22,"hired":4,"pipeline":0,"od":6,"fail":11,"hire_rate":18,"final_rate":18,"od_rate":27,"fail_rate":50}],
-  ta: [{"name":"幸运","total":4,"hired":3,"pipeline":0,"od":0,"fail":1,"hire_rate":75,"final_rate":75,"od_rate":0,"fail_rate":25},{"name":"越祈","total":22,"hired":11,"pipeline":1,"od":2,"fail":8,"hire_rate":50,"final_rate":55,"od_rate":9,"fail_rate":36},{"name":"褚岩","total":8,"hired":3,"pipeline":1,"od":1,"fail":2,"hire_rate":38,"final_rate":50,"od_rate":12,"fail_rate":25},{"name":"予安","total":6,"hired":3,"pipeline":0,"od":0,"fail":3,"hire_rate":50,"final_rate":50,"od_rate":0,"fail_rate":50},{"name":"真珠","total":6,"hired":3,"pipeline":0,"od":1,"fail":2,"hire_rate":50,"final_rate":50,"od_rate":17,"fail_rate":33},{"name":"瑞妮","total":35,"hired":14,"pipeline":3,"od":7,"fail":10,"hire_rate":40,"final_rate":49,"od_rate":20,"fail_rate":29},{"name":"大娃","total":32,"hired":14,"pipeline":1,"od":7,"fail":10,"hire_rate":44,"final_rate":47,"od_rate":22,"fail_rate":31},{"name":"散影","total":15,"hired":7,"pipeline":0,"od":1,"fail":7,"hire_rate":47,"final_rate":47,"od_rate":7,"fail_rate":47},{"name":"瑞思","total":20,"hired":8,"pipeline":1,"od":2,"fail":6,"hire_rate":40,"final_rate":45,"od_rate":10,"fail_rate":30},{"name":"天雪","total":61,"hired":26,"pipeline":1,"od":10,"fail":24,"hire_rate":43,"final_rate":44,"od_rate":16,"fail_rate":39},{"name":"欣然","total":39,"hired":16,"pipeline":1,"od":7,"fail":15,"hire_rate":41,"final_rate":44,"od_rate":18,"fail_rate":38},{"name":"玄鸟","total":49,"hired":18,"pipeline":3,"od":8,"fail":18,"hire_rate":37,"final_rate":43,"od_rate":16,"fail_rate":37},{"name":"车英","total":50,"hired":15,"pipeline":6,"od":11,"fail":16,"hire_rate":30,"final_rate":42,"od_rate":22,"fail_rate":32},{"name":"禇岩","total":24,"hired":8,"pipeline":2,"od":4,"fail":10,"hire_rate":33,"final_rate":42,"od_rate":17,"fail_rate":42},{"name":"优妮","total":19,"hired":7,"pipeline":1,"od":3,"fail":6,"hire_rate":37,"final_rate":42,"od_rate":16,"fail_rate":32},{"name":"贵音","total":41,"hired":15,"pipeline":0,"od":9,"fail":14,"hire_rate":37,"final_rate":37,"od_rate":22,"fail_rate":34},{"name":"蒂蒂","total":11,"hired":4,"pipeline":0,"od":3,"fail":4,"hire_rate":36,"final_rate":36,"od_rate":27,"fail_rate":36},{"name":"司童","total":40,"hired":13,"pipeline":1,"od":10,"fail":16,"hire_rate":32,"final_rate":35,"od_rate":25,"fail_rate":40},{"name":"林波","total":3,"hired":1,"pipeline":0,"od":1,"fail":1,"hire_rate":33,"final_rate":33,"od_rate":33,"fail_rate":33},{"name":"希雯","total":68,"hired":21,"pipeline":0,"od":17,"fail":30,"hire_rate":31,"final_rate":31,"od_rate":25,"fail_rate":44},{"name":"粥粥","total":8,"hired":2,"pipeline":0,"od":1,"fail":4,"hire_rate":25,"final_rate":25,"od_rate":12,"fail_rate":50},{"name":"奎妮","total":4,"hired":1,"pipeline":0,"od":0,"fail":3,"hire_rate":25,"final_rate":25,"od_rate":0,"fail_rate":75},{"name":"夏娜","total":25,"hired":2,"pipeline":3,"od":7,"fail":10,"hire_rate":8,"final_rate":20,"od_rate":28,"fail_rate":40},{"name":"子衿","total":10,"hired":1,"pipeline":0,"od":1,"fail":8,"hire_rate":10,"final_rate":10,"od_rate":10,"fail_rate":80}],
-  monthly: [{"month":"25年3月","total":25,"hired":10,"pipeline":0,"od":1,"fail":14,"final_rate":40,"fail_rate":56,"od_rate":4},{"month":"25年4月","total":19,"hired":8,"pipeline":0,"od":3,"fail":8,"final_rate":42,"fail_rate":42,"od_rate":16},{"month":"25年5月","total":40,"hired":21,"pipeline":0,"od":4,"fail":15,"final_rate":52,"fail_rate":38,"od_rate":10},{"month":"25年6月","total":39,"hired":16,"pipeline":0,"od":7,"fail":16,"final_rate":41,"fail_rate":41,"od_rate":18},{"month":"25年7月","total":41,"hired":19,"pipeline":0,"od":10,"fail":12,"final_rate":46,"fail_rate":29,"od_rate":24},{"month":"25年8月","total":44,"hired":11,"pipeline":0,"od":10,"fail":23,"final_rate":25,"fail_rate":52,"od_rate":23},{"month":"25年9月","total":44,"hired":19,"pipeline":0,"od":5,"fail":20,"final_rate":43,"fail_rate":45,"od_rate":11},{"month":"25年10月","total":41,"hired":12,"pipeline":0,"od":15,"fail":14,"final_rate":29,"fail_rate":34,"od_rate":37},{"month":"25年11月","total":77,"hired":35,"pipeline":0,"od":17,"fail":25,"final_rate":45,"fail_rate":32,"od_rate":22},{"month":"25年12月","total":92,"hired":41,"pipeline":2,"od":20,"fail":29,"final_rate":47,"fail_rate":32,"od_rate":22},{"month":"26年1月","total":59,"hired":19,"pipeline":3,"od":10,"fail":27,"final_rate":37,"fail_rate":46,"od_rate":17},{"month":"26年2月","total":31,"hired":6,"pipeline":10,"od":8,"fail":7,"final_rate":52,"fail_rate":23,"od_rate":26},{"month":"26年3月","total":37,"hired":0,"pipeline":11,"od":3,"fail":19,"final_rate":30,"fail_rate":51,"od_rate":8}],
-  compare: {
-    "2025": {total:462,hired:182,offer:92,fail:176,hire_rate:39,final_rate:59,fail_rate:38},
-    "2026": {total:139,hired:43,offer:25,fail:53,hire_rate:31,final_rate:49,fail_rate:38}
-  },
-  industry: [
-    {name:"市场营销",total:124,hired:37,flash_quit:4,total_hired:41,offer:5,dropped:23,fail:53,hire_rate:33,final_rate:37,fail_rate:43,flash_rate:10},
-    {name:"行业一部（美业）",total:84,hired:35,flash_quit:2,total_hired:37,offer:5,dropped:10,fail:28,hire_rate:44,final_rate:50,fail_rate:33,flash_rate:5},
-    {name:"行业四部（快消）",total:68,hired:24,flash_quit:0,total_hired:24,offer:1,dropped:19,fail:21,hire_rate:35,final_rate:37,fail_rate:31,flash_rate:0},
-    {name:"行业七部（生服）",total:49,hired:16,flash_quit:2,total_hired:18,offer:0,dropped:7,fail:23,hire_rate:37,final_rate:37,fail_rate:47,flash_rate:11},
-    {name:"行业三部（耐消）",total:46,hired:25,flash_quit:0,total_hired:25,offer:1,dropped:8,fail:11,hire_rate:54,final_rate:57,fail_rate:24,flash_rate:0},
-    {name:"渠道业务",total:40,hired:15,flash_quit:0,total_hired:15,offer:3,dropped:8,fail:12,hire_rate:38,final_rate:45,fail_rate:30,flash_rate:0},
-    {name:"行业二部（服饰）",total:32,hired:10,flash_quit:1,total_hired:11,offer:0,dropped:6,fail:14,hire_rate:34,final_rate:34,fail_rate:44,flash_rate:9},
-    {name:"行业八部（教育到综）",total:28,hired:9,flash_quit:0,total_hired:9,offer:1,dropped:3,fail:15,hire_rate:32,final_rate:36,fail_rate:54,flash_rate:0},
-    {name:"行业六部（交通）",total:26,hired:5,flash_quit:0,total_hired:5,offer:4,dropped:6,fail:9,hire_rate:19,final_rate:35,fail_rate:35,flash_rate:0},
-    {name:"行业五部（互联网）",total:26,hired:6,flash_quit:2,total_hired:8,offer:2,dropped:5,fail:9,hire_rate:31,final_rate:38,fail_rate:35,flash_rate:25},
-    {name:"创作者营销与商业服务",total:20,hired:9,flash_quit:0,total_hired:9,offer:0,dropped:3,fail:8,hire_rate:45,final_rate:45,fail_rate:40,flash_rate:0},
-    {name:"商业化服务与体验",total:20,hired:3,flash_quit:1,total_hired:4,offer:0,dropped:4,fail:11,hire_rate:20,final_rate:20,fail_rate:55,flash_rate:25},
-    {name:"电商行业运营",total:18,hired:3,flash_quit:0,total_hired:3,offer:0,dropped:9,fail:6,hire_rate:17,final_rate:17,fail_rate:33,flash_rate:0},
-    {name:"行业九部（跨境）",total:7,hired:5,flash_quit:0,total_hired:5,offer:1,dropped:0,fail:1,hire_rate:71,final_rate:86,fail_rate:14,flash_rate:0},
-  ]
-};
+// ===== 数据（直接来自 Excel 精确计算）=====
+const D = {hrbp:__HRBP_JS__,ta:__TA_JS__,monthly:__MONTHLY_JS__};
 
-const G='#3fb950',O='#d29922',R='#f85149',B='#58a6ff',M='#8b949e',P='#bc8cff';
+const G='#3fb950',O='#d29922',R='#f85149',B='#58a6ff',T='#39d353',M='#8b949e';
 const ax={axisLine:{lineStyle:{color:'#30363d'}},axisTick:{lineStyle:{color:'#30363d'}},
           axisLabel:{color:'#8b949e',fontSize:11},splitLine:{lineStyle:{color:'#30363d',type:'dashed'}}};
 
 function gc(id){const el=document.getElementById(id);if(!el)return null;let c=echarts.getInstanceByDom(el);if(!c)c=echarts.init(el,null,{renderer:'canvas'});return c;}
-function fc(r){return r>=70?G:r>=45?'#39d353':r>=25?O:R;}
+function fc(r){return r>=70?G:r>=45?T:r>=25?O:R;}
 
 function switchTab(name){
-  const tabs=['overview','hrbp','ta','monthly','compare'];
-  document.querySelectorAll('.tab').forEach((t,i)=>{t.classList.toggle('active',tabs[i]===name);});
-  document.querySelectorAll('.tab-panel').forEach(p=>{p.classList.toggle('active',p.id==='panel-'+name);});
+  document.querySelectorAll('.tab').forEach((t,i)=>{
+    t.classList.toggle('active',['overview','hrbp','ta','monthly'][i]===name);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p=>{
+    p.classList.toggle('active',p.id==='panel-'+name);
+  });
   if(name==='hrbp') initHRBP();
   if(name==='ta') initTA();
   if(name==='monthly') initMonthly();
-  if(name==='compare') initCompare();
-  if(name==='industry') initIndustry();
 }
 
+// 饼图
 function initPie(){
   const c=gc('chart-pie'); if(!c)return;
+  const hired=25,offer=47,fail=53,other=2;
   c.setOption({backgroundColor:'transparent',
     tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
     legend:{bottom:0,textStyle:{color:'#8b949e',fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
     series:[{type:'pie',radius:['42%','68%'],center:['50%','46%'],
       data:[
-        {value:25,name:'已入职 25',itemStyle:{color:G}},
-        {value:47,name:'OD/在途 47',itemStyle:{color:O}},
-        {value:53,name:'Fail 53',itemStyle:{color:'#3d2020'}},
-        {value:2,name:'其他 2',itemStyle:{color:'#30363d'}},
+        {value:hired,name:`已入职 ${hired}`,itemStyle:{color:G}},
+        {value:offer,name:`OD/在途 ${offer}`,itemStyle:{color:O}},
+        {value:fail,name:`Fail ${fail}`,itemStyle:{color:'#3d2020'}},
+        {value:other,name:`其他 ${other}`,itemStyle:{color:'#30363d'}},
       ],
-      label:{color:'#e6edf3',fontSize:11},itemStyle:{borderColor:'#0d1117',borderWidth:2},
+      label:{color:'#e6edf3',fontSize:11},
+      itemStyle:{borderColor:'#0d1117',borderWidth:2},
     }]
   });
 }
 
+// 总览 bar
 function initOverviewBars(){
-  const ch=gc('chart-hrbp-overview');if(ch){
-    const hs=[...D.hrbp].sort((a,b)=>b.final_rate-a.final_rate);
-    ch.setOption({backgroundColor:'transparent',grid:{left:52,right:48,top:8,bottom:8,containLabel:false},
-      xAxis:{type:'value',max:100,...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'},show:false},
-      yAxis:{type:'category',data:hs.map(d=>d.name),...ax,axisLabel:{...ax.axisLabel,fontSize:12,margin:8}},
-      tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},formatter:p=>{const d=hs[p.dataIndex];return `<b>${d.name}</b><br/>推送:${d.total} 入职:${d.hired} 终转化:${d.final_rate}%`;}},
-      series:[{type:'bar',barCategoryGap:'40%',data:hs.map(d=>({value:d.final_rate,itemStyle:{color:fc(d.final_rate),borderRadius:[0,4,4,0]}})),
-        label:{show:true,position:'right',color:'#c9d1d9',fontSize:11,fontWeight:'bold',formatter:'{c}%'}}]
-    });
-  }
-  const ct=gc('chart-ta-overview');if(ct){
-    const ts=[...D.ta].sort((a,b)=>b.final_rate-a.final_rate);
-    ct.setOption({backgroundColor:'transparent',grid:{left:46,right:48,top:8,bottom:8,containLabel:false},
-      xAxis:{type:'value',max:100,...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'},show:false},
-      yAxis:{type:'category',data:ts.map(d=>d.name),...ax,axisLabel:{...ax.axisLabel,fontSize:12,margin:8}},
-      tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},formatter:p=>{const d=ts[p.dataIndex];return `<b>${d.name}</b><br/>推送:${d.total} 入职:${d.hired} 终转化:${d.final_rate}%`;}},
-      series:[{type:'bar',barCategoryGap:'40%',data:ts.map(d=>({value:d.final_rate,itemStyle:{color:fc(d.final_rate),borderRadius:[0,4,4,0]}})),
-        label:{show:true,position:'right',color:'#c9d1d9',fontSize:11,fontWeight:'bold',formatter:'{c}%'}}]
-    });
-  }
+  // HRBP
+  const ch=gc('chart-hrbp-overview'); if(!ch)return;
+  const hs=[...D.hrbp].sort((a,b)=>b.final_rate-a.final_rate);
+  ch.setOption({backgroundColor:'transparent',
+    grid:{left:48,right:40,top:4,bottom:4,containLabel:false},
+    xAxis:{type:'value',max:100,...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}},
+    yAxis:{type:'category',data:hs.map(d=>d.name),...ax},
+    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},
+      formatter:p=>{const d=hs[p.dataIndex];return `<b>${d.name}</b><br/>推送:${d.total} 入职:${d.hired} 终转化:${d.final_rate}%`;}},
+    series:[{type:'bar',barMaxWidth:12,
+      data:hs.map(d=>({value:d.final_rate,itemStyle:{color:fc(d.final_rate),borderRadius:[0,3,3,0]}})),
+      label:{show:true,position:'right',color:'#8b949e',fontSize:10,formatter:'{c}%'},
+    }]
+  });
+  // TA
+  const ct=gc('chart-ta-overview'); if(!ct)return;
+  const ts=[...D.ta].filter(d=>d.total>=3).sort((a,b)=>b.final_rate-a.final_rate);
+  ct.setOption({backgroundColor:'transparent',
+    grid:{left:42,right:40,top:4,bottom:4,containLabel:false},
+    xAxis:{type:'value',max:100,...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}},
+    yAxis:{type:'category',data:ts.map(d=>d.name),...ax},
+    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},
+      formatter:p=>{const d=ts[p.dataIndex];return `<b>${d.name}</b><br/>推送:${d.total} 入职:${d.hired} 终转化:${d.final_rate}%`;}},
+    series:[{type:'bar',barMaxWidth:12,
+      data:ts.map(d=>({value:d.final_rate,itemStyle:{color:fc(d.final_rate),borderRadius:[0,3,3,0]}})),
+      label:{show:true,position:'right',color:'#8b949e',fontSize:10,formatter:'{c}%'},
+    }]
+  });
 }
 
 function initMonthlyOverview(){
-  const c=gc('chart-monthly-overview');if(!c)return;
-  c.setOption({backgroundColor:'transparent',grid:{left:36,right:60,top:16,bottom:40},
-    legend:{data:['推送','已入职','待入职/在途','Offer Dropped','Fail','终转化率'],right:0,top:0,textStyle:{color:'#8b949e',fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
-    xAxis:{type:'category',data:D.monthly.map(d=>d.month),...ax,axisLabel:{...ax.axisLabel,rotate:30,fontSize:10}},
+  const c=gc('chart-monthly-overview'); if(!c)return;
+  const months=D.monthly.map(d=>d.month);
+  c.setOption({backgroundColor:'transparent',
+    grid:{left:36,right:60,top:16,bottom:20},
+    legend:{data:['推送','入职','OD在途','Fail','终转化率'],right:0,top:0,textStyle:{color:'#8b949e',fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+    xAxis:{type:'category',data:months,...ax},
     yAxis:[{type:'value',...ax},{type:'value',max:100,position:'right',...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}}],
     tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
     series:[
-      {name:'推送',type:'bar',data:D.monthly.map(d=>d.total),itemStyle:{color:'#21262d',borderRadius:[3,3,0,0]},barMaxWidth:16},
-      {name:'入职',type:'bar',data:D.monthly.map(d=>d.hired),itemStyle:{color:G,borderRadius:[3,3,0,0]},barMaxWidth:10},
-      {name:'待入职/在途',type:'bar',data:D.monthly.map(d=>d.pipeline),itemStyle:{color:'#58a6ff',borderRadius:[3,3,0,0]},barMaxWidth:10},{name:'Offer Dropped',type:'bar',data:D.monthly.map(d=>d.od),itemStyle:{color:'#6e3030',borderRadius:[3,3,0,0]},barMaxWidth:10},
-      {name:'Fail',type:'bar',data:D.monthly.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.35)',borderRadius:[3,3,0,0]},barMaxWidth:10},
-      {name:'终转化率',type:'line',yAxisIndex:1,data:D.monthly.map(d=>d.final_rate),lineStyle:{color:B,width:2},itemStyle:{color:B},symbol:'circle',symbolSize:5,label:{show:false}},
+      {name:'推送',type:'bar',stack:'s',data:D.monthly.map(d=>d.total),itemStyle:{color:'#21262d',borderRadius:[3,3,0,0]},barMaxWidth:32},
+      {name:'入职',type:'bar',stack:'s2',data:D.monthly.map(d=>d.hired),itemStyle:{color:G,borderRadius:[3,3,0,0]},barMaxWidth:20},
+      {name:'OD在途',type:'bar',stack:'s2',data:D.monthly.map(d=>d.offer),itemStyle:{color:O},barMaxWidth:20},
+      {name:'Fail',type:'bar',stack:'s2',data:D.monthly.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.35)',borderRadius:[3,3,0,0]},barMaxWidth:20},
+      {name:'终转化率',type:'line',yAxisIndex:1,data:D.monthly.map(d=>d.final_rate),
+        lineStyle:{color:B,width:2},itemStyle:{color:B},symbol:'circle',symbolSize:7,
+        label:{show:true,formatter:'{c}%',color:B,fontSize:11,position:'top'}},
     ]
   });
 }
 
+// HRBP
 let hrbpDone=false;
 function initHRBP(){
-  if(hrbpDone)return;hrbpDone=true;
-  const hrbpSorted=[...D.hrbp].sort((a,b)=>b.final_rate-a.final_rate);
-  // 可视化排名列表 - HRBP
-  document.getElementById('legend-hrbp').innerHTML=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">`+hrbpSorted.map((d,i)=>{
-    const c=fc(d.final_rate);
-    const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
-    return `<div style="background:rgba(255,255,255,.03);border:1px solid rgba(48,54,61,.6);border-radius:8px;padding:10px 12px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-        <div style="display:flex;align-items:center;gap:6px">
-          <span style="color:${M};font-size:10px">${medal||('#'+(i+1))}</span>
-          <span style="font-weight:700;font-size:13px">${d.name}</span>
-        </div>
-        <span style="color:${M};font-size:10px">${d.total}人</span>
-      </div>
-      <div style="margin-bottom:5px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
-          <span style="color:${M};font-size:10px">终转化率</span>
-          <span style="color:${c};font-weight:700;font-size:11px">${d.final_rate}%</span>
-        </div>
-        <div style="height:6px;background:rgba(255,255,255,.06);border-radius:3px">
-          <div style="height:100%;width:${d.final_rate}%;background:${c};border-radius:3px;transition:width .3s"></div>
-        </div>
-      </div>
-      <div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
-          <span style="color:${M};font-size:10px">Fail率</span>
-          <span style="color:${d.fail_rate>=50?R:d.fail_rate>=35?O:M};font-size:11px">${d.fail_rate}%</span>
-        </div>
-        <div style="height:4px;background:rgba(255,255,255,.06);border-radius:3px">
-          <div style="height:100%;width:${d.fail_rate}%;background:rgba(248,81,73,.5);border-radius:3px"></div>
-        </div>
-      </div>
-    </div>`;
-  }).join('')+'</div>';
-  // 散点图：编号气泡
-  // chart-hrbp-scatter 已移除
-  // chart-hrbp-stack 已移除
-  makeTable('table-hrbp', D.hrbp);
+  if(hrbpDone)return; hrbpDone=true;
+  // 散点
+  const cs=gc('chart-hrbp-scatter');
+  cs.setOption({backgroundColor:'transparent',
+    grid:{left:44,right:20,top:20,bottom:36},
+    xAxis:{type:'value',name:'Fail率 %',max:100,...ax,nameTextStyle:{color:M,fontSize:11}},
+    yAxis:{type:'value',name:'终转化 %',max:100,...ax,nameTextStyle:{color:M,fontSize:11}},
+    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},
+      formatter:p=>{const d=p.data;return `<b>${d[3]}</b><br/>推送:${d[4]} 入职:${d[5]}<br/>终转化:${d[1]}% Fail:${d[0]}%`;}},
+    // 象限参考线
+    markLine:{silent:true},
+    series:[{
+      type:'scatter',
+      data:D.hrbp.map(d=>[d.fail_rate,d.final_rate,d.total*3,d.name,d.total,d.hired]),
+      symbolSize:d=>Math.max(14,Math.sqrt(d[2])*2.2),
+      itemStyle:{color:d=>fc(d.data[1]),opacity:.85,borderColor:'rgba(255,255,255,.15)',borderWidth:1},
+      label:{show:true,formatter:d=>d.data[3],position:'top',color:M,fontSize:10},
+    }]
+  });
+  // 堆叠
+  const ck=gc('chart-hrbp-stack');
+  const sorted=[...D.hrbp].sort((a,b)=>b.total-a.total);
+  ck.setOption({backgroundColor:'transparent',
+    grid:{left:44,right:12,top:28,bottom:4,containLabel:false},
+    legend:{data:['已入职','OD/在途','Fail'],top:0,right:0,textStyle:{color:M,fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+    xAxis:{type:'value',...ax},
+    yAxis:{type:'category',data:sorted.map(d=>d.name),...ax},
+    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
+    series:[
+      {name:'已入职',type:'bar',stack:'s',data:sorted.map(d=>d.hired),itemStyle:{color:G},barMaxWidth:14},
+      {name:'OD/在途',type:'bar',stack:'s',data:sorted.map(d=>d.offer),itemStyle:{color:O}},
+      {name:'Fail',type:'bar',stack:'s',data:sorted.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.35)',borderRadius:[0,3,3,0]}},
+    ]
+  });
+  // 详表
+  makeTable('table-hrbp', D.hrbp, 'OD/在途');
 }
 
+// TA
 let taDone=false;
 function initTA(){
-  if(taDone)return;taDone=true;
-  const taSorted=[...D.ta].sort((a,b)=>b.final_rate-a.final_rate);
-  // 可视化排名列表 - TA
-  document.getElementById('legend-ta').innerHTML=`<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">`+taSorted.map((d,i)=>{
-    const c=fc(d.final_rate);
-    const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
-    return `<div style="background:rgba(255,255,255,.03);border:1px solid rgba(48,54,61,.6);border-radius:8px;padding:10px 12px">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-        <div style="display:flex;align-items:center;gap:6px">
-          <span style="color:${M};font-size:10px">${medal||('#'+(i+1))}</span>
-          <span style="font-weight:700;font-size:13px">${d.name}</span>
-        </div>
-        <span style="color:${M};font-size:10px">${d.total}人</span>
-      </div>
-      <div style="margin-bottom:5px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
-          <span style="color:${M};font-size:10px">终转化率</span>
-          <span style="color:${c};font-weight:700;font-size:11px">${d.final_rate}%</span>
-        </div>
-        <div style="height:6px;background:rgba(255,255,255,.06);border-radius:3px">
-          <div style="height:100%;width:${d.final_rate}%;background:${c};border-radius:3px"></div>
-        </div>
-      </div>
-      <div>
-        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
-          <span style="color:${M};font-size:10px">Fail率</span>
-          <span style="color:${d.fail_rate>=50?R:d.fail_rate>=35?O:M};font-size:11px">${d.fail_rate}%</span>
-        </div>
-        <div style="height:4px;background:rgba(255,255,255,.06);border-radius:3px">
-          <div style="height:100%;width:${d.fail_rate}%;background:rgba(248,81,73,.5);border-radius:3px"></div>
-        </div>
-      </div>
-    </div>`;
-  }).join('')+'</div>';
-  // chart-ta-scatter 已移除
-  // chart-ta-stack 已移除
-
-  // 热力图已移除
-
-  // Top3 卡片
-  const taTop3Data = [
-    {ta:"希雯",   total:68, top3:[["市场营销",49],["行业四部（快消）",3],["营销实验室",3]]},
-    {ta:"天雪",   total:61, top3:[["渠道业务",16],["行业一部（美业）",10],["行业四部（快消）",7]]},
-    {ta:"车英",   total:50, top3:[["市场营销",37],["创作者营销与商业服务",4],["行业四部（快消）",2]]},
-    {ta:"玄鸟",   total:49, top3:[["行业一部（美业）",11],["商业化服务与体验",9],["行业七部（生服）",5]]},
-    {ta:"贵音",   total:41, top3:[["行业四部（快消）",12],["行业一部（美业）",11],["行业六部（交通）",4]]},
-    {ta:"司童",   total:40, top3:[["行业四部（快消）",12],["行业二部（服饰）",6],["行业七部（生服）",5]]},
-    {ta:"欣然",   total:39, top3:[["行业一部（美业）",13],["行业四部（快消）",8],["电商行业运营",4]]},
-    {ta:"瑞妮",   total:35, top3:[["行业三部（耐消）",17],["行业一部（美业）",5],["行业六部（交通）",4]]},
-    {ta:"大娃",   total:32, top3:[["行业七部（生服）",15],["行业二部（服饰）",5],["行业四部（快消）",3]]},
-    {ta:"夏娜",   total:25, top3:[["渠道业务",6],["行业一部（美业）",4],["行业四部（快消）",4]]},
-    {ta:"禇岩",   total:24, top3:[["行业一部（美业）",6],["市场营销",5],["行业三部（耐消）",3]]},
-    {ta:"越祈",   total:22, top3:[["行业七部（生服）",6],["行业四部（快消）",2],["行业一部（美业）",2]]},
-    {ta:"瑞思",   total:20, top3:[["行业三部（耐消）",5],["行业一部（美业）",4],["行业二部（服饰）",3]]},
-    {ta:"优妮",   total:19, top3:[["行业七部（生服）",5],["行业四部（快消）",3],["行业五部（互联网）",3]]},
-    {ta:"散影",   total:15, top3:[["行业八部（教育到综）",10],["渠道业务",3],["行业三部（耐消）",1]]},
-    {ta:"蒂蒂",   total:11, top3:[["市场营销",3],["创作者营销与商业服务",3],["行业一部（美业）",2]]},
-  ];
-  const colors=['#58a6ff','#3fb950','#d29922'];
-  document.getElementById('ta-top3-grid').innerHTML=taTop3Data.map(d=>{
-    const bars=d.top3.map((t,i)=>`
-      <div style="margin-bottom:5px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:2px">
-          <span style="color:#c9d1d9;font-size:10px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t[0]}</span>
-          <span style="color:${colors[i]};font-size:10px;font-weight:700;margin-left:4px">${t[1]}人</span>
-        </div>
-        <div style="height:4px;background:rgba(255,255,255,.06);border-radius:2px">
-          <div style="height:100%;width:${Math.round(t[1]/d.top3[0][1]*100)}%;background:${colors[i]};border-radius:2px"></div>
-        </div>
-      </div>`).join('');
-    return `<div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)">
-        <span style="font-weight:700;font-size:12px">${d.ta}</span>
-        <span style="color:var(--muted);font-size:10px">${d.total}人</span>
-      </div>
-      ${bars}
-    </div>`;
-  }).join('');
-  makeTable('table-ta', D.ta);
+  if(taDone)return; taDone=true;
+  const taFiltered=D.ta.filter(d=>d.total>=3);
+  const cs=gc('chart-ta-scatter');
+  cs.setOption({backgroundColor:'transparent',
+    grid:{left:44,right:20,top:20,bottom:36},
+    xAxis:{type:'value',name:'Fail率 %',max:100,...ax,nameTextStyle:{color:M,fontSize:11}},
+    yAxis:{type:'value',name:'终转化 %',max:100,...ax,nameTextStyle:{color:M,fontSize:11}},
+    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},
+      formatter:p=>{const d=p.data;return `<b>${d[3]}</b><br/>推送:${d[4]} 入职:${d[5]}<br/>终转化:${d[1]}% Fail:${d[0]}%`;}},
+    series:[{
+      type:'scatter',
+      data:taFiltered.map(d=>[d.fail_rate,d.final_rate,d.total*3,d.name,d.total,d.hired]),
+      symbolSize:d=>Math.max(14,Math.sqrt(d[2])*2.2),
+      itemStyle:{color:d=>fc(d.data[1]),opacity:.85,borderColor:'rgba(255,255,255,.15)',borderWidth:1},
+      label:{show:true,formatter:d=>d.data[3],position:'top',color:M,fontSize:10},
+    }]
+  });
+  const ck=gc('chart-ta-stack');
+  const sorted=[...taFiltered].sort((a,b)=>b.total-a.total);
+  ck.setOption({backgroundColor:'transparent',
+    grid:{left:44,right:12,top:28,bottom:4,containLabel:false},
+    legend:{data:['已入职','OD/在途','Fail'],top:0,right:0,textStyle:{color:M,fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+    xAxis:{type:'value',...ax},
+    yAxis:{type:'category',data:sorted.map(d=>d.name),...ax},
+    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
+    series:[
+      {name:'已入职',type:'bar',stack:'s',data:sorted.map(d=>d.hired),itemStyle:{color:G},barMaxWidth:14},
+      {name:'OD/在途',type:'bar',stack:'s',data:sorted.map(d=>d.offer),itemStyle:{color:O}},
+      {name:'Fail',type:'bar',stack:'s',data:sorted.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.35)',borderRadius:[0,3,3,0]}},
+    ]
+  });
+  makeTable('table-ta', taFiltered, 'OD/在途');
 }
 
+// 月度
+let monthlyDone=false;
 function initMonthly(){
-  const c=gc('chart-monthly-main');if(!c)return;
-  c.setOption({backgroundColor:'transparent',grid:{left:36,right:64,top:28,bottom:44},
-    legend:{data:['推送量','已入职','待入职/在途','Offer Dropped','Fail','终转化率'],right:0,top:0,textStyle:{color:M,fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
-    xAxis:{type:'category',data:D.monthly.map(d=>d.month),...ax,
-      axisLabel:{...ax.axisLabel,rotate:30,fontSize:11}},
+  if(monthlyDone)return; monthlyDone=true;
+  const c=gc('chart-monthly-main');
+  const months=D.monthly.map(d=>d.month);
+  c.setOption({backgroundColor:'transparent',
+    grid:{left:36,right:60,top:24,bottom:24},
+    legend:{data:['推送量','已入职','OD在途','Fail','终转化率'],right:0,top:0,textStyle:{color:M,fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+    xAxis:{type:'category',data:months,...ax},
     yAxis:[{type:'value',...ax},{type:'value',max:100,position:'right',...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}}],
     tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
-    // 25年底高峰标注
     series:[
-      {name:'推送量',type:'bar',data:D.monthly.map(d=>d.total),itemStyle:{color:'rgba(33,38,45,.9)',borderRadius:[3,3,0,0]},barMaxWidth:28,
-        markPoint:{data:[{type:'max',name:'峰值',label:{formatter:'峰值\n{c}人',color:'#e6edf3',fontSize:10},itemStyle:{color:'rgba(88,166,255,.3)'}}]}},
-      {name:'已入职',type:'bar',data:D.monthly.map(d=>d.hired),itemStyle:{color:G,borderRadius:[3,3,0,0]},barMaxWidth:18},
-      {name:'待入职/在途',type:'bar',data:D.monthly.map(d=>d.pipeline),itemStyle:{color:'#58a6ff',borderRadius:[3,3,0,0]},barMaxWidth:18},{name:'Offer Dropped',type:'bar',data:D.monthly.map(d=>d.od),itemStyle:{color:'#6e3030',borderRadius:[3,3,0,0]},barMaxWidth:18},
-      {name:'Fail',type:'bar',data:D.monthly.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.45)',borderRadius:[3,3,0,0]},barMaxWidth:18},
+      {name:'推送量',type:'bar',data:D.monthly.map(d=>d.total),itemStyle:{color:'#21262d',borderRadius:[3,3,0,0]},barMaxWidth:36},
+      {name:'已入职',type:'bar',data:D.monthly.map(d=>d.hired),itemStyle:{color:G,borderRadius:[3,3,0,0]},barMaxWidth:24},
+      {name:'OD在途',type:'bar',data:D.monthly.map(d=>d.offer),itemStyle:{color:O,borderRadius:[3,3,0,0]},barMaxWidth:24},
+      {name:'Fail',type:'bar',data:D.monthly.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.4)',borderRadius:[3,3,0,0]},barMaxWidth:24},
       {name:'终转化率',type:'line',yAxisIndex:1,data:D.monthly.map(d=>d.final_rate),
-        lineStyle:{color:B,width:2},itemStyle:{color:B},symbol:'circle',symbolSize:6,
-        label:{show:true,formatter:d=>d.value>0?d.value+'%':'',color:B,fontSize:10,position:'top'}},
-    ]
-  });
-}
-
-let compareDone=false;
-function initCompare(){
-  if(compareDone)return;compareDone=true;
-  
-  // 对比条形图 - 百分比指标
-  const c1=gc('chart-compare-bar');
-  c1.setOption({backgroundColor:'transparent',grid:{left:44,right:40,top:30,bottom:20},
-    legend:{data:['2025全年','2026 YTD'],top:0,right:0,textStyle:{color:M,fontSize:10},icon:'rect',itemWidth:10,itemHeight:10},
-    xAxis:{type:'category',data:['入职率','终转化率','Fail率'],...ax},
-    yAxis:{type:'value',...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}},
-    tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
-    series:[
-      {name:'2025全年',type:'bar',data:[39,59,38],itemStyle:{color:'#4e9d8f'},barMaxWidth:30},
-      {name:'2026 YTD',type:'bar',data:[31,49,38],itemStyle:{color:'#5b8db8'},barMaxWidth:30},
+        lineStyle:{color:B,width:2},itemStyle:{color:B},symbol:'circle',symbolSize:7,
+        label:{show:true,formatter:'{c}%',color:B,fontSize:11,position:'top'}},
     ]
   });
 
-  // 绝对数量对比
-  const c2=gc('chart-compare-absolute');
-  c2.setOption({backgroundColor:'transparent',grid:{left:44,right:12,top:30,bottom:20},
-    legend:{data:['2025全年','2026 YTD'],top:0,right:0,textStyle:{color:M,fontSize:10},icon:'rect',itemWidth:10,itemHeight:10},
-    xAxis:{type:'category',data:['总推送','入职','待入职/在途','Offer Dropped','Fail'],...ax},
+  // HRBP月度入职
+  const ch=gc('chart-hrbp-monthly');
+  const allHrbp=[...new Set(Object.values(D.hrbp_monthly).flatMap(m=>Object.keys(m)))];
+  const colors=[G,B,O,'#bc8cff',T,'#ff9e64','#e06c75','#61afef','#98c379'];
+  ch.setOption({backgroundColor:'transparent',
+    grid:{left:36,right:12,top:28,bottom:16},
+    legend:{data:allHrbp,top:0,right:0,textStyle:{color:M,fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+    xAxis:{type:'category',data:['1月','2月','3月'],...ax},
     yAxis:{type:'value',...ax},
-    tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},formatter:p=>{let r=p[0];return `<b>${r.name}</b><br/>${p.map(d=>`${d.seriesName}: ${d.value}人`).join('<br/>')}`;}},
-    series:[
-      {name:'2025全年',type:'bar',data:[462,182,20,113,176],itemStyle:{color:'#4e9d8f'},barMaxWidth:36},
-      {name:'2026 YTD',type:'bar',data:[139,43,26,113,53],itemStyle:{color:'#5b8db8'},barMaxWidth:36},
-    ]
-  });
-}
-
-let industryDone=false;
-function initIndustry(){
-  if(industryDone)return;industryDone=true;
-  const sorted=[...D.industry].sort((a,b)=>b.hire_rate-a.hire_rate);
-  const names=sorted.map(d=>d.name);
-
-  // 入职率条形图
-  const c1=gc('chart-industry-hire');
-  c1.setOption({backgroundColor:'transparent',grid:{left:160,right:60,top:8,bottom:8,containLabel:false},
-    xAxis:{type:'value',max:100,...ax,axisLabel:{...ax.axisLabel,formatter:'{value}%'}},
-    yAxis:{type:'category',data:names,...ax,axisLabel:{...ax.axisLabel,width:150,overflow:'truncate'}},
-    tooltip:{trigger:'item',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12},
-      formatter:p=>{const d=sorted[p.dataIndex];return `<b>${d.name}</b><br/>推送:${d.total} 入职:${d.total_hired} 闪离:${d.flash_quit}<br/>入职率:${d.hire_rate}% 闪离率:${d.flash_rate}%`;}},
-    series:[
-      {name:'在职入职',type:'bar',stack:'s',barMaxWidth:14,
-        data:sorted.map(d=>({value:round1(d.hired/d.total*100),itemStyle:{color:G,borderRadius:d.flash_quit===0?[0,3,3,0]:0}}))},
-      {name:'已闪离',type:'bar',stack:'s',barMaxWidth:14,
-        data:sorted.map(d=>({value:round1(d.flash_quit/d.total*100),itemStyle:{color:R,borderRadius:[0,3,3,0]}})),
-        label:{show:true,position:'right',color:R,fontSize:10,formatter:p=>{const d=sorted[p.dataIndex];return d.flash_quit>0?`⚡${d.flash_rate}%`:'';}}}
-    ]
-  });
-
-  // 堆叠图
-  const stackSort=[...D.industry].sort((a,b)=>b.total-a.total);
-  const c2=gc('chart-industry-stack');
-  c2.setOption({backgroundColor:'transparent',grid:{left:160,right:12,top:28,bottom:4,containLabel:false},
-    legend:{data:['已入职','闪离','在途','Fail','Dropped'],top:0,right:0,textStyle:{color:M,fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
-    xAxis:{type:'value',...ax},
-    yAxis:{type:'category',data:stackSort.map(d=>d.name),...ax,axisLabel:{...ax.axisLabel,width:150,overflow:'truncate'}},
     tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
-    series:[
-      {name:'已入职',type:'bar',stack:'s',data:stackSort.map(d=>d.hired),itemStyle:{color:G},barMaxWidth:14},
-      {name:'闪离',type:'bar',stack:'s',data:stackSort.map(d=>d.flash_quit),itemStyle:{color:R}},
-      {name:'待入职/在途',type:'bar',stack:'s',data:stackSort.map(d=>d.offer),itemStyle:{color:'#58a6ff'}},
-      {name:'Dropped',type:'bar',stack:'s',data:stackSort.map(d=>d.dropped),itemStyle:{color:'#30363d'}},
-      {name:'Fail',type:'bar',stack:'s',data:stackSort.map(d=>d.fail),itemStyle:{color:'rgba(248,81,73,.4)',borderRadius:[0,3,3,0]}},
-    ]
+    series:allHrbp.map((name,i)=>({
+      name,type:'bar',stack:'s',barMaxWidth:36,
+      data:['1月','2月','3月'].map(m=>D.hrbp_monthly[m][name]||0),
+      itemStyle:{color:colors[i%colors.length]},
+    }))
   });
 
-  // 详表
-  const el=document.getElementById('table-industry');if(!el)return;
-  const tbl=[...D.industry].sort((a,b)=>b.total-a.total);
-  let h='<thead><tr><th>#</th><th>行业</th><th>推送</th><th>在职入职</th><th>⚡闪离</th><th>实际入职</th><th>入职率</th><th>闪离率</th><th>在途</th><th style='color:#f85149'>OD</th><th>Fail</th><th>Fail率</th></tr></thead><tbody>';
-  tbl.forEach((d,i)=>{
-    const fq=d.flash_quit>0?`<span class="pill pill-r">⚡${d.flash_quit}</span>`:'0';
-    const fr=d.flash_rate>0?`<span style="color:var(--red)">${d.flash_rate}%</span>`:'0%';
-    h+=`<tr><td>${i+1}</td><td><b>${d.name}</b></td><td>${d.total}</td><td class="c-green">${d.hired}</td><td>${fq}</td><td>${d.total_hired}</td><td>${d.hire_rate}%</td><td>${fr}</td><td style='color:#58a6ff'>${d.pipeline}</td><td style='color:#6e7681'>${d.od}</td><td>${d.fail}</td><td class="${d.fail_rate>=50?'c-red':d.fail_rate>=40?'c-orange':''}">${d.fail_rate}%</td></tr>`;
+  // TA月度入职
+  const ct=gc('chart-ta-monthly');
+  const allTa=[...new Set(Object.values(D.ta_monthly).flatMap(m=>Object.keys(m)))];
+  ct.setOption({backgroundColor:'transparent',
+    grid:{left:36,right:12,top:28,bottom:16},
+    legend:{data:allTa,top:0,right:0,textStyle:{color:M,fontSize:10},icon:'circle',itemWidth:8,itemHeight:8},
+    xAxis:{type:'category',data:['1月','2月','3月'],...ax},
+    yAxis:{type:'value',...ax},
+    tooltip:{trigger:'axis',backgroundColor:'#1c2128',borderColor:'#30363d',textStyle:{color:'#e6edf3',fontSize:12}},
+    series:allTa.map((name,i)=>({
+      name,type:'bar',stack:'s',barMaxWidth:36,
+      data:['1月','2月','3月'].map(m=>D.ta_monthly[m][name]||0),
+      itemStyle:{color:colors[i%colors.length]},
+    }))
   });
-  el.innerHTML=h+'</tbody>';
 }
-function round1(v){return Math.round(v*10)/10;}
 
-function makeTable(id,items){
-  const el=document.getElementById(id);if(!el)return;
+// 详表
+function makeTable(id, items, offerLabel){
+  const el=document.getElementById(id); if(!el)return;
   const sorted=[...items].sort((a,b)=>b.final_rate-a.final_rate);
-  let h='<thead><tr><th style="width:28px">#</th><th>姓名</th><th>推送</th><th>入职</th><th>入职率</th><th>在途</th><th style="color:#f85149">OD率</th><th style="min-width:130px">终转化率</th><th style="min-width:130px">Fail率</th><th>评级</th></tr></thead><tbody>';
+  let h=`<thead><tr>
+    <th style="width:28px">#</th><th>姓名</th><th>推送</th><th>入职</th><th>入职率</th>
+    <th>${offerLabel}</th><th style="min-width:130px">终转化率</th>
+    <th style="min-width:130px">Fail率</th><th>评级</th>
+  </tr></thead><tbody>`;
   sorted.forEach((d,i)=>{
     const rc=i===0?'r1':i===1?'r2':i===2?'r3':'rn';
     const fc2=d.final_rate>=60?'c-green':d.final_rate>=35?'c-blue':d.final_rate>=20?'c-orange':'c-red';
     const frc=d.fail_rate>=60?'c-red':d.fail_rate>=40?'c-orange':'';
     let pill='';
-    if(d.total<3)pill='<span class="pill pill-gray">样本小</span>';
-    else if(d.final_rate>=70)pill='<span class="pill pill-g">🏆 优秀</span>';
-    else if(d.final_rate>=50)pill='<span class="pill pill-b">✅ 良好</span>';
-    else if(d.final_rate>=25)pill='<span class="pill pill-o">⚠️ 待改善</span>';
+    if(d.total<3) pill='<span class="pill pill-gray">样本小</span>';
+    else if(d.final_rate>=70) pill='<span class="pill pill-g">🏆 优秀</span>';
+    else if(d.final_rate>=50) pill='<span class="pill pill-b">✅ 良好</span>';
+    else if(d.final_rate>=25) pill='<span class="pill pill-o">⚠️ 待改善</span>';
     else pill='<span class="pill pill-r">🚨 关注</span>';
-    h+=`<tr><td><span class="rnum ${rc}">${i+1}</span></td><td><b>${d.name}</b></td><td>${d.total}</td><td class="c-green">${d.hired}</td><td style="color:var(--muted)">${d.hire_rate}%</td><td style="color:#58a6ff">${d.pipeline}</td><td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill bar-g" style="width:${d.final_rate}%"></div></div><span class="rate-lbl ${fc2}">${d.final_rate}%</span></div></td><td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill bar-r" style="width:${d.fail_rate}%"></div></div><span class="rate-lbl ${frc}">${d.fail_rate}%</span></div></td><td style="color:#f85149;font-size:11px">${d.od_rate}%</td><td>${pill}</td></tr>`;
+    h+=`<tr>
+      <td><span class="rnum ${rc}">${i+1}</span></td>
+      <td><b>${d.name}</b></td>
+      <td>${d.total}</td>
+      <td class="c-green">${d.hired}</td>
+      <td style="color:var(--muted)">${d.hire_rate}%</td>
+      <td class="c-orange">${d.offer}</td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill bar-g" style="width:${d.final_rate}%"></div></div><span class="rate-lbl ${fc2}">${d.final_rate}%</span></div></td>
+      <td><div class="bar-wrap"><div class="bar-bg"><div class="bar-fill bar-r" style="width:${d.fail_rate}%"></div></div><span class="rate-lbl ${frc}">${d.fail_rate}%</span></div></td>
+      <td>${pill}</td>
+    </tr>`;
   });
   el.innerHTML=h+'</tbody>';
 }
 
 window.addEventListener('load',()=>{
-  initPie();initOverviewBars();initMonthlyOverview();
-  window.addEventListener('resize',()=>{document.querySelectorAll('[id^="chart-"]').forEach(el=>{const c=echarts.getInstanceByDom(el);if(c)c.resize();});});
+  initPie(); initOverviewBars(); initMonthlyOverview();
+  window.addEventListener('resize',()=>{
+    document.querySelectorAll('[id^="chart-"]').forEach(el=>{const c=echarts.getInstanceByDom(el);if(c)c.resize();});
+  });
 });
 </script>
 </body>
